@@ -24,11 +24,11 @@ class Import_Export extends Plugin implements IHandler {
 			return;
 		}
 
-		_debug("please enter your username:");
+		Debug::log("please enter your username:");
 
 		$username = trim(read_stdin());
 
-		_debug("importing $filename for user $username...\n");
+		Debug::log("importing $filename for user $username...\n");
 
 		$sth = $this->pdo->prepare("SELECT id FROM ttrss_users WHERE login = ?");
 		$sth->execute($username);
@@ -50,31 +50,32 @@ class Import_Export extends Plugin implements IHandler {
 	function hook_prefs_tab($args) {
 		if ($args != "prefFeeds") return;
 
-		print "<div dojoType=\"dijit.layout.AccordionPane\" title=\"".__('Import and export')."\">";
+		print "<div dojoType='dijit.layout.AccordionPane' 
+			title=\"<i class='material-icons'>import_export</i> ".__('Import and export')."\">";
 
 		print_notice(__("You can export and import your Starred and Archived articles for safekeeping or when migrating between tt-rss instances of same version."));
 
 		print "<p>";
 
-		print "<button dojoType=\"dijit.form.Button\" onclick=\"return exportData()\">".
+		print "<button dojoType='dijit.form.Button' class='alt-primary' onclick='return exportData()'>".
 			__('Export my data')."</button> ";
 
 		print "<hr>";
 
-		print "<iframe id=\"data_upload_iframe\"
-			name=\"data_upload_iframe\" onload=\"dataImportComplete(this)\"
-			style=\"width: 400px; height: 100px; display: none;\"></iframe>";
+		print "<iframe id='data_upload_iframe'
+			name='data_upload_iframe' onload='dataImportComplete(this)'
+			style='width: 400px; height: 100px; display: none;'></iframe>";
 
-		print "<form name=\"import_form\" style='display : block' target=\"data_upload_iframe\"
-			enctype=\"multipart/form-data\" method=\"POST\"
-			action=\"backend.php\">
-			<label class=\"dijitButton\">".__("Choose file...")."
-				<input style=\"display : none\" id=\"export_file\" name=\"export_file\" type=\"file\">&nbsp;
+		print "<form name='import_form' style='display : block' target='data_upload_iframe'
+			enctype='multipart/form-data' method='POST'
+			action='backend.php'>
+			<label class='dijitButton'>".__("Choose file...")."
+				<input style='display : none' id='export_file' name='export_file' type='file'>&nbsp;
 			</label>
-			<input type=\"hidden\" name=\"op\" value=\"pluginhandler\">
-			<input type=\"hidden\" name=\"plugin\" value=\"import_export\">
-			<input type=\"hidden\" name=\"method\" value=\"dataimport\">
-			<button dojoType=\"dijit.form.Button\" onclick=\"return importData();\" type=\"submit\">" .
+			<input type='hidden' name='op' value='pluginhandler'>
+			<input type='hidden' name='plugin' value='import_export'>
+			<input type='hidden' name='method' value='dataimport'>
+			<button dojoType='dijit.form.Button' onclick='return importData();' class='alt-primary' type='submit'>" .
 			__('Import') . "</button>";
 
 		print "</form>";
@@ -399,6 +400,24 @@ class Import_Export extends Plugin implements IHandler {
 
 								if ($res) {
 
+									if (DB_TYPE == "pgsql") {
+										$ts_lang = get_pref('DEFAULT_SEARCH_LANGUAGE', $owner_uid);
+										// TODO: maybe use per-feed setting if available?
+
+										if (!$ts_lang)
+											$ts_lang = 'simple';
+
+										$sth = $this->pdo->prepare("UPDATE ttrss_entries
+											SET tsvector_combined = to_tsvector(:ts_lang, :ts_content)
+											WHERE id = :id");
+
+										$sth->execute([
+											"id" => $ref_id,
+											"ts_lang" => $ts_lang,
+											"ts_content" => mb_substr(strip_tags($article['title'] . " " . $article['content']), 0, 900000)
+										]);
+									}
+
 									$label_cache = json_decode($article['label_cache'], true);
 
 									if (is_array($label_cache) && $label_cache["no-labels"] != 1) {
@@ -434,26 +453,29 @@ class Import_Export extends Plugin implements IHandler {
 
 	function exportData() {
 
+		print "<form onsubmit='return false'>";
+
 		print "<p style='text-align : center' id='export_status_message'>You need to prepare exported data first by clicking the button below.</p>";
 
-		print "<div align='center'>";
-		print "<button dojoType=\"dijit.form.Button\"
+		print "<footer class='text-center'>";
+		print "<button dojoType='dijit.form.Button'
+			type='submit' class='alt-primary'
 			onclick=\"dijit.byId('dataExportDlg').prepare()\">".
 			__('Prepare data')."</button>";
 
-		print "<button dojoType=\"dijit.form.Button\"
+		print "<button dojoType='dijit.form.Button'
 			onclick=\"dijit.byId('dataExportDlg').hide()\">".
 			__('Close this window')."</button>";
 
-		print "</div>";
+		print "</footer>";
 
-
+		print "</form>";
 	}
 
 	function dataImport() {
 		header("Content-Type: text/html"); # required for iframe
 
-		print "<div style='text-align : center'>";
+		print "<footer class='text-center'>";
 
 		if ($_FILES['export_file']['error'] != 0) {
 			print_error(T_sprintf("Upload failed with error code %d (%s)",
@@ -485,7 +507,7 @@ class Import_Export extends Plugin implements IHandler {
 			}
 		}
 
-		print "<button dojoType=\"dijit.form.Button\"
+		print "<button dojoType='dijit.form.Button'
 			onclick=\"dijit.byId('dataImportDlg').hide()\">".
 			__('Close this window')."</button>";
 

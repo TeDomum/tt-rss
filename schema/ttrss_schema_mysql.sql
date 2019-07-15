@@ -69,6 +69,7 @@ create table ttrss_feed_categories(id integer not null primary key auto_incremen
 
 create table ttrss_archived_feeds (id integer not null primary key,
 	owner_uid integer not null,
+	created datetime not null,
 	title varchar(200) not null,
 	feed_url text not null,
 	site_url varchar(250) not null default '',
@@ -132,7 +133,8 @@ create table ttrss_feeds (id integer not null auto_increment primary key,
 	feed_language varchar(100) not null default '',
 	foreign key (owner_uid) references ttrss_users(id) ON DELETE CASCADE,
 	foreign key (cat_id) references ttrss_feed_categories(id) ON DELETE SET NULL,
-	foreign key (parent_feed) references ttrss_feeds(id) ON DELETE SET NULL) ENGINE=InnoDB DEFAULT CHARSET=UTF8;
+	foreign key (parent_feed) references ttrss_feeds(id) ON DELETE SET NULL,
+	unique(feed_url(255), owner_uid)) ENGINE=InnoDB DEFAULT CHARSET=UTF8;
 
 insert into ttrss_feeds (owner_uid, title, feed_url) values
 	(1, 'Tiny Tiny RSS: Forum', 'http://tt-rss.org/forum/rss.php');
@@ -244,6 +246,7 @@ create table ttrss_filters2(id integer primary key auto_increment,
 	inverse bool not null default false,
 	title varchar(250) not null default '',
 	order_id integer not null default 0,
+	last_triggered datetime default null,
 	foreign key (owner_uid) references ttrss_users(id) ON DELETE CASCADE) ENGINE=InnoDB DEFAULT CHARSET=UTF8;
 
 create table ttrss_filters2_rules(id integer primary key auto_increment,
@@ -284,7 +287,7 @@ create table ttrss_tags (id integer primary key auto_increment,
 
 create table ttrss_version (schema_version int not null) ENGINE=InnoDB DEFAULT CHARSET=UTF8;
 
-insert into ttrss_version values (134);
+insert into ttrss_version values (138);
 
 create table ttrss_enclosures (id integer primary key auto_increment,
 	content_url text not null,
@@ -377,6 +380,7 @@ insert into ttrss_prefs (pref_name,type_id,def_value,section_id) values('_ENABLE
 insert into ttrss_prefs (pref_name,type_id,def_value,section_id) values('_MOBILE_REVERSE_HEADLINES', 1, 'false', 1);
 insert into ttrss_prefs (pref_name,type_id,def_value,section_id) values('USER_CSS_THEME', 2, '', 2);
 insert into ttrss_prefs (pref_name,type_id,def_value,section_id) values('USER_LANGUAGE', 2, '', 2);
+insert into ttrss_prefs (pref_name,type_id,def_value,section_id) values('DEFAULT_SEARCH_LANGUAGE', 2, '', 2);
 
 update ttrss_prefs set access_level = 1 where pref_name in ('ON_CATCHUP_SHOW_NEXT_FEED',
 	'SORT_HEADLINES_BY_FEED_DATE',

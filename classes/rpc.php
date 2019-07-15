@@ -8,7 +8,7 @@ class RPC extends Handler_Protected {
 	}
 
 	function setprofile() {
-		$_SESSION["profile"] = clean($_REQUEST["id"]);
+		$_SESSION["profile"] = (int) clean($_REQUEST["id"]);
 
 		// default value
 		if (!$_SESSION["profile"]) $_SESSION["profile"] = null;
@@ -240,8 +240,8 @@ class RPC extends Handler_Protected {
 					$new_feed_id = (int)$row['id'] + 1;
 
 					$sth = $this->pdo->prepare("INSERT INTO ttrss_archived_feeds
-						(id, owner_uid, title, feed_url, site_url)
-							SELECT ?, owner_uid, title, feed_url, site_url from ttrss_feeds
+						(id, owner_uid, title, feed_url, site_url, created)
+							SELECT ?, owner_uid, title, feed_url, site_url, NOW() from ttrss_feeds
 							  	WHERE id = ?");
 
 					$sth->execute([$new_feed_id, $feed_id]);
@@ -271,17 +271,15 @@ class RPC extends Handler_Protected {
 	}
 
 	function getAllCounters() {
-		$last_article_id = (int) clean($_REQUEST["last_article_id"]);
+		@$seq = (int) $_REQUEST['seq'];
 
-		$reply = array();
+		$reply = [
+			'counters' => Counters::getAllCounters(),
+			'seq' => $seq
+		];
 
-		if (!empty($_REQUEST['seq'])) $reply['seq'] = (int) $_REQUEST['seq'];
-
-		if ($last_article_id != Article::getLastArticleId()) {
-			$reply['counters'] = Counters::getAllCounters();
-		}
-
-		$reply['runtime-info'] = make_runtime_info();
+		if ($seq % 2 == 0)
+			$reply['runtime-info'] = make_runtime_info();
 
 		print json_encode($reply);
 	}
@@ -289,7 +287,7 @@ class RPC extends Handler_Protected {
 	/* GET["cmode"] = 0 - mark as read, 1 - as unread, 2 - toggle */
 	function catchupSelected() {
 		$ids = explode(",", clean($_REQUEST["ids"]));
-		$cmode = sprintf("%d", clean($_REQUEST["cmode"]));
+		$cmode = (int)clean($_REQUEST["cmode"]);
 
 		Article::catchupArticlesById($ids, $cmode);
 
@@ -326,7 +324,7 @@ class RPC extends Handler_Protected {
 
 		if ($reply['error']['code'] == 0) {
 			$reply['init-params'] = make_init_params();
-			$reply['runtime-info'] = make_runtime_info(true);
+			$reply['runtime-info'] = make_runtime_info();
 		}
 
 		print json_encode($reply);
@@ -347,20 +345,6 @@ class RPC extends Handler_Protected {
 			print "<li>" . $line["caption"] . "</li>";
 		}
 		print "</ul>";
-	}
-
-	function updateFeedBrowser() {
-		if (defined('_DISABLE_FEED_BROWSER') && _DISABLE_FEED_BROWSER) return;
-
-		$search = clean($_REQUEST["search"]);
-		$limit = clean($_REQUEST["limit"]);
-		$mode = (int) clean($_REQUEST["mode"]);
-
-		require_once "feedbrowser.php";
-
-		print json_encode(array("content" =>
-			make_feed_browser($search, $limit, $mode),
-				"mode" => $mode));
 	}
 
 	// Silent
@@ -426,7 +410,10 @@ class RPC extends Handler_Protected {
 
 		Feeds::catchup_feed($feed_id, $is_cat, false, $mode, [$search_query, $search_lang]);
 
-		print json_encode(array("message" => "UPDATE_COUNTERS"));
+		// return counters here synchronously so that frontend can figure out next unread feed properly
+		print json_encode(['counters' => Counters::getAllCounters()]);
+
+		//print json_encode(array("message" => "UPDATE_COUNTERS"));
 	}
 
 	function setpanelmode() {
@@ -599,4 +586,27 @@ class RPC extends Handler_Protected {
 		}
 
 	}
+
+	function checkforupdates() {
+		$rv = [];
+
+		if (CHECK_FOR_UPDATES && $_SESSION["access_level"] >= 10 && defined("GIT_VERSION_TIMESTAMP")) {
+			$content = @fetch_file_contents(["url" => "https://tt-rss.org/version.json"]);
+
+			if ($content) {
+				$content = json_decode($content, true);
+
+				if ($content && isset($content["changeset"])) {
+					if ((int)GIT_VERSION_TIMESTAMP < (int)$content["changeset"]["timestamp"] &&
+						GIT_VERSION_HEAD != $content["changeset"]["id"]) {
+
+						$rv = $content["changeset"];
+					}
+				}
+			}
+		}
+
+		print json_encode($rv);
+	}
+
 }

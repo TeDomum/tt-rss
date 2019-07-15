@@ -33,11 +33,7 @@ class Auth_Internal extends Plugin implements IAuthModule {
 
 				if ($row = $sth->fetch()) {
 
-					require_once "lib/otphp/vendor/base32.php";
-					require_once "lib/otphp/lib/otp.php";
-					require_once "lib/otphp/lib/totp.php";
-
-					$base32 = new Base32();
+					$base32 = new \OTPHP\Base32();
 
 					$otp_enabled = $row['otp_enabled'];
 					$secret = $base32->encode(sha1($row['salt']));
@@ -52,13 +48,17 @@ class Auth_Internal extends Plugin implements IAuthModule {
 							}
 						} else {
 							$return = urlencode($_REQUEST["return"]);
-							?><html>
+							?>
+							<!DOCTYPE html>
+							<html>
 								<head>
 									<title>Tiny Tiny RSS</title>
 									<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 								</head>
 								<?php echo stylesheet_tag("css/default.css") ?>
-							<body class="ttrss_utility otp"><div class="content">
+							<body class="ttrss_utility otp">
+							<h1><?php echo __("Authentication") ?></h1>
+							<div class="content">
 							<form action="public.php?return=<?php echo $return ?>"
 									method="POST" class="otpform">
 								<input type="hidden" name="op" value="login">
@@ -68,9 +68,11 @@ class Auth_Internal extends Plugin implements IAuthModule {
 								<input type="hidden" name="remember_me" value="<?php echo htmlspecialchars($_POST["remember_me"]) ?>">
 								<input type="hidden" name="profile" value="<?php echo htmlspecialchars($_POST["profile"]) ?>">
 
-								<label><?php echo __("Please enter your one time password:") ?></label>
-								<input autocomplete="off" size="6" name="otp" value=""/>
-								<input type="submit" value="Continue"/>
+								<fieldset>
+									<label><?php echo __("Please enter your one time password:") ?></label>
+									<input autocomplete="off" size="6" name="otp" value=""/>
+									<input type="submit" value="Continue"/>
+								</fieldset>
 							</form></div>
 							<script type="text/javascript">
 								document.forms[0].otp.focus();

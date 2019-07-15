@@ -20,6 +20,10 @@ class Share extends Plugin {
 		return file_get_contents(dirname(__FILE__) . "/share.js");
 	}
 
+	function get_css() {
+		return file_get_contents(dirname(__FILE__) . "/share.css");
+	}
+
 	function get_prefs_js() {
 		return file_get_contents(dirname(__FILE__) . "/share_prefs.js");
 	}
@@ -38,9 +42,9 @@ class Share extends Plugin {
 	function hook_prefs_tab_section($id) {
 		if ($id == "prefFeedsPublishedGenerated") {
 
-			print "<p>" . __("You can disable all articles shared by unique URLs here.") . "</p>";
+			print "<h3>" . __("You can disable all articles shared by unique URLs here.") . "</h3>";
 
-			print "<button class=\"btn-danger\" dojoType=\"dijit.form.Button\" onclick=\"return clearArticleAccessKeys()\">".
+			print "<button class='alt-danger' dojoType='dijit.form.Button' onclick=\"return Plugins.Share.clearKeys()\">".
 				__('Unshare all articles')."</button> ";
 
 			print "</p>";
@@ -70,12 +74,11 @@ class Share extends Plugin {
 	}
 
 	function hook_article_button($line) {
-		$img = $line['uuid'] ? "share.png" : "notshared.png";
+		$img_class = $line['uuid'] ? "shared" : "";
 
-		return "<img id='SHARE-IMG-".$line['int_id']."' src=\"plugins/share/$img\"
-			class='tagsPic' style=\"cursor : pointer\"
-			onclick=\"shareArticle(".$line['int_id'].")\"
-			title='".__('Share by URL')."'>";
+		return "<i id='SHARE-IMG-".$line['int_id']."' class='material-icons icon-share $img_class'
+			style='cursor : pointer' onclick=\"Plugins.Share.shareArticle(".$line['int_id'].")\"
+			title='".__('Share by URL')."'>link</i>";
 	}
 
 	function shareArticle() {
@@ -97,14 +100,16 @@ class Share extends Plugin {
 				$sth->execute([$uuid, $param, $_SESSION['uid']]);
 			}
 
-			print __("You can share this article by the following unique URL:") . "<br/>";
+			print "<header>" . __("You can share this article by the following unique URL:") . "</header>";
 
 			$url_path = get_self_url_prefix();
 			$url_path .= "/public.php?op=share&key=$uuid";
 
-			print "<div class=\"tagCloudContainer\">";
-			print "<a id='gen_article_url' href='$url_path' target='_blank' rel='noopener noreferrer'>$url_path</a>";
-			print "</div>";
+			print "<section>
+				<div class='panel text-center'>
+				<a id='gen_article_url' href='$url_path' target='_blank' rel='noopener noreferrer'>$url_path</a>
+				</div>
+				</section>";
 
 			/* if (!label_find_id(__('Shared'), $_SESSION["uid"]))
 				label_create(__('Shared'), $_SESSION["uid"]);
@@ -116,18 +121,18 @@ class Share extends Plugin {
 			print "Article not found.";
 		}
 
-		print "<div align='center'>";
+		print "<footer class='text-center'>";
 
-		print "<button dojoType=\"dijit.form.Button\" onclick=\"return dijit.byId('shareArticleDlg').unshare()\">".
+		print "<button dojoType='dijit.form.Button' onclick=\"return dijit.byId('shareArticleDlg').unshare()\">".
 			__('Unshare article')."</button>";
 
-		print "<button dojoType=\"dijit.form.Button\" onclick=\"return dijit.byId('shareArticleDlg').newurl()\">".
+		print "<button dojoType='dijit.form.Button' onclick=\"return dijit.byId('shareArticleDlg').newurl()\">".
 			__('Generate new URL')."</button>";
 
-		print "<button dojoType=\"dijit.form.Button\" onclick=\"return dijit.byId('shareArticleDlg').hide()\">".
+		print "<button dojoType='dijit.form.Button' onclick=\"return dijit.byId('shareArticleDlg').hide()\">".
 			__('Close this window')."</button>";
 
-		print "</div>";
+		print "</footer>";
 	}
 
 	function api_version() {

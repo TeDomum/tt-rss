@@ -155,7 +155,7 @@ class Af_Zz_ImgProxy extends Plugin {
 		$proxy_all = $this->host->get($this, "proxy_all");
 
 		$doc = new DOMDocument();
-		if (@$doc->loadHTML($article["content"])) {
+		if (@$doc->loadHTML('<?xml encoding="UTF-8">' . $article["content"])) {
 			$xpath = new DOMXPath($doc);
 			$imgs = $xpath->query("//img[@src]");
 
@@ -170,7 +170,7 @@ class Af_Zz_ImgProxy extends Plugin {
 				}
 			}
 
-			$vids = $xpath->query("//video");
+			$vids = $xpath->query("(//video|//picture)");
 
 			foreach ($vids as $vid) {
 				if ($vid->hasAttribute("poster")) {
@@ -205,7 +205,8 @@ class Af_Zz_ImgProxy extends Plugin {
 	function hook_prefs_tab($args) {
 		if ($args != "prefFeeds") return;
 
-		print "<div dojoType=\"dijit.layout.AccordionPane\" title=\"".__('Image proxy settings (af_zz_imgproxy)')."\">";
+		print "<div dojoType=\"dijit.layout.AccordionPane\" 
+			title=\"<i class='material-icons'>extension</i> ".__('Image proxy settings (af_zz_imgproxy)')."\">";
 
 		print "<form dojoType=\"dijit.form.Form\">";
 
@@ -216,7 +217,7 @@ class Af_Zz_ImgProxy extends Plugin {
 				new Ajax.Request('backend.php', {
 					parameters: dojo.objectToQuery(this.getValues()),
 					onComplete: function(transport) {
-						notify_info(transport.responseText);
+						Notify.info(transport.responseText);
 					}
 				});
 				//this.reset();

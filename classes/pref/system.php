@@ -26,7 +26,8 @@ class Pref_System extends Handler_Protected {
 	function index() {
 
 		print "<div dojoType=\"dijit.layout.AccordionContainer\" region=\"center\">";
-		print "<div dojoType=\"dijit.layout.AccordionPane\" title=\"".__('Error Log')."\">";
+		print "<div dojoType=\"dijit.layout.AccordionPane\" 
+			title=\"<i class='material-icons'>report</i> ".__('Event Log')."\">";
 
 		if (LOG_DESTINATION == "sql") {
 
@@ -37,10 +38,10 @@ class Pref_System extends Handler_Protected {
 				LIMIT 100");
 
 			print "<button dojoType=\"dijit.form.Button\"
-				onclick=\"updateSystemList()\">".__('Refresh')."</button> ";
+				onclick=\"Helpers.updateEventLog()\">".__('Refresh')."</button> ";
 
 			print "&nbsp;<button dojoType=\"dijit.form.Button\"
-				onclick=\"clearSqlLog()\">".__('Clear log')."</button> ";
+				class=\"alt-danger\" onclick=\"Helpers.clearEventLog()\">".__('Clear')."</button> ";
 
 			print "<p><table width=\"100%\" cellspacing=\"10\" class=\"prefErrorLog\">";
 
@@ -53,7 +54,7 @@ class Pref_System extends Handler_Protected {
 				</tr>";
 
 			while ($line = $res->fetch()) {
-				print "<tr class=\"errrow\">";
+				print "<tr>";
 
 				foreach ($line as $k => $v) {
 					$line[$k] = htmlspecialchars($v);
@@ -77,6 +78,20 @@ class Pref_System extends Handler_Protected {
 			print_notice("Please set LOG_DESTINATION to 'sql' in config.php to enable database logging.");
 
 		}
+
+		print "</div>";
+
+		print "<div dojoType=\"dijit.layout.AccordionPane\" 
+			title=\"<i class='material-icons'>info</i> ".__('PHP Information')."\">";
+
+		ob_start();
+		phpinfo();
+		$info = ob_get_contents();
+		ob_end_clean();
+
+		print "<div class='phpinfo'>";
+		print preg_replace( '%^.*<body>(.*)</body>.*$%ms','$1', $info);
+		print "</div>";
 
 		print "</div>";
 

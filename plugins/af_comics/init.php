@@ -14,6 +14,7 @@ class Af_Comics extends Plugin {
 		$this->host = $host;
 
 		$host->add_hook($host::HOOK_FETCH_FEED, $this);
+		$host->add_hook($host::HOOK_FEED_BASIC_INFO, $this);
 		$host->add_hook($host::HOOK_SUBSCRIBE_FEED, $this);
 		$host->add_hook($host::HOOK_ARTICLE_FILTER, $this);
 		$host->add_hook($host::HOOK_PREFS_TAB, $this);
@@ -46,7 +47,8 @@ class Af_Comics extends Plugin {
 	function hook_prefs_tab($args) {
 		if ($args != "prefFeeds") return;
 
-		print "<div dojoType=\"dijit.layout.AccordionPane\" title=\"".__('Feeds supported by af_comics')."\">";
+		print "<div dojoType=\"dijit.layout.AccordionPane\" 
+			title=\"<i class='material-icons'>photo</i> ".__('Feeds supported by af_comics')."\">";
 
 		print "<p>" . __("The following comics are currently supported:") . "</p>";
 
@@ -60,7 +62,7 @@ class Af_Comics extends Plugin {
 
 		asort($comics);
 
-		print "<ul class=\"browseFeedList\" style=\"border-width : 1px\">";
+		print "<ul class='panel panel-scrollable list list-unstyled'>";
 		foreach ($comics as $comic) {
 			print "<li>$comic</li>";
 		}
@@ -124,16 +126,9 @@ class Af_Comics extends Plugin {
 					$node = $xpath->query('//picture[contains(@class, "item-comic-image")]/img')->item(0);
 
 					if ($node) {
-					    $node->removeAttribute("width");
-
-						if ($node->hasAttribute("srcset") && preg_match("|/transparent\.png$|", $node->getAttribute("srcset"))) {
-							if ($node->hasAttribute("data-srcset")) {
-								$node->setAttribute("srcset", $node->getAttribute("data-srcset"));
-								$node->removeAttribute("data-srcset");
-							} elseif ($node->hasAttribute("src")) {
-								$node->removeAttribute("srcset");
-							}
-						}
+						$node->removeAttribute("width");
+						$node->removeAttribute("data-srcset");
+						$node->removeAttribute("srcset");
 
 						$tpl->setVariable('ARTICLE_ID', $article_link, true);
 						$tpl->setVariable('ARTICLE_LINK', $article_link, true);
@@ -146,6 +141,7 @@ class Af_Comics extends Plugin {
 						$tpl->setVariable('ARTICLE_SOURCE_TITLE', $feed_title, true);
 
 						$tpl->addBlock('entry');
+
 					}
 				}
 			}
@@ -169,6 +165,16 @@ class Af_Comics extends Plugin {
 			return '<?xml version="1.0" encoding="utf-8"?>'; // Get is_html() to return false.
 
 		return $contents;
+	}
+
+	function hook_feed_basic_info($basic_info, $fetch_url, $owner_uid, $feed, $auth_login, $auth_pass) {
+		if ($auth_login || $auth_pass)
+			return $basic_info;
+
+		if (preg_match('#^https?://www\.gocomics\.com/([-a-z0-9]+)$#i', $fetch_url, $matches))
+			$basic_info = array('title' => ucfirst($matches[1]), 'site_url' => $matches[0]);
+
+		return $basic_info;
 	}
 
 	function api_version() {

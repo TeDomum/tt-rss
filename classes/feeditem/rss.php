@@ -4,9 +4,9 @@ class FeedItem_RSS extends FeedItem_Common {
 		$id = $this->elem->getElementsByTagName("guid")->item(0);
 
 		if ($id) {
-			return $id->nodeValue;
+			return clean($id->nodeValue);
 		} else {
-			return $this->get_link();
+			return clean($this->get_link());
 		}
 	}
 
@@ -33,20 +33,20 @@ class FeedItem_RSS extends FeedItem_Common {
 					|| $link->getAttribute("rel") == "alternate"
 					|| $link->getAttribute("rel") == "standout")) {
 
-				return trim($link->getAttribute("href"));
+				return clean(trim($link->getAttribute("href")));
 			}
 		}
 
 		$link = $this->elem->getElementsByTagName("guid")->item(0);
 
 		if ($link && $link->hasAttributes() && $link->getAttribute("isPermaLink") == "true") {
-			return trim($link->nodeValue);
+			return clean(trim($link->nodeValue));
 		}
 
 		$link = $this->elem->getElementsByTagName("link")->item(0);
 
 		if ($link) {
-			return trim($link->nodeValue);
+			return clean(trim($link->nodeValue));
 		}
 	}
 
@@ -54,7 +54,7 @@ class FeedItem_RSS extends FeedItem_Common {
 		$title = $this->xpath->query("title", $this->elem)->item(0);
 
 		if ($title) {
-			return trim($title->nodeValue);
+			return clean(trim($title->nodeValue));
 		}
 
 		// if the document has a default namespace then querying for
@@ -62,7 +62,7 @@ class FeedItem_RSS extends FeedItem_Common {
 		$title = $this->elem->getElementsByTagName("title")->item(0);
 
 		if ($title) {
-			return trim($title->nodeValue);
+			return clean(trim($title->nodeValue));
 		}
 	}
 
@@ -106,7 +106,7 @@ class FeedItem_RSS extends FeedItem_Common {
 		$categories = $this->xpath->query("dc:subject", $this->elem);
 
 		foreach ($categories as $cat) {
-			array_push($cats, trim($cat->nodeValue));
+			array_push($cats, clean(trim($cat->nodeValue)));
 		}
 
 		return $cats;
@@ -120,73 +120,28 @@ class FeedItem_RSS extends FeedItem_Common {
 		foreach ($enclosures as $enclosure) {
 			$enc = new FeedEnclosure();
 
-			$enc->type = $enclosure->getAttribute("type");
-			$enc->link = $enclosure->getAttribute("url");
-			$enc->length = $enclosure->getAttribute("length");
-			$enc->height = $enclosure->getAttribute("height");
-			$enc->width = $enclosure->getAttribute("width");
+			$enc->type = clean($enclosure->getAttribute("type"));
+			$enc->link = clean($enclosure->getAttribute("url"));
+			$enc->length = clean($enclosure->getAttribute("length"));
+			$enc->height = clean($enclosure->getAttribute("height"));
+			$enc->width = clean($enclosure->getAttribute("width"));
 
 			array_push($encs, $enc);
 		}
 
-		$enclosures = $this->xpath->query("media:content", $this->elem);
-
-		foreach ($enclosures as $enclosure) {
-			$enc = new FeedEnclosure();
-
-			$enc->type = $enclosure->getAttribute("type");
-			$enc->link = $enclosure->getAttribute("url");
-			$enc->length = $enclosure->getAttribute("length");
-			$enc->height = $enclosure->getAttribute("height");
-			$enc->width = $enclosure->getAttribute("width");
-
-			$desc = $this->xpath->query("media:description", $enclosure)->item(0);
-			if ($desc) $enc->title = strip_tags($desc->nodeValue);
-
-			array_push($encs, $enc);
-		}
-
-
-		$enclosures = $this->xpath->query("media:group", $this->elem);
-
-		foreach ($enclosures as $enclosure) {
-			$enc = new FeedEnclosure();
-
-			$content = $this->xpath->query("media:content", $enclosure)->item(0);
-
-			if ($content) {
-				$enc->type = $content->getAttribute("type");
-				$enc->link = $content->getAttribute("url");
-				$enc->length = $content->getAttribute("length");
-				$enc->height = $content->getAttribute("height");
-				$enc->width = $content->getAttribute("width");
-
-				$desc = $this->xpath->query("media:description", $content)->item(0);
-				if ($desc) {
-					$enc->title = strip_tags($desc->nodeValue);
-				} else {
-					$desc = $this->xpath->query("media:description", $enclosure)->item(0);
-					if ($desc) $enc->title = strip_tags($desc->nodeValue);
-				}
-
-				array_push($encs, $enc);
-			}
-		}
-
-		$enclosures = $this->xpath->query("media:thumbnail", $this->elem);
-
-		foreach ($enclosures as $enclosure) {
-			$enc = new FeedEnclosure();
-
-			$enc->type = "image/generic";
-			$enc->link = $enclosure->getAttribute("url");
-			$enc->height = $enclosure->getAttribute("height");
-			$enc->width = $enclosure->getAttribute("width");
-
-			array_push($encs, $enc);
-		}
+		$encs = array_merge($encs, parent::get_enclosures());
 
 		return $encs;
+	}
+
+	function get_language() {
+		$languages = $this->doc->getElementsByTagName('language');
+
+		if (count($languages) == 0) {
+			return "";
+		}
+
+		return clean($languages[0]->textContent);
 	}
 
 }

@@ -56,14 +56,14 @@ class Af_Psql_Trgm extends Plugin {
 
 			$title = $row['title'];
 
-			print "<h2>$title</h2>";
+			print "<p>$title</p>";
 
 			$sth = $this->pdo->prepare("SELECT ttrss_entries.id AS id,
 				feed_id,
 				ttrss_entries.title AS title,
 				updated, link,
 				ttrss_feeds.title AS feed_title,
-				SIMILARITY(ttrss_entries.title, '$title') AS sm
+				SIMILARITY(ttrss_entries.title, ?) AS sm
 			FROM
 				ttrss_entries, ttrss_user_entries LEFT JOIN ttrss_feeds ON (ttrss_feeds.id = feed_id)
 			WHERE
@@ -75,28 +75,30 @@ class Af_Psql_Trgm extends Plugin {
 				sm DESC, date_entered DESC
 			LIMIT 10");
 
-			$sth->execute([$owner_uid, $id]);
+			$sth->execute([$title, $owner_uid, $id]);
 
-			print "<ul class=\"browseFeedList\" style=\"border-width : 1px\">";
+			print "<ul class='panel panel-scrollable'>";
 
 			while ($line = $sth->fetch()) {
-				print "<li>";
-				print "<div class='insensitive small' style='margin-left : 20px; float : right'>" .
-					smart_date_time(strtotime($line["updated"]))
-					. "</div>";
+				print "<li style='display : flex'>";
+				print "<i class='material-icons'>bookmark_outline</i>";
 
 				$sm = sprintf("%.2f", $line['sm']);
-				print "<img src='images/score_high.png' title='$sm'
-				style='vertical-align : middle'>";
-
 				$article_link = htmlspecialchars($line["link"]);
+
+				print "<div style='flex-grow : 2'>";
+
 				print " <a target=\"_blank\" rel=\"noopener noreferrer\" href=\"$article_link\">".
 					$line["title"]."</a>";
 
-				print " (<a href=\"#\" onclick=\"viewfeed({feed:".$line["feed_id"]."})\">".
+				print " (<a href=\"#\" onclick=\"Feeds.open({feed:".$line["feed_id"]."})\">".
 					htmlspecialchars($line["feed_title"])."</a>)";
 
-				print " <span class='insensitive'>($sm)</span>";
+				print " &mdash; $sm";
+
+				print "</div>";
+
+				print "<div style='text-align : right' class='text-muted'>" . smart_date_time(strtotime($line["updated"])) . "</div>";
 
 				print "</li>";
 			}
@@ -105,24 +107,24 @@ class Af_Psql_Trgm extends Plugin {
 
 		}
 
-		print "<div style='text-align : center'>";
-		print "<button dojoType=\"dijit.form.Button\" onclick=\"dijit.byId('trgmRelatedDlg').hide()\">".__('Close this window')."</button>";
-		print "</div>";
+		print "<footer class='text-center'>";
+		print "<button dojoType='dijit.form.Button' onclick=\"dijit.byId('trgmRelatedDlg').hide()\">".__('Close this window')."</button>";
+		print "</footer>";
 
 
 	}
 
 	function hook_article_button($line) {
-		return "<img src=\"plugins/af_psql_trgm/button.png\"
-			style=\"cursor : pointer\" style=\"cursor : pointer\"
-			onclick=\"showTrgmRelated(".$line["id"].")\"
-			class='tagsPic' title='".__('Show related articles')."'>";
+		return "<i style=\"cursor : pointer\" class='material-icons'
+			onclick=\"Plugins.Psql_Trgm.showRelated(".$line["id"].")\"
+			title='".__('Show related articles')."'>bookmark_outline</i>";
 	}
 
 	function hook_prefs_tab($args) {
 		if ($args != "prefFeeds") return;
 
-		print "<div dojoType=\"dijit.layout.AccordionPane\" title=\"".__('Mark similar articles as read')."\">";
+		print "<div dojoType=\"dijit.layout.AccordionPane\" 
+			title=\"<i class='material-icons'>extension</i> ".__('Mark similar articles as read')."\">";
 
 		if (DB_TYPE != "pgsql") {
 			print_error("Database type not supported.");
@@ -150,7 +152,7 @@ class Af_Psql_Trgm extends Plugin {
 					new Ajax.Request('backend.php', {
 						parameters: dojo.objectToQuery(this.getValues()),
 						onComplete: function(transport) {
-							notify_info(transport.responseText);
+							Notify.info(transport.responseText);
 						}
 					});
 					//this.reset();
@@ -161,31 +163,38 @@ class Af_Psql_Trgm extends Plugin {
 			print_hidden("method", "save");
 			print_hidden("plugin", "af_psql_trgm");
 
-			print "<p>" . __("PostgreSQL trigram extension returns string similarity as a floating point number (0-1). Setting it too low might produce false positives, zero disables checking.") . "</p>";
-			print_notice("Enable the plugin for specific feeds in the feed editor.");
+			print "<h2>" . __("Global settings") . "</h2>";
 
-			print "<h3>" . __("Global settings") . "</h3>";
+			print_notice("Enable for specific feeds in the feed editor.");
 
-			print "<table>";
+			print "<fieldset>";
 
-			print "<tr><td width=\"40%\">" . __("Minimum similarity:") . "</td>";
-			print "<td>
-				<input dojoType=\"dijit.form.ValidationTextBox\"
-				placeholder=\"0.75\"
-				required=\"1\" name=\"similarity\" value=\"$similarity\"></td></tr>";
-			print "<tr><td width=\"40%\">" . __("Minimum title length:") . "</td>";
-			print "<td>
-				<input dojoType=\"dijit.form.ValidationTextBox\"
+			print "<label>" . __("Minimum similarity:") . "</label> ";
+			print "<input dojoType=\"dijit.form.NumberSpinner\"
+				placeholder=\"0.75\" id='psql_trgm_similarity'
+				required=\"1\" name=\"similarity\" value=\"$similarity\">";
+
+			print "<div dojoType='dijit.Tooltip' connectId='psql_trgm_similarity' position='below'>" .
+				__("PostgreSQL trigram extension returns string similarity as a floating point number (0-1). Setting it too low might produce false positives, zero disables checking.") .
+				"</div>";
+
+			print "</fieldset><fieldset>";
+
+			print "<label>" . __("Minimum title length:") . "</label> ";
+			print "<input dojoType=\"dijit.form.NumberSpinner\"
 				placeholder=\"32\"
-				required=\"1\" name=\"min_title_length\" value=\"$min_title_length\"></td></tr>";
-			print "<tr><td width=\"40%\">" . __("Enable for all feeds:") . "</td>";
-			print "<td>";
+				required=\"1\" name=\"min_title_length\" value=\"$min_title_length\">";
+
+			print "</fieldset><fieldset>";
+
+			print "<label class='checkbox'>";
 			print_checkbox("enable_globally", $enable_globally);
-			print "</td></tr>";
+			print " " . __("Enable for all feeds:");
+			print "</label>";
 
-			print "</table>";
+			print "</fieldset>";
 
-			print "<p>"; print_button("submit", __("Save"));
+			print_button("submit", __("Save"), "class='alt-primary'");
 			print "</form>";
 
 			$enabled_feeds = $this->host->get($this, "enabled_feeds");
@@ -197,12 +206,11 @@ class Af_Psql_Trgm extends Plugin {
 			if (count($enabled_feeds) > 0) {
 				print "<h3>" . __("Currently enabled for (click to edit):") . "</h3>";
 
-				print "<ul class=\"browseFeedList\" style=\"border-width : 1px\">";
+				print "<ul class=\"panel panel-scrollable list list-unstyled\">";
 				foreach ($enabled_feeds as $f) {
 					print "<li>" .
-						"<img src='images/pub_set.png'
-							style='vertical-align : middle'> <a href='#'
-							onclick='editFeed($f)'>" .
+						"<i class='material-icons'>rss_feed</i> <a href='#'
+							onclick='CommonDialogs.editFeed($f)'>" .
 						Feeds::getFeedTitle($f) . "</a></li>";
 				}
 				print "</ul>";
@@ -213,8 +221,8 @@ class Af_Psql_Trgm extends Plugin {
 	}
 
 	function hook_prefs_edit_feed($feed_id) {
-		print "<div class=\"dlgSec\">".__("Similarity (pg_trgm)")."</div>";
-		print "<div class=\"dlgSecCont\">";
+		print "<header>".__("Similarity (pg_trgm)")."</header>";
+		print "<section>";
 
 		$enabled_feeds = $this->host->get($this, "enabled_feeds");
 		if (!array($enabled_feeds)) $enabled_feeds = array();
@@ -222,11 +230,14 @@ class Af_Psql_Trgm extends Plugin {
 		$key = array_search($feed_id, $enabled_feeds);
 		$checked = $key !== FALSE ? "checked" : "";
 
-		print "<hr/><input dojoType=\"dijit.form.CheckBox\" type=\"checkbox\" id=\"trgm_similarity_enabled\"
-			name=\"trgm_similarity_enabled\"
-			$checked>&nbsp;<label for=\"trgm_similarity_enabled\">".__('Mark similar articles as read')."</label>";
+		print "<fieldset>";
 
-		print "</div>";
+		print "<label class='checkbox'><input dojoType='dijit.form.CheckBox' type='checkbox' id='trgm_similarity_enabled'
+			name='trgm_similarity_enabled' $checked> ".__('Mark similar articles as read')."</label>";
+
+		print "</fieldset>";
+
+		print "</section>";
 	}
 
 	function hook_prefs_save_feed($feed_id) {
@@ -287,7 +298,7 @@ class Af_Psql_Trgm extends Plugin {
 		$row = $sth->fetch();
 		$nequal = $row['nequal'];
 
-		_debug("af_psql_trgm: num equals: $nequal");
+		Debug::log("af_psql_trgm: num equals: $nequal", Debug::$LOG_EXTENDED);
 
 		if ($nequal != 0) {
 			$article["force_catchup"] = true;
@@ -304,7 +315,7 @@ class Af_Psql_Trgm extends Plugin {
 		$row = $sth->fetch();
 		$similarity_result = $row['ms'];
 
-		_debug("af_psql_trgm: similarity result: $similarity_result");
+		Debug::log("af_psql_trgm: similarity result: $similarity_result", Debug::$LOG_EXTENDED);
 
 		if ($similarity_result >= $similarity) {
 			$article["force_catchup"] = true;

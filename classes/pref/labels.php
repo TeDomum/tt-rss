@@ -22,67 +22,58 @@ class Pref_Labels extends Handler_Protected {
 
 			print "<form onsubmit='return false;'>";
 
-			print "<div class=\"dlgSec\">".__("Caption")."</div>";
+			print "<header>".__("Caption")."</header>";
 
-			print "<div class=\"dlgSecCont\">";
+			print "<section>";
 
 			$fg_color = $line['fg_color'];
-			$bg_color = $line['bg_color'];
+			$bg_color = $line['bg_color'] ? $line['bg_color'] : '#fff7d5';
 
-			print "<span class=\"labelColorIndicator\" id=\"label-editor-indicator\" style='color : $fg_color; background-color : $bg_color; margin-bottom : 4px; margin-right : 4px'>&alpha;</span>";
+			print "<input style='font-size : 16px; color : $fg_color; background : $bg_color; transition : background 0.1s linear'
+				id='labelEdit_caption' name='caption' dojoType='dijit.form.ValidationTextBox'
+				required='true' value=\"".htmlspecialchars($line['caption'])."\">";
 
-			print "<input style=\"font-size : 16px\" name=\"caption\"
-			dojoType=\"dijit.form.ValidationTextBox\"
-			required=\"true\"
-			value=\"".htmlspecialchars($line['caption'])."\">";
+			print "</section>";
 
-			print "</div>";
-			print "<div class=\"dlgSec\">" . __("Colors") . "</div>";
-			print "<div class=\"dlgSecCont\">";
+			print "<header>" . __("Colors") . "</header>";
+			print "<section>";
 
-			print "<table cellspacing=\"0\">";
-
-			print "<tr><td>".__("Foreground:")."</td><td>".__("Background:").
-				"</td></tr>";
-
+			print "<table>";
+			print "<tr><th style='text-align : left'>".__("Foreground:")."</th><th style='text-align : left'>".__("Background:")."</th></tr>";
 			print "<tr><td style='padding-right : 10px'>";
 
-			print "<input dojoType=\"dijit.form.TextBox\"
-			style=\"display : none\" id=\"labelEdit_fgColor\"
-			name=\"fg_color\" value=\"$fg_color\">";
-			print "<input dojoType=\"dijit.form.TextBox\"
-			style=\"display : none\" id=\"labelEdit_bgColor\"
-			name=\"bg_color\" value=\"$bg_color\">";
+			print "<input dojoType='dijit.form.TextBox'
+				style='display : none' id='labelEdit_fgColor'
+				name='fg_color' value='$fg_color'>";
+			print "<input dojoType='dijit.form.TextBox'
+				style='display : none' id='labelEdit_bgColor'
+				name='bg_color' value='$bg_color'>";
 
-			print "<div dojoType=\"dijit.ColorPalette\">
-			<script type=\"dojo/method\" event=\"onChange\" args=\"fg_color\">
-				dijit.byId(\"labelEdit_fgColor\").attr('value', fg_color);
-				$('label-editor-indicator').setStyle({color: fg_color});
+			print "<div dojoType='dijit.ColorPalette'>
+			<script type='dojo/method' event='onChange' args='fg_color'>
+				dijit.byId('labelEdit_fgColor').attr('value', fg_color);
+				dijit.byId('labelEdit_caption').domNode.setStyle({color: fg_color});
 			</script>
 			</div>";
-			print "</div>";
 
 			print "</td><td>";
 
-			print "<div dojoType=\"dijit.ColorPalette\">
-			<script type=\"dojo/method\" event=\"onChange\" args=\"bg_color\">
-				dijit.byId(\"labelEdit_bgColor\").attr('value', bg_color);
-				$('label-editor-indicator').setStyle({backgroundColor: bg_color});
+			print "<div dojoType='dijit.ColorPalette'>
+			<script type='dojo/method' event='onChange' args='bg_color'>
+				dijit.byId('labelEdit_bgColor').attr('value', bg_color);
+				dijit.byId('labelEdit_caption').domNode.setStyle({backgroundColor: bg_color});
 			</script>
 			</div>";
-			print "</div>";
 
 			print "</td></tr></table>";
-			print "</div>";
+			print "</section>";
 
-#			print "</form>";
-
-			print "<div class=\"dlgButtons\">";
-			print "<button dojoType=\"dijit.form.Button\" type=\"submit\" class=\"btn-primary\" onclick=\"dijit.byId('labelEditDlg').execute()\">".
+			print "<footer>";
+			print "<button dojoType='dijit.form.Button' type='submit' class='alt-primary' onclick=\"dijit.byId('labelEditDlg').execute()\">".
 				__('Save')."</button>";
-			print "<button dojoType=\"dijit.form.Button\" onclick=\"dijit.byId('labelEditDlg').hide()\">".
+			print "<button dojoType='dijit.form.Button' onclick=\"dijit.byId('labelEditDlg').hide()\">".
 				__('Cancel')."</button>";
-			print "</div>";
+			print "</footer>";
 
 			print "</form>";
 		}
@@ -147,13 +138,11 @@ class Pref_Labels extends Handler_Protected {
 				$sth->execute([$fg, $bg, $id, $_SESSION['uid']]);
 			}
 
-			$caption = Labels::find_caption($id, $_SESSION["uid"]);
-
 			/* Remove cached data */
 
 			$sth = $this->pdo->prepare("UPDATE ttrss_user_entries SET label_cache = ''
-				WHERE label_cache LIKE ? AND owner_uid = ?");
-			$sth->execute(["%$caption%", $_SESSION['uid']]);
+				WHERE owner_uid = ?");
+			$sth->execute([$_SESSION['uid']]);
 		}
 	}
 
@@ -166,13 +155,11 @@ class Pref_Labels extends Handler_Protected {
 				AND owner_uid = ?");
 			$sth->execute([$id, $_SESSION['uid']]);
 
-			$caption = Labels::find_caption($id, $_SESSION["uid"]);
-
 			/* Remove cached data */
 
 			$sth = $this->pdo->prepare("UPDATE ttrss_user_entries SET label_cache = ''
-				WHERE label_cache LIKE ? AND owner_uid = ?");
-			$sth->execute(["%$caption%", $_SESSION['uid']]);
+				WHERE owner_uid = ?");
+			$sth->execute([$_SESSION['uid']]);
 		}
 	}
 
@@ -262,11 +249,11 @@ class Pref_Labels extends Handler_Protected {
 
 	function index() {
 
-		print "<div id=\"pref-label-wrap\" dojoType=\"dijit.layout.BorderContainer\" gutters=\"false\">";
-		print "<div id=\"pref-label-header\" dojoType=\"dijit.layout.ContentPane\" region=\"top\">";
-		print "<div id=\"pref-label-toolbar\" dojoType=\"dijit.Toolbar\">";
+		print "<div dojoType='dijit.layout.BorderContainer' gutters='false'>";
+		print "<div style='padding : 0px' dojoType='dijit.layout.ContentPane' region='top'>";
+		print "<div dojoType='fox.Toolbar'>";
 
-		print "<div dojoType=\"dijit.form.DropDownButton\">".
+		print "<div dojoType='fox.form.DropDownButton'>".
 				"<span>" . __('Select')."</span>";
 		print "<div dojoType=\"dijit.Menu\" style=\"display: none;\">";
 		print "<div onclick=\"dijit.byId('labelTree').model.setAllChecked(true)\"
@@ -275,19 +262,19 @@ class Pref_Labels extends Handler_Protected {
 			dojoType=\"dijit.MenuItem\">".__('None')."</div>";
 		print "</div></div>";
 
-		print"<button dojoType=\"dijit.form.Button\" onclick=\"return addLabel()\">".
+		print"<button dojoType=\"dijit.form.Button\" onclick=\"CommonDialogs.addLabel()\">".
 			__('Create label')."</button dojoType=\"dijit.form.Button\"> ";
 
-		print "<button dojoType=\"dijit.form.Button\" onclick=\"removeSelectedLabels()\">".
+		print "<button dojoType=\"dijit.form.Button\" onclick=\"dijit.byId('labelTree').removeSelected()\">".
 			__('Remove')."</button dojoType=\"dijit.form.Button\"> ";
 
-		print "<button dojoType=\"dijit.form.Button\" onclick=\"labelColorReset()\">".
+		print "<button dojoType=\"dijit.form.Button\" onclick=\"dijit.byId('labelTree').resetColors()\">".
 			__('Clear colors')."</button dojoType=\"dijit.form.Button\">";
 
 
 		print "</div>"; #toolbar
 		print "</div>"; #pane
-		print "<div id=\"pref-label-content\" dojoType=\"dijit.layout.ContentPane\" region=\"center\">";
+		print "<div style='padding : 0px' dojoType=\"dijit.layout.ContentPane\" region=\"center\">";
 
 		print "<div id=\"labellistLoading\">
 		<img src='images/indicator_tiny.gif'>".
@@ -310,7 +297,7 @@ class Pref_Labels extends Handler_Protected {
 			var bare_id = id.substr(id.indexOf(':')+1);
 
 			if (id.match('LABEL:')) {
-				editLabel(bare_id);
+				dijit.byId('labelTree').editLabel(bare_id);
 			}
 		</script>
 		</div>";

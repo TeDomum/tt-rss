@@ -94,7 +94,7 @@ function print_feed_multi_select($id, $default_ids = [],
 				(SELECT COUNT(id) FROM ttrss_feed_categories AS c2 WHERE
 					c2.parent_cat = ttrss_feed_categories.id) AS num_children
 				FROM ttrss_feed_categories
-				WHERE owner_uid = :uid AND 
+				WHERE owner_uid = :uid AND
 				(parent_cat = :root_id OR (:root_id IS NULL AND parent_cat IS NULL)) ORDER BY title");
 
 		$sth->execute([":uid" => $_SESSION['uid'], ":root_id" => $root_id]);
@@ -188,7 +188,7 @@ function print_feed_cat_select($id, $default_id,
 				(SELECT COUNT(id) FROM ttrss_feed_categories AS c2 WHERE
 					c2.parent_cat = ttrss_feed_categories.id) AS num_children
 				FROM ttrss_feed_categories
-				WHERE owner_uid = :uid AND 
+				WHERE owner_uid = :uid AND
 				  (parent_cat = :root_id OR (:root_id IS NULL AND parent_cat IS NULL)) ORDER BY title");
 	$sth->execute([":uid" => $_SESSION['uid'], ":root_id" => $root_id]);
 
@@ -233,10 +233,12 @@ function print_feed_cat_select($id, $default_id,
 	}
 }
 
-function stylesheet_tag($filename) {
+function stylesheet_tag($filename, $id = false) {
 	$timestamp = filemtime($filename);
 
-	return "<link rel=\"stylesheet\" type=\"text/css\" href=\"$filename?$timestamp\"/>\n";
+	$id_part = $id ? "id=\"$id\"" : "";
+
+	return "<link rel=\"stylesheet\" $id_part type=\"text/css\" href=\"$filename?$timestamp\"/>\n";
 }
 
 function javascript_tag($filename) {
@@ -286,25 +288,21 @@ function format_inline_player($url, $ctype) {
 
 	if (strpos($ctype, "audio/") === 0) {
 
+		$entry .= "<div class='inline-player'>";
+
 		if ($_SESSION["hasAudio"] && (strpos($ctype, "ogg") !== false ||
 				$_SESSION["hasMp3"])) {
 
 			$entry .= "<audio preload=\"none\" controls>
 					<source type=\"$ctype\" src=\"$url\"/>
-					</audio>";
+					</audio> ";
 
-		} else {
-
-			$entry .= "<object type=\"application/x-shockwave-flash\"
-					data=\"lib/button/musicplayer.swf?song_url=$url\"
-					width=\"17\" height=\"17\" style='float : left; margin-right : 5px;'>
-					<param name=\"movie\"
-						value=\"lib/button/musicplayer.swf?song_url=$url\" />
-					</object>";
 		}
 
-		if ($entry) $entry .= "&nbsp; <a target=\"_blank\" rel=\"noopener noreferrer\"
+		if ($entry) $entry .= "<a target=\"_blank\" rel=\"noopener noreferrer\"
 				href=\"$url\">" . basename($url) . "</a>";
+
+		$entry .= "</div>";
 
 		return $entry;
 

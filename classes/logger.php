@@ -30,9 +30,9 @@ class Logger {
 			return false;
 	}
 
-	function log($string) {
+	function log($string, $context = "") {
 		if ($this->adapter)
-			return $this->adapter->log($string);
+			return $this->adapter->log_error(E_USER_NOTICE, $string, '', 0, $context);
 		else
 			return false;
 	}
@@ -48,6 +48,9 @@ class Logger {
 			break;
 		case "syslog":
 			$this->adapter = new Logger_Syslog();
+			break;
+		case "stdout":
+			$this->adapter = new Logger_Stdout();
 			break;
 		default:
 			$this->adapter = false;

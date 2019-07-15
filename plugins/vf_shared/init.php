@@ -14,7 +14,7 @@ class VF_Shared extends Plugin {
 	function init($host) {
 		$this->host = $host;
 
-		$host->add_feed(-1, __("Shared articles"), 'plugins/vf_shared/share.png', $this);
+		$host->add_feed(-1, __("Shared articles"), 'link', $this);
 	}
 
 	function api_version() {
@@ -25,7 +25,7 @@ class VF_Shared extends Plugin {
 	 * @SuppressWarnings(PHPMD.UnusedFormalParameter)
 	 */
 	function get_unread($feed_id) {
-		$sth = $this->pdo->prepare("select count(int_id) AS count 
+		$sth = $this->pdo->prepare("select count(int_id) AS count
 			from ttrss_user_entries where owner_uid = ? and unread = true and uuid != ''");
 		$sth->execute([$_SESSION['uid']]);
 
@@ -40,7 +40,7 @@ class VF_Shared extends Plugin {
 	 * @SuppressWarnings(PHPMD.UnusedFormalParameter)
 	 */
 	function get_total($feed_id) {
-		$sth = $this->pdo->prepare("select count(int_id) AS count 
+		$sth = $this->pdo->prepare("select count(int_id) AS count
 			from ttrss_user_entries where owner_uid = ? and uuid != ''");
 		$sth->execute([$_SESSION['uid']]);
 

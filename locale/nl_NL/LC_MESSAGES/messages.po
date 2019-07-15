@@ -7,17 +7,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tt-rss git\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-04-28 17:03+0300\n"
-"PO-Revision-Date: 2013-05-02 13:55+0100\n"
-"Last-Translator: ArmyOfPirates\n"
-"Language-Team: translations <LL@li.org>\n"
+"POT-Creation-Date: 2019-05-20 15:42+0300\n"
+"PO-Revision-Date: 2019-02-23 05:02+0000\n"
+"Last-Translator: Patrick Ahles <p.ahles+weblate@gmail.com>\n"
+"Language-Team: Dutch <https://weblate.tt-rss.org/projects/tt-rss/messages/nl/>\n"
 "Language: nl_NL\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.5.5\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 3.3\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-KeywordsList: _\n"
 "X-Poedit-Basepath: .\n"
 
@@ -56,36 +56,32 @@ msgstr "Standaard interval"
 #: backend.php:83
 #: backend.php:93
 msgid "Disable updates"
-msgstr "updates uitschakelen"
+msgstr "Updates uitschakelen"
 
 #: backend.php:84
 #: backend.php:94
-#, fuzzy
 msgid "15 minutes"
 msgstr "Elke 15 minuten"
 
 #: backend.php:85
 #: backend.php:95
-#, fuzzy
 msgid "30 minutes"
 msgstr "Elke 30 minuten"
 
 #: backend.php:86
 #: backend.php:96
 msgid "Hourly"
-msgstr "Ieder uur"
+msgstr "Elk uur"
 
 #: backend.php:87
 #: backend.php:97
-#, fuzzy
 msgid "4 hours"
-msgstr "Om de 4 uur"
+msgstr "Elke 4 uur"
 
 #: backend.php:88
 #: backend.php:98
-#, fuzzy
 msgid "12 hours"
-msgstr "Om de 12 uur"
+msgstr "Elke 12 uur"
 
 #: backend.php:89
 #: backend.php:99
@@ -98,8 +94,8 @@ msgid "Weekly"
 msgstr "Wekelijks"
 
 #: backend.php:103
+#: classes/pref/system.php:52
 #: classes/pref/users.php:47
-#: classes/pref/system.php:51
 msgid "User"
 msgstr "Gebruiker"
 
@@ -117,7 +113,7 @@ msgstr "Dit programma vereist XmlHttpRequest om goed te functioneren. Uw browser
 
 #: errors.php:12
 msgid "This program requires cookies to function properly. Your browser doesn't seem to support them."
-msgstr "Dit programma vereist cookies om goed te functioneren.  Uw browser lijkt dit niet te ondersteunen."
+msgstr "Dit programma vereist cookies om goed te functioneren. Uw browser lijkt dit niet te ondersteunen."
 
 #: errors.php:15
 msgid "Backend sanity check failed."
@@ -129,7 +125,7 @@ msgstr "Frontend gezondheidscontrole mislukt."
 
 #: errors.php:19
 msgid "Incorrect database schema version. &lt;a href='db-updater.php'&gt;Please update&lt;/a&gt;."
-msgstr "Onjuiste database schema versie. &lt;a href='db-updater.php'&gt;Bijwerken aub!&lt;/a&gt;."
+msgstr "Onjuiste database schemaversie. &lt;a href='db-updater.php'&gt;Bijwerken aub!&lt;/a&gt;."
 
 #: errors.php:21
 msgid "Request not authorized."
@@ -141,11 +137,11 @@ msgstr "Geen uit te voeren opdracht."
 
 #: errors.php:25
 msgid "Could not display feed: query failed. Please check label match syntax or local configuration."
-msgstr "Kon feed niet weergeven: de zoekopdracht is mislukt. Controleer aub de syntax van de labelzoektekst of de lokale configuratie. "
+msgstr "Kon feed niet weergeven: de zoekopdracht is mislukt. Controleer aub de syntax van de labelzoektekst of de lokale configuratie."
 
 #: errors.php:27
 msgid "Denied. Your access level is insufficient to access this page."
-msgstr "Niet toegestaan. Uw toegangsniveau is onvoldoende voor deze pagina."
+msgstr "Niet toegestaan. Uw toegangsniveau is onvoldoende om deze pagina te zien."
 
 #: errors.php:29
 msgid "Configuration check failed"
@@ -160,1655 +156,1620 @@ msgid "SQL escaping test failed, check your database and PHP configuration"
 msgstr "SQL escaping test mislukt. Controleer uw database en de PHP configuratie"
 
 #: errors.php:37
-#, fuzzy
 msgid "Method not found"
-msgstr "Feed niet gevonden."
+msgstr "Methode niet gevonden"
 
 #: errors.php:39
-#, fuzzy
 msgid "Plugin not found"
-msgstr "Gebruiker niet gevonden"
+msgstr "Plugin niet gevonden"
 
-#: index.php:153
-#: index.php:169
-#: index.php:287
-#: prefs.php:122
+#: errors.php:41
+msgid "Encoding data as JSON failed"
+msgstr "Gegevens coderen als JSON mislukt"
+
+#: index.php:127
+#: index.php:142
+#: index.php:254
+#: prefs.php:112
 #: classes/backend.php:5
-#: classes/pref/labels.php:294
-#: classes/pref/feeds.php:1238
-#: classes/pref/filters.php:822
-#: js/feedlist.js:148
-#: js/feedlist.js:491
-#: js/feedlist.js:539
-#: js/functions.js:314
-#: js/functions.js:1336
-#: js/prefs.js:562
-#: js/prefs.js:754
-#: js/prefs.js:1484
-#: js/prefs.js:1499
-#: js/tt-rss.js:546
-#: js/viewfeed.js:1180
+#: classes/pref/feeds.php:1268
+#: classes/pref/filters.php:806
+#: classes/pref/labels.php:281
+#: js/AppBase.js:147
+#: js/CommonDialogs.js:291
+#: js/CommonDialogs.js:371
+#: js/Feeds.js:344
+#: js/Feeds.js:422
+#: js/Headlines.js:282
+#: js/PrefFeedTree.js:126
+#: js/PrefFeedTree.js:133
+#: js/PrefFeedTree.js:250
+#: js/PrefFeedTree.js:319
+#: js/PrefFilterTree.js:97
+#: js/PrefHelpers.js:23
+#: js/PrefHelpers.js:72
+#: js/PrefHelpers.js:138
 #: plugins/import_export/import_export.js:17
-#: js/functions.js:565
-#: js/prefs.js:1196
-#: js/prefs.js:1249
-#: js/prefs.js:1288
-#: js/prefs.js:1301
-#: js/prefs.js:1312
-#: js/prefs.js:1327
-#: js/tt-rss.js:563
-#: js/viewfeed.js:760
 msgid "Loading, please wait..."
 msgstr "Aan 't laden, even wachten aub..."
 
-#: index.php:191
-msgid "Show articles"
-msgstr "Toon artikelen"
-
-#: index.php:194
-msgid "Adaptive"
-msgstr "Aangepast"
-
-#: index.php:195
-msgid "All Articles"
-msgstr "Alle artikelen"
-
-#: index.php:196
-#: include/functions.php:1198
-#: classes/feeds.php:110
-msgid "Starred"
-msgstr "Met ster"
-
-#: index.php:197
-#: include/functions.php:1199
-#: classes/feeds.php:111
-msgid "Published"
-msgstr "Gepubliceerd"
-
-#: index.php:198
-#: classes/feeds.php:103
-#: classes/feeds.php:109
-msgid "Unread"
-msgstr "Ongelezen"
-
-#: index.php:199
-msgid "With Note"
-msgstr "Met notitie"
-
-#: index.php:200
-msgid "Ignore Scoring"
-msgstr "Scores negeren"
-
-#: index.php:203
-msgid "Sort articles"
-msgstr "Artikelen sorteren"
-
-#: index.php:206
-msgid "Default"
-msgstr "Standaard"
-
-#: index.php:207
-msgid "Newest first"
-msgstr "Nieuwste eerst"
-
-#: index.php:208
-msgid "Oldest first"
-msgstr "Oudste eerst"
-
-#: index.php:209
-msgid "Title"
-msgstr "Titel"
-
-#: index.php:213
-#: index.php:253
-#: include/functions.php:1186
-#: classes/feeds.php:115
-#: js/FeedTree.js:138
-#: js/FeedTree.js:166
-msgid "Mark as read"
-msgstr "Markeren als gelezen"
-
-#: index.php:216
-msgid "Older than one day"
-msgstr "Ouder dan een dag"
-
-#: index.php:219
-msgid "Older than one week"
-msgstr "Ouder dan een week"
-
-#: index.php:222
-msgid "Older than two weeks"
-msgstr "Ouder dan twee weken"
-
-#: index.php:238
+#: index.php:151
+#: js/AppBase.js:244
+#: js/AppBase.js:250
 msgid "Communication problem with server."
 msgstr "Communicatieprobleem met de server."
 
-#: index.php:243
+#: index.php:154
+msgid "Recent entries found in event log."
+msgstr "Recente meldingen gevonden in het gebeurtenissenlogboek."
+
+#: index.php:157
+msgid "Updates are available from Git."
+msgstr "Er zijn updates beschikbaar via Git."
+
+#: index.php:171
+msgid "Show articles"
+msgstr "Toon artikelen"
+
+#: index.php:174
+msgid "Adaptive"
+msgstr "Aangepast"
+
+#: index.php:175
+msgid "All Articles"
+msgstr "Alle artikelen"
+
+#: index.php:176
+#: include/functions.php:1204
+#: classes/feeds.php:70
+msgid "Starred"
+msgstr "Met ster"
+
+#: index.php:177
+#: include/functions.php:1205
+#: classes/feeds.php:71
+msgid "Published"
+msgstr "Gepubliceerd"
+
+#: index.php:178
+#: classes/feeds.php:63
+#: classes/feeds.php:69
+msgid "Unread"
+msgstr "Ongelezen"
+
+#: index.php:179
+msgid "With Note"
+msgstr "Met notitie"
+
+#: index.php:180
+msgid "Ignore Scoring"
+msgstr "Scores negeren"
+
+#: index.php:183
+msgid "Sort articles"
+msgstr "Artikelen sorteren"
+
+#: index.php:187
+msgid "Default"
+msgstr "Standaard"
+
+#: index.php:188
+msgid "Newest first"
+msgstr "Nieuwste eerst"
+
+#: index.php:189
+msgid "Oldest first"
+msgstr "Oudste eerst"
+
+#: index.php:190
+msgid "Title"
+msgstr "Titel"
+
+#: index.php:194
+#: index.php:228
+#: include/functions.php:1192
+#: classes/feeds.php:75
+#: js/FeedTree.js:58
+#: js/FeedTree.js:93
+msgid "Mark as read"
+msgstr "Markeren als gelezen"
+
+#: index.php:197
+msgid "Older than one day"
+msgstr "Ouder dan een dag"
+
+#: index.php:200
+msgid "Older than one week"
+msgstr "Ouder dan een week"
+
+#: index.php:203
+msgid "Older than two weeks"
+msgstr "Ouder dan twee weken"
+
+#: index.php:218
 msgid "Actions..."
 msgstr "Acties..."
 
-#: index.php:245
+#: index.php:221
 msgid "Preferences..."
 msgstr "Voorkeuren…"
 
-#: index.php:246
+#: index.php:222
 msgid "Search..."
 msgstr "Zoeken..."
 
-#: index.php:247
+#: index.php:223
 msgid "Feed actions:"
 msgstr "Feed acties:"
 
-#: index.php:248
-#: classes/handler/public.php:551
+#: index.php:224
+#: classes/handler/public.php:778
 msgid "Subscribe to feed..."
 msgstr "Abonneren op feed..."
 
-#: index.php:249
+#: index.php:225
 msgid "Edit this feed..."
 msgstr "Bewerk deze feed..."
 
-#: index.php:250
-msgid "Rescore feed"
-msgstr "Feed opnieuw score geven"
-
-#: index.php:251
-#: classes/pref/feeds.php:778
-#: classes/pref/feeds.php:1211
-#: js/PrefFeedTree.js:80
+#: index.php:226
+#: classes/pref/feeds.php:796
+#: classes/pref/feeds.php:1241
+#: js/PrefFeedTree.js:62
 msgid "Unsubscribe"
 msgstr "Abonnement opzeggen"
 
-#: index.php:252
+#: index.php:227
 msgid "All feeds:"
 msgstr "Alle feeds:"
 
-#: index.php:254
+#: index.php:229
 msgid "(Un)hide read feeds"
 msgstr "Toon/Verberg gelezen feeds"
 
-#: index.php:255
+#: index.php:230
 msgid "Other actions:"
 msgstr "Andere acties:"
 
-#: index.php:256
-#: include/functions.php:1172
+#: index.php:231
+#: include/functions.php:1178
 msgid "Toggle widescreen mode"
-msgstr "Wisselen breedbeeld modus"
+msgstr "Wisselen breedbeeldmodus"
 
-#: index.php:257
-msgid "Create label..."
-msgstr "Label aanmaken…"
+#: index.php:232
+#: include/functions.php:1213
+msgid "Toggle night mode"
+msgstr "In/uitschakelen nacht modus"
 
-#: index.php:258
-msgid "Create filter..."
-msgstr "Filter aanmaken…"
-
-#: index.php:259
+#: index.php:233
 msgid "Keyboard shortcuts help"
-msgstr "Hulp bij sneltoetscombinaties"
+msgstr "Hulp voor sneltoetscombinaties"
 
-#: index.php:268
+#: index.php:242
 msgid "Logout"
 msgstr "Afmelden"
 
-#: index.php:274
-msgid "Updates are available from Git."
-msgstr ""
-
-#: prefs.php:33
-#: prefs.php:140
-#: include/functions.php:1201
-#: classes/pref/prefs.php:425
+#: prefs.php:32
+#: prefs.php:129
+#: include/functions.php:1208
+#: classes/pref/prefs.php:473
 msgid "Preferences"
 msgstr "Voorkeuren"
 
-#: prefs.php:131
+#: prefs.php:121
 msgid "Keyboard shortcuts"
 msgstr "Sneltoetscombinaties"
 
-#: prefs.php:132
+#: prefs.php:122
 msgid "Exit preferences"
 msgstr "Verlaat voorkeuren"
 
-#: prefs.php:143
-#: classes/pref/feeds.php:114
-#: classes/pref/feeds.php:1146
-#: classes/pref/feeds.php:1200
+#: prefs.php:132
+#: classes/pref/feeds.php:127
+#: classes/pref/feeds.php:1176
+#: classes/pref/feeds.php:1230
+#: classes/pref/prefs.php:28
 msgid "Feeds"
 msgstr "Feeds"
 
-#: prefs.php:146
-#: classes/pref/filters.php:276
+#: prefs.php:136
+#: classes/pref/filters.php:243
 msgid "Filters"
 msgstr "Filters"
 
-#: prefs.php:149
-#: classes/pref/labels.php:94
-#: classes/feeds.php:1708
+#: prefs.php:140
+#: classes/feeds.php:1383
+#: classes/pref/labels.php:85
 msgid "Labels"
 msgstr "Labels"
 
-#: prefs.php:153
+#: prefs.php:145
 msgid "Users"
 msgstr "Gebruikers"
 
-#: prefs.php:156
+#: prefs.php:148
 msgid "System"
 msgstr "Systeem"
 
-#: register.php:186
-#: include/login_form.php:162
+#: register.php:183
+#: include/login_form.php:141
 msgid "Create new account"
 msgstr "Maak nieuw account aan"
 
-#: register.php:192
+#: register.php:189
 msgid "New user registrations are administratively disabled."
 msgstr "Het registreren van nieuwe gebruikers is door de beheerder uitgeschakeld."
 
-#: register.php:196
-#: register.php:241
-#: register.php:254
-#: register.php:269
-#: register.php:288
-#: register.php:336
-#: register.php:346
-#: register.php:358
-#: classes/handler/public.php:623
-#: classes/handler/public.php:697
-#: classes/handler/public.php:798
-#: classes/handler/public.php:877
-#: classes/handler/public.php:891
-#: classes/handler/public.php:898
-#: classes/handler/public.php:923
+#: register.php:193
+#: register.php:238
+#: register.php:251
+#: register.php:266
+#: register.php:285
+#: register.php:332
+#: register.php:342
+#: register.php:354
+#: classes/handler/public.php:795
+#: classes/handler/public.php:844
+#: classes/handler/public.php:868
+#: classes/handler/public.php:960
+#: classes/handler/public.php:990
+#: classes/handler/public.php:1064
+#: classes/handler/public.php:1161
+#: classes/handler/public.php:1173
+#: classes/handler/public.php:1178
+#: classes/handler/public.php:1202
 msgid "Return to Tiny Tiny RSS"
 msgstr "Ga terug naar Tiny Tiny RSS"
 
-#: register.php:217
+#: register.php:214
 msgid "Your temporary password will be sent to the specified email. Accounts, which were not logged in once, are erased automatically 24 hours after temporary password is sent."
 msgstr "Uw tijdelijke wachtwoord wordt naar het vermelde e-mailadres verstuurd. Accounts waarin niet wordt ingelogd, worden automatisch 24 uur na het verzenden van het tijdelijk wachtwoord verwijderd."
 
-#: register.php:223
+#: register.php:220
 msgid "Desired login:"
-msgstr "Gewenst loginID:"
+msgstr "Gewenst loginnaam:"
 
-#: register.php:226
+#: register.php:223
 msgid "Check availability"
 msgstr "Controleer beschikbaarheid"
 
-#: register.php:228
-#: classes/handler/public.php:713
+#: register.php:225
+#: classes/handler/public.php:975
 msgid "Email:"
 msgstr "E-mail:"
 
-#: register.php:231
-#: classes/handler/public.php:718
+#: register.php:228
 msgid "How much is two plus two:"
 msgstr "Hoeveel is twee plus twee:"
 
-#: register.php:234
+#: register.php:231
 msgid "Submit registration"
 msgstr "Registratie indienen"
 
-#: register.php:252
+#: register.php:249
 msgid "Your registration information is incomplete."
-msgstr "Uw registratie informatie is incompleet."
+msgstr "Uw registratieinformatie is incompleet."
 
-#: register.php:267
+#: register.php:264
 msgid "Sorry, this username is already taken."
-msgstr "Sorry, deze naam is al in gebruik."
+msgstr "Sorry, deze gebruikersnaam is al in gebruik."
 
-#: register.php:286
+#: register.php:283
 msgid "Registration failed."
 msgstr "Registratie is mislukt."
 
-#: register.php:333
+#: register.php:329
 msgid "Account created successfully."
 msgstr "Het account is met succes aangemaakt."
 
-#: register.php:355
+#: register.php:351
 msgid "New user registrations are currently closed."
 msgstr "Nieuwe gebruikersregistratie is op dit moment niet mogelijk."
 
-#: update.php:67
+#: update.php:68
 msgid "Tiny Tiny RSS data update script."
 msgstr "Tiny Tiny RSS data update script."
 
 #: include/controls.php:85
-#: classes/pref/filters.php:245
-#: classes/pref/filters.php:256
-#: classes/pref/filters.php:553
+#: classes/pref/filters.php:212
+#: classes/pref/filters.php:223
+#: classes/pref/filters.php:537
 msgid "All feeds"
 msgstr "Alle feeds"
 
 #: include/controls.php:138
 #: include/controls.php:230
-#: classes/opml.php:512
-#: classes/digest.php:120
-#: classes/pref/feeds.php:233
-#: classes/feeds.php:1720
+#: classes/digest.php:124
+#: classes/feeds.php:1395
+#: classes/opml.php:536
+#: classes/pref/feeds.php:246
 msgid "Uncategorized"
 msgstr "Ongecategoriseerd"
 
-#: include/feedbrowser.php:84
-#, php-format
-msgid "%d archived article"
-msgid_plural "%d archived articles"
-msgstr[0] "%d gearchiveerd artikel"
-msgstr[1] "%d gearchiveerde artikelen"
+#: include/functions.php:84
+msgid "Detect automatically"
+msgstr "Detecteer automatisch"
 
-#: include/feedbrowser.php:108
-msgid "No feeds found."
-msgstr "Geen feeds gevonden."
-
-#: include/functions.php:954
+#: include/functions.php:958
 #, php-format
 msgid "%d min"
-msgstr ""
+msgstr "%d min"
 
-#: include/functions.php:1148
+#: include/functions.php:1154
 msgid "Navigation"
 msgstr "Navigatie"
 
-#: include/functions.php:1149
+#: include/functions.php:1155
 msgid "Open next feed"
 msgstr "Open volgende feed"
 
-#: include/functions.php:1150
+#: include/functions.php:1156
 msgid "Open previous feed"
 msgstr "Open voorgaande feed"
 
-#: include/functions.php:1151
+#: include/functions.php:1157
 msgid "Open next article"
 msgstr "Open volgende artikel"
 
-#: include/functions.php:1152
+#: include/functions.php:1158
 msgid "Open previous article"
 msgstr "Open voorgaand artikel"
 
-#: include/functions.php:1153
+#: include/functions.php:1159
 msgid "Open next article (don't scroll long articles)"
 msgstr "Open volgend artikel (lange artikelen niet scrollen)"
 
-#: include/functions.php:1154
+#: include/functions.php:1160
 msgid "Open previous article (don't scroll long articles)"
 msgstr "Open vorig artikel (lange artikelen niet scrollen)"
 
-#: include/functions.php:1155
+#: include/functions.php:1161
 msgid "Move to next article (don't expand or mark read)"
 msgstr "Open volgend artikel (niet uitklappen of markeren als gelezen)"
 
-#: include/functions.php:1156
+#: include/functions.php:1162
 msgid "Move to previous article (don't expand or mark read)"
 msgstr "Open vorig artikel (niet uitklappen of markeren als gelezen)"
 
-#: include/functions.php:1157
+#: include/functions.php:1163
 msgid "Show search dialog"
 msgstr "Toon zoekdialoogvenster"
 
-#: include/functions.php:1158
+#: include/functions.php:1164
 msgid "Article"
 msgstr "Artikel"
 
-#: include/functions.php:1159
-#: js/viewfeed.js:1695
+#: include/functions.php:1165
+#: js/Headlines.js:1283
 msgid "Toggle starred"
 msgstr "In/uitschakelen sterren"
 
-#: include/functions.php:1160
-#: js/viewfeed.js:1707
+#: include/functions.php:1166
+#: js/Headlines.js:1295
 msgid "Toggle published"
 msgstr "In/uitschakelen gepubliceerd"
 
-#: include/functions.php:1161
-#: js/viewfeed.js:1682
+#: include/functions.php:1167
+#: js/Headlines.js:1270
 msgid "Toggle unread"
 msgstr "In/uitschakelen gelezen"
 
-#: include/functions.php:1162
+#: include/functions.php:1168
 msgid "Edit tags"
 msgstr "Bewerk tags"
 
-#: include/functions.php:1163
+#: include/functions.php:1169
 msgid "Open in new window"
 msgstr "Open in nieuw venster"
 
-#: include/functions.php:1164
-#: js/viewfeed.js:1728
+#: include/functions.php:1170
+#: js/Headlines.js:1316
 msgid "Mark below as read"
 msgstr "Hieronder markeren als gelezen"
 
-#: include/functions.php:1165
-#: js/viewfeed.js:1721
+#: include/functions.php:1171
+#: js/Headlines.js:1309
 msgid "Mark above as read"
 msgstr "Hierboven markeren als gelezen"
 
-#: include/functions.php:1166
+#: include/functions.php:1172
 msgid "Scroll down"
 msgstr "Omlaag scrollen"
 
-#: include/functions.php:1167
+#: include/functions.php:1173
 msgid "Scroll up"
 msgstr "Omhoog scrollen"
 
-#: include/functions.php:1168
+#: include/functions.php:1174
 msgid "Select article under cursor"
 msgstr "Selecteer artikel onder de cursor"
 
-#: include/functions.php:1169
+#: include/functions.php:1175
 msgid "Email article"
 msgstr "E-mail artikel"
 
-#: include/functions.php:1170
+#: include/functions.php:1176
 msgid "Close/collapse article"
 msgstr "Sluiten/inklappen artikel"
 
-#: include/functions.php:1171
+#: include/functions.php:1177
 msgid "Toggle article expansion (combined mode)"
 msgstr "In/uitschakelen artikel uitklappen (gecombineerde modus)"
 
-#: include/functions.php:1173
-#: plugins/embed_original/init.php:33
+#: include/functions.php:1179
 msgid "Toggle embed original"
-msgstr "In/uitschakelen origineel  insluiten"
+msgstr "In/uitschakelen origineel insluiten"
 
-#: include/functions.php:1174
+#: include/functions.php:1180
 msgid "Article selection"
 msgstr "Artikelselectie"
 
-#: include/functions.php:1175
+#: include/functions.php:1181
 msgid "Select all articles"
 msgstr "Selecteer alle artikelen"
 
-#: include/functions.php:1176
+#: include/functions.php:1182
 msgid "Select unread"
 msgstr "Selecteer ongelezen"
 
-#: include/functions.php:1177
+#: include/functions.php:1183
 msgid "Select starred"
 msgstr "Selecteer met ster"
 
-#: include/functions.php:1178
+#: include/functions.php:1184
 msgid "Select published"
 msgstr "Selecteer gepubliceerde"
 
-#: include/functions.php:1179
+#: include/functions.php:1185
 msgid "Invert selection"
 msgstr "Keer selectie om"
 
-#: include/functions.php:1180
+#: include/functions.php:1186
 msgid "Deselect everything"
 msgstr "Deselecteer alles"
 
-#: include/functions.php:1181
-#: classes/pref/feeds.php:524
-#: classes/pref/feeds.php:802
+#: include/functions.php:1187
+#: classes/pref/feeds.php:529
+#: classes/pref/feeds.php:817
 msgid "Feed"
 msgstr "Feed"
 
-#: include/functions.php:1182
+#: include/functions.php:1188
 msgid "Refresh current feed"
 msgstr "Ververs huidige feed"
 
-#: include/functions.php:1183
+#: include/functions.php:1189
 msgid "Un/hide read feeds"
 msgstr "Toon/Verberg gelezen feeds"
 
-#: include/functions.php:1184
-#: classes/pref/feeds.php:1203
+#: include/functions.php:1190
+#: classes/pref/feeds.php:1233
 msgid "Subscribe to feed"
 msgstr "Abonneer op feed"
 
-#: include/functions.php:1185
-#: js/FeedTree.js:145
-#: js/PrefFeedTree.js:74
-#: js/viewfeed.js:1846
+#: include/functions.php:1191
+#: js/Headlines.js:1433
+#: js/PrefFeedTree.js:56
+#: js/FeedTree.js:65
 msgid "Edit feed"
 msgstr "Bewerk feed"
 
-#: include/functions.php:1187
+#: include/functions.php:1193
 msgid "Reverse headlines"
 msgstr "Draai kopteksten om"
 
-#: include/functions.php:1188
+#: include/functions.php:1194
 msgid "Toggle headline grouping"
-msgstr ""
+msgstr "Schakel groepering op kopje aan/uit"
 
-#: include/functions.php:1189
+#: include/functions.php:1195
 msgid "Debug feed update"
 msgstr "Debug feed update"
 
-#: include/functions.php:1190
-#, fuzzy
+#: include/functions.php:1196
 msgid "Debug viewfeed()"
-msgstr "Debug feed update"
+msgstr "Debug viewfeed()"
 
-#: include/functions.php:1191
-#: js/FeedTree.js:194
+#: include/functions.php:1197
+#: js/FeedTree.js:121
 msgid "Mark all feeds as read"
 msgstr "Markeer alle feeds als gelezen"
 
-#: include/functions.php:1192
+#: include/functions.php:1198
 msgid "Un/collapse current category"
 msgstr "Uit/Inklappen huidige categorie"
 
-#: include/functions.php:1193
-msgid "Toggle combined mode"
-msgstr "In/uitschakelen gecombineerde modus"
-
-#: include/functions.php:1194
+#: include/functions.php:1199
 msgid "Toggle auto expand in combined mode"
 msgstr "In/uitschakelen automatisch uitklappen in gecombineerde modus"
 
-#: include/functions.php:1195
+#: include/functions.php:1200
+msgid "Toggle combined mode"
+msgstr "In/uitschakelen gecombineerde modus"
+
+#: include/functions.php:1201
 msgid "Go to"
 msgstr "Ga naar"
 
-#: include/functions.php:1196
-#: classes/feeds.php:1581
+#: include/functions.php:1202
+#: classes/feeds.php:1256
 msgid "All articles"
 msgstr "Alle artikelen"
 
-#: include/functions.php:1197
+#: include/functions.php:1203
 msgid "Fresh"
 msgstr "Nieuw"
 
-#: include/functions.php:1200
-#: js/tt-rss.js:490
-#: js/tt-rss.js:659
-msgid "Tag cloud"
-msgstr "Tag wolk"
+#: include/functions.php:1206
+#: classes/feeds.php:1260
+msgid "Recently read"
+msgstr "Recent gelezen"
 
-#: include/functions.php:1202
+#: include/functions.php:1207
+#: js/tt-rss.js:432
+#: js/tt-rss.js:511
+msgid "Tag cloud"
+msgstr "Tagwolk"
+
+#: include/functions.php:1209
 msgid "Other"
 msgstr "Andere"
 
-#: include/functions.php:1203
-#: classes/pref/labels.php:279
+#: include/functions.php:1210
+#: classes/pref/labels.php:266
 msgid "Create label"
 msgstr "Maak label"
 
-#: include/functions.php:1204
-#: classes/pref/filters.php:801
+#: include/functions.php:1211
+#: classes/pref/filters.php:785
 msgid "Create filter"
 msgstr "Maak filter"
 
-#: include/functions.php:1205
+#: include/functions.php:1212
 msgid "Un/collapse sidebar"
 msgstr "Uit/Inklappen zijbalk"
 
-#: include/functions.php:1206
+#: include/functions.php:1214
 msgid "Show help dialog"
 msgstr "Toon helpdialoogvenster"
 
-#: include/functions.php:2507
+#: include/functions.php:2465
 msgid "There is no error, the file uploaded with success"
-msgstr ""
+msgstr "Er is geen fout, het bestand is met success geüpload"
 
-#: include/functions.php:2508
+#: include/functions.php:2466
 msgid "The uploaded file exceeds the upload_max_filesize directive in php.ini"
-msgstr ""
+msgstr "Het geüploade bestand is groter dan de upload_max_filesize instelling in php.ini"
 
-#: include/functions.php:2509
+#: include/functions.php:2467
 msgid "The uploaded file exceeds the MAX_FILE_SIZE directive that was specified in the HTML form"
-msgstr ""
+msgstr "Het geüploade bestand is groter dan de MAX_FILE_SIZE instelling die is aangegeven in het HTML-formulier"
 
-#: include/functions.php:2510
+#: include/functions.php:2468
 msgid "The uploaded file was only partially uploaded"
-msgstr ""
+msgstr "Het geüploade bestand was slechts gedeeltelijk geüpload"
 
-#: include/functions.php:2511
-#, fuzzy
+#: include/functions.php:2469
 msgid "No file was uploaded"
-msgstr "Geen bestand geupload."
+msgstr "Geen bestand geüpload"
 
-#: include/functions.php:2512
+#: include/functions.php:2470
 msgid "Missing a temporary folder"
-msgstr ""
+msgstr "Een tijdelijke map ontbreekt"
 
-#: include/functions.php:2513
+#: include/functions.php:2471
 msgid "Failed to write file to disk."
-msgstr ""
+msgstr "Er kon geen bestand naar de harde schijf worden geschreven."
 
-#: include/functions.php:2514
+#: include/functions.php:2472
 msgid "A PHP extension stopped the file upload."
-msgstr ""
+msgstr "Een PHP-extensie heeft de bestandsupload gestopt."
 
-#: include/login_form.php:107
-#: classes/handler/public.php:446
-#: classes/handler/public.php:708
+#: include/login_form.php:81
+#: classes/handler/public.php:643
+#: classes/handler/public.php:970
+#: classes/pref/users.php:55
 msgid "Login:"
 msgstr "Aanmelden:"
 
-#: include/login_form.php:117
-#: classes/handler/public.php:449
+#: include/login_form.php:88
+#: classes/handler/public.php:650
 msgid "Password:"
 msgstr "Wachtwoord:"
 
-#: include/login_form.php:123
+#: include/login_form.php:96
 msgid "I forgot my password"
 msgstr "Ik ben mijn wachtwoord vergeten"
 
-#: include/login_form.php:129
+#: include/login_form.php:101
 msgid "Profile:"
 msgstr "Profiel:"
 
-#: include/login_form.php:133
-#: classes/handler/public.php:252
-#: classes/pref/prefs.php:1043
+#: include/login_form.php:104
+#: classes/handler/public.php:280
+#: classes/pref/prefs.php:1065
 #: classes/rpc.php:69
 msgid "Default profile"
 msgstr "Standaard profiel"
 
-#: include/login_form.php:141
+#: include/login_form.php:113
 msgid "Use less traffic"
 msgstr "Gebruik minder dataverkeer"
 
-#: include/login_form.php:145
+#: include/login_form.php:117
 msgid "Does not display images in articles, reduces automatic refreshes."
 msgstr "Geeft geen afbeeldingen weer in artikelen, vermindert automatisch herladen."
 
-#: include/login_form.php:153
+#: include/login_form.php:126
 msgid "Remember me"
 msgstr "Onthoud mij"
 
-#: include/login_form.php:159
-#: classes/handler/public.php:454
+#: include/login_form.php:137
+#: classes/handler/public.php:663
 msgid "Log in"
 msgstr "Aanmelden"
 
-#: include/sessions.php:46
-#, fuzzy
+#: include/sessions.php:45
 msgid "Session failed to validate (schema version changed)"
-msgstr "De sessie kon niet worden gevalideerd (onjuist IP)"
+msgstr "De sessie kon niet worden gevalideerd (schema-versie is veranderd)"
 
-#: include/sessions.php:62
-#, fuzzy
+#: include/sessions.php:53
+msgid "Session failed to validate (UA changed)."
+msgstr "De sessie kon niet worden gevalideerd (UA is veranderd)."
+
+#: include/sessions.php:67
 msgid "Session failed to validate (password changed)"
-msgstr "De sessie kon niet worden gevalideerd (onjuist IP)"
+msgstr "De sessie kon niet worden gevalideerd (wachtwoord veranderd)"
 
-#: include/sessions.php:69
-#, fuzzy
+#: include/sessions.php:74
 msgid "Session failed to validate (user not found)"
-msgstr "De sessie kon niet worden gevalideerd (onjuist IP)"
+msgstr "De sessie kon niet worden gevalideerd (gebruiker niet gevonden)"
 
 #: classes/article.php:26
 msgid "Article not found."
 msgstr "Artikel niet gevonden."
 
-#: classes/article.php:211
+#: classes/article.php:239
 msgid "Tags for this article (separated by commas):"
 msgstr "Tags voor dit artikel (komma gescheiden):"
 
-#: classes/article.php:236
-#: classes/pref/labels.php:82
-#: classes/pref/users.php:103
-#: classes/pref/feeds.php:782
-#: classes/pref/feeds.php:922
-#: classes/pref/filters.php:525
-#: classes/pref/prefs.php:988
-#: plugins/nsfw/init.php:85
-#: plugins/note/init.php:58
-#: plugins/af_readability/init.php:69
-#: plugins/af_redditimgur/init.php:62
-#: plugins/af_psql_trgm/init.php:188
-#: plugins/mail/init.php:65
-#: plugins/af_zz_imgproxy/init.php:238
+#: classes/article.php:251
+#: classes/pref/feeds.php:797
+#: classes/pref/feeds.php:951
+#: classes/pref/filters.php:509
+#: classes/pref/labels.php:73
+#: classes/pref/prefs.php:1016
+#: classes/pref/users.php:114
+#: plugins/af_psql_trgm/init.php:197
+#: plugins/af_readability/init.php:91
+#: plugins/af_redditimgur/init.php:69
+#: plugins/af_zz_imgproxy/init.php:239
+#: plugins/mail/init.php:66
+#: plugins/note/init.php:53
+#: plugins/nsfw/init.php:86
 msgid "Save"
 msgstr "Opslaan"
 
-#: classes/article.php:238
-#: classes/handler/public.php:423
-#: classes/handler/public.php:457
-#: classes/pref/labels.php:84
-#: classes/pref/users.php:105
-#: classes/pref/feeds.php:783
-#: classes/pref/feeds.php:925
-#: classes/pref/feeds.php:1680
-#: classes/pref/filters.php:528
-#: classes/pref/filters.php:945
-#: classes/pref/filters.php:1022
-#: classes/pref/filters.php:1115
-#: classes/pref/prefs.php:990
-#: classes/feeds.php:1035
-#: classes/feeds.php:1087
-#: classes/feeds.php:1126
-#: plugins/note/init.php:60
-#: plugins/mail/init.php:179
+#: classes/article.php:253
+#: classes/feeds.php:716
+#: classes/feeds.php:757
+#: classes/handler/public.php:621
+#: classes/pref/feeds.php:798
+#: classes/pref/feeds.php:954
+#: classes/pref/feeds.php:1691
+#: classes/pref/filters.php:512
+#: classes/pref/filters.php:942
+#: classes/pref/filters.php:1021
+#: classes/pref/filters.php:1114
+#: classes/pref/labels.php:75
+#: classes/pref/prefs.php:1018
+#: classes/pref/prefs.php:1115
+#: classes/pref/users.php:116
+#: plugins/mail/init.php:178
+#: plugins/note/init.php:55
 msgid "Cancel"
 msgstr "Annuleren"
 
-#: classes/article.php:337
-#: classes/article.php:682
-#: classes/article.php:837
+#: classes/article.php:348
+#: classes/article.php:614
 msgid "no tags"
 msgstr "geen tags"
 
-#: classes/article.php:448
+#: classes/article.php:458
 msgid "unknown type"
 msgstr "onbekend type"
 
-#: classes/article.php:525
+#: classes/article.php:535
 msgid "Attachments"
 msgstr "Bijlagen"
 
-#: classes/article.php:624
-#: classes/feeds.php:659
-msgid "comment"
-msgid_plural "comments"
-msgstr[0] ""
-msgstr[1] ""
-
-#: classes/article.php:628
-#: classes/feeds.php:663
-#, fuzzy
-msgid "comments"
-msgstr "Bijlagen"
-
-#: classes/article.php:651
-msgid " - "
-msgstr " - "
-
-#: classes/article.php:692
-#: classes/feeds.php:645
-msgid "Edit tags for this article"
-msgstr "Bewerk tags voor dit artikel"
-
-#: classes/article.php:725
-#: classes/feeds.php:600
-msgid "Originally from:"
-msgstr "Oorspronkelijk uit:"
-
-#: classes/article.php:736
-#: classes/pref/feeds.php:541
-#: classes/feeds.php:611
-msgid "Feed URL"
-msgstr "Feed URL"
-
-#: classes/article.php:773
-#: classes/backend.php:103
-#: classes/dlg.php:33
-#: classes/dlg.php:56
-#: classes/dlg.php:89
-#: classes/dlg.php:154
-#: classes/dlg.php:181
-#: classes/dlg.php:197
-#: classes/pref/feeds.php:1474
-#: classes/pref/feeds.php:1541
-#: classes/pref/filters.php:208
-#: classes/pref/prefs.php:1105
-#: plugins/af_psql_trgm/init.php:109
-#: plugins/import_export/init.php:425
-#: plugins/import_export/init.php:471
-#: plugins/share/init.php:128
-msgid "Close this window"
-msgstr "Sluit dit venster"
-
-#: classes/article.php:875
-msgid "(edit note)"
-msgstr "(bewerk notitie)"
-
-#: classes/opml.php:31
-#: classes/opml.php:36
-msgid "OPML Utility"
-msgstr "OPML hulpprogramma"
-
-#: classes/opml.php:40
-msgid "Importing OPML..."
-msgstr "OPML aan 't importeren…"
-
-#: classes/opml.php:45
-msgid "Return to preferences"
-msgstr "Terug naar voorkeuren"
-
-#: classes/opml.php:301
-#, php-format
-msgid "Adding feed: %s"
-msgstr "Feed toevoegen: %s"
-
-#: classes/opml.php:312
-#, php-format
-msgid "Duplicate feed: %s"
-msgstr "Dubbele feed: %s"
-
-#: classes/opml.php:326
-#, php-format
-msgid "Adding label %s"
-msgstr "Toevoegen label %s"
-
-#: classes/opml.php:329
-#, php-format
-msgid "Duplicate label: %s"
-msgstr "Dubbele label: %s"
-
-#: classes/opml.php:341
-#, php-format
-msgid "Setting preference key %s to %s"
-msgstr "Instellen voorkeursleutel %s op %s"
-
-#: classes/opml.php:377
-msgid "Adding filter..."
-msgstr "Filter toevoegen..."
-
-#: classes/opml.php:512
-#, php-format
-msgid "Processing category: %s"
-msgstr "Verwerken categorie: %s"
-
-#: classes/opml.php:558
-#, php-format
-msgid "Upload failed with error code %d"
-msgstr "Upload mislukt met fout nummer %d"
-
-#: classes/opml.php:570
-#: plugins/import_export/init.php:452
-msgid "Unable to move uploaded file."
-msgstr "Kan het geüploade bestand niet verplaatsen."
-
-#: classes/opml.php:574
-#: plugins/import_export/init.php:456
-msgid "Error: please upload OPML file."
-msgstr "Fout: OPML bestand uploaden aub."
-
-#: classes/opml.php:585
-msgid "Error: unable to find moved OPML file."
-msgstr "Fout: kan het verplaatste OPML bestand niet vinden."
-
-#: classes/opml.php:594
-msgid "Error while parsing document."
-msgstr "Fout bij het parsen van het document."
-
-#: classes/backend.php:31
-msgid "Other interface tips are available in the Tiny Tiny RSS wiki."
-msgstr "Andere interface tips zijn te vinden in de Tiny Tiny RSS wiki."
-
-#: classes/backend.php:36
+#: classes/backend.php:37
 msgid "Keyboard Shortcuts"
 msgstr "Sneltoetscombinaties"
 
-#: classes/backend.php:59
+#: classes/backend.php:61
+#: classes/backend.php:130
 msgid "Shift"
 msgstr "Shift"
 
-#: classes/backend.php:62
+#: classes/backend.php:64
+#: classes/backend.php:133
 msgid "Ctrl"
 msgstr "Ctrl"
 
-#: classes/backend.php:97
-msgid "Help topic not found."
-msgstr "Help onderwerp niet gevonden."
+#: classes/backend.php:159
+#: classes/dlg.php:30
+#: classes/dlg.php:57
+#: classes/dlg.php:89
+#: classes/dlg.php:153
+#: classes/dlg.php:187
+#: classes/dlg.php:203
+#: classes/pref/feeds.php:1499
+#: classes/pref/feeds.php:1559
+#: classes/pref/filters.php:175
+#: plugins/af_psql_trgm/init.php:111
+#: plugins/import_export/init.php:468
+#: plugins/import_export/init.php:512
+#: plugins/share/init.php:133
+msgid "Close this window"
+msgstr "Sluit dit venster"
 
-#: classes/dlg.php:17
-msgid "If you have imported labels and/or filters, you might need to reload preferences to see your new data."
-msgstr "Indien u labels en/of filters heeft geïmporteerd moet u waarschijnlijk te voorkeuren herladen om uw bijgewerkte gegevens te zien."
-
-#: classes/dlg.php:44
+#: classes/dlg.php:41
 msgid "Your Public OPML URL is:"
 msgstr "Uw publieke OPML URL is:"
 
-#: classes/dlg.php:53
-#: classes/dlg.php:178
-#: plugins/share/init.php:125
+#: classes/dlg.php:54
+#: classes/dlg.php:184
+#: plugins/share/init.php:130
 msgid "Generate new URL"
 msgstr "Genereer nieuwe URL"
 
-#: classes/dlg.php:67
+#: classes/dlg.php:68
 msgid "Update daemon is enabled in configuration, but daemon process is not running, which prevents all feeds from updating. Please start the daemon process or contact instance owner."
-msgstr "De update daemon is ingeschakeld in de configuratie, maar het achtergrondproces loopt niet. Dit voorkomt dat alle feeds wordt bijgewerkt. Start het achtergrondproces of contacteer de eigenaar van deze instantie."
+msgstr "De update daemon is ingeschakeld in de configuratie, maar het achtergrondproces loopt niet. Dit voorkomt dat alle feeds worden bijgewerkt. Start het achtergrondproces of contacteer de eigenaar van deze instantie."
 
-#: classes/dlg.php:71
-#: classes/dlg.php:80
+#: classes/dlg.php:72
+#: classes/dlg.php:81
 msgid "Last update:"
 msgstr "Laatste update:"
 
-#: classes/dlg.php:76
+#: classes/dlg.php:77
 msgid "Update daemon is taking too long to perform a feed update. This could indicate a problem like crash or a hang. Please check the daemon process or contact instance owner."
 msgstr "De update daemon neemt te veel tijd om een feed bij te werken. Dit kan betekenen dat het proces is gescrashed of hangt. Controleer het achtergrondproces of contacteer de eigenaar van deze instantie."
 
-#: classes/dlg.php:169
-msgid "You can view this feed as RSS using the following URL:"
-msgstr "u kunt deze feed bekijken als RSS via de volgende URL:"
+#: classes/dlg.php:170
+#, php-format
+msgid "%s can be accessed via the following secret URL:"
+msgstr "%s kan worden bekeken via de volgende geheime URL:"
 
-#: classes/dlg.php:190
+#: classes/dlg.php:181
+#: classes/pref/filters.php:1015
+#: classes/pref/prefs.php:683
+#: classes/pref/prefs.php:806
+#: classes/pref/prefs.php:852
+#: classes/pref/prefs.php:867
+#: plugins/bookmarklets/init.php:45
+msgid "More info..."
+msgstr "Meer info..."
+
+#: classes/dlg.php:196
 msgid "You are using default tt-rss password. Please change it in the Preferences (Personal data / Authentication)."
-msgstr ""
+msgstr "Je gebruikt het standaard tt-rss wachtwoord. Pas dit alsjeblief aan in de Voorkeuren (Persoonlijke gegevens / Authenticatie)."
 
-#: classes/dlg.php:194
-#, fuzzy
+#: classes/dlg.php:200
 msgid "Open Preferences"
 msgstr "Voorkeuren"
 
-#: classes/handler/public.php:387
-#: plugins/bookmarklets/init.php:40
+#: classes/feeds.php:34
+#: classes/feeds.php:35
+#: classes/feeds.php:99
+#: classes/feeds.php:100
+#: classes/pref/feeds.php:1371
+msgid "Show as feed"
+msgstr "Weergeven als feed"
+
+#: classes/feeds.php:41
+#, php-format
+msgid "Last updated: %s"
+msgstr "Laatst geüpdatet: %s"
+
+#: classes/feeds.php:60
+msgid "Select..."
+msgstr "Selecteer..."
+
+#: classes/feeds.php:62
+#: classes/pref/feeds.php:1224
+#: classes/pref/feeds.php:1457
+#: classes/pref/feeds.php:1514
+#: classes/pref/filters.php:363
+#: classes/pref/filters.php:423
+#: classes/pref/filters.php:779
+#: classes/pref/filters.php:865
+#: classes/pref/filters.php:894
+#: classes/pref/labels.php:260
+#: classes/pref/prefs.php:1030
+#: classes/pref/users.php:343
+msgid "All"
+msgstr "Alles"
+
+#: classes/feeds.php:64
+msgid "Invert"
+msgstr "Omkeren"
+
+#: classes/feeds.php:65
+#: classes/pref/feeds.php:1226
+#: classes/pref/feeds.php:1459
+#: classes/pref/feeds.php:1516
+#: classes/pref/filters.php:365
+#: classes/pref/filters.php:425
+#: classes/pref/filters.php:781
+#: classes/pref/filters.php:867
+#: classes/pref/filters.php:896
+#: classes/pref/labels.php:262
+#: classes/pref/prefs.php:1032
+#: classes/pref/users.php:345
+msgid "None"
+msgstr "Niets"
+
+#: classes/feeds.php:67
+msgid "Selection toggle:"
+msgstr "Selectie schakelaar:"
+
+#: classes/feeds.php:73
+msgid "Selection:"
+msgstr "Selectie:"
+
+#: classes/feeds.php:76
+msgid "Set score"
+msgstr "Geef score"
+
+#: classes/feeds.php:79
+msgid "Move back"
+msgstr "Terugzetten"
+
+#: classes/feeds.php:80
+#: classes/pref/filters.php:372
+#: classes/pref/filters.php:432
+#: classes/pref/filters.php:874
+#: classes/pref/filters.php:903
+msgid "Delete"
+msgstr "Verwijderen"
+
+#: classes/feeds.php:82
+msgid "Archive"
+msgstr "Archiveer"
+
+#: classes/feeds.php:86
+#: classes/feeds.php:91
+#: plugins/mail/init.php:76
+#: plugins/mailto/init.php:24
+msgid "Forward by email"
+msgstr "Doorsturen per e-mail"
+
+#: classes/feeds.php:95
+msgid "Feed:"
+msgstr "Feed:"
+
+#: classes/feeds.php:149
+#: classes/feeds.php:506
+msgid "Feed not found."
+msgstr "Feed niet gevonden."
+
+#: classes/feeds.php:209
+msgid "Never"
+msgstr "Nooit"
+
+#: classes/feeds.php:260
+#: classes/feeds.php:1258
+msgid "Archived articles"
+msgstr "Gearchiveerde artikelen"
+
+#: classes/feeds.php:320
+msgid "Collapse article"
+msgstr "Artikel inklappen"
+
+#: classes/feeds.php:345
+#, php-format
+msgid "Imported at %s"
+msgstr "Geïmporteerd op %s"
+
+#: classes/feeds.php:397
+msgid "No unread articles found to display."
+msgstr "Er zijn geen ongelezen artikelen gevonden om weer te geven."
+
+#: classes/feeds.php:400
+msgid "No updated articles found to display."
+msgstr "Geen bijgewerkte artikelen gevonden om weer te geven."
+
+#: classes/feeds.php:403
+msgid "No starred articles found to display."
+msgstr "Er zijn geen artikelen met ster gevonden om weer te geven."
+
+#: classes/feeds.php:407
+msgid "No articles found to display. You can assign articles to labels manually from article header context menu (applies to all selected articles) or use a filter."
+msgstr "Geen artikelen gevonden voor weergave. U kunt handmatig labels aan artikels toekennen vanuit het context menu (wordt toegepast op alle geselecteerde artikelen) of een filter gebruiken."
+
+#: classes/feeds.php:409
+msgid "No articles found to display."
+msgstr "Geen artikelen gevonden om weer te geven."
+
+#: classes/feeds.php:426
+#: classes/feeds.php:603
+#, php-format
+msgid "Feeds last updated at %s"
+msgstr "Feeds laatst bijgewerkt op %s"
+
+#: classes/feeds.php:438
+#: classes/feeds.php:615
+msgid "Some feeds have update errors (click for details)"
+msgstr "Sommige feeds hebben updatefouten (klik voor details)"
+
+#: classes/feeds.php:592
+msgid "No feed selected."
+msgstr "Geen feeds geselecteerd."
+
+#: classes/feeds.php:659
+msgid "Feed or site URL"
+msgstr "Feed of website URL"
+
+#: classes/feeds.php:667
+#: classes/pref/feeds.php:571
+#: classes/pref/feeds.php:826
+#: classes/pref/feeds.php:1664
+msgid "Place in category:"
+msgstr "Plaats in categorie:"
+
+#: classes/feeds.php:676
+msgid "Available feeds"
+msgstr "Beschikbare feeds"
+
+#: classes/feeds.php:693
+#: classes/pref/feeds.php:657
+#: classes/pref/feeds.php:891
+#: classes/pref/feeds.php:1676
+#: classes/pref/users.php:387
+msgid "Login"
+msgstr "LoginID"
+
+#: classes/feeds.php:697
+#: classes/pref/feeds.php:665
+#: classes/pref/feeds.php:899
+#: classes/pref/feeds.php:1677
+#: classes/pref/prefs.php:289
+msgid "Password"
+msgstr "Wachtwoord"
+
+#: classes/feeds.php:709
+#: classes/pref/feeds.php:680
+msgid "This feed requires authentication."
+msgstr "Deze feed vereist authenticatie."
+
+#: classes/feeds.php:714
+#: classes/handler/public.php:792
+#: classes/pref/feeds.php:1690
+msgid "Subscribe"
+msgstr "Abonneren"
+
+#: classes/feeds.php:735
+#, php-format
+msgid "Search %s..."
+msgstr "Zoeken %s..."
+
+#: classes/feeds.php:741
+#: classes/pref/feeds.php:603
+#: classes/pref/feeds.php:841
+msgid "Language:"
+msgstr "Taal:"
+
+#: classes/feeds.php:743
+msgid "Used for word stemming"
+msgstr "Gebruikt voor woordstam"
+
+#: classes/feeds.php:753
+msgid "Search syntax"
+msgstr "Zoeksyntax"
+
+#: classes/feeds.php:756
+#: classes/pref/feeds.php:1217
+#: classes/pref/filters.php:772
+#: classes/pref/users.php:330
+#: js/Feeds.js:550
+msgid "Search"
+msgstr "Zoeken"
+
+#: classes/feeds.php:1250
+msgid "Starred articles"
+msgstr "Artikelen met ster"
+
+#: classes/feeds.php:1252
+msgid "Published articles"
+msgstr "Gepubliceerde artikelen"
+
+#: classes/feeds.php:1254
+msgid "Fresh articles"
+msgstr "Nieuwe artikelen"
+
+#: classes/feeds.php:1381
+msgid "Special"
+msgstr "Speciaal"
+
+#: classes/feeds.php:1472
+#, php-format
+msgid "Incorrect search syntax: %s."
+msgstr ""
+
+#: classes/feeds.php:1657
+#, php-format
+msgid "Search results: %s"
+msgstr "Zoekresultaten: %s"
+
+#: classes/handler/public.php:537
+#: plugins/bookmarklets/init.php:41
 msgid "Share with Tiny Tiny RSS"
 msgstr "Deel met Tiny Tiny RSS"
 
-#: classes/handler/public.php:395
+#: classes/handler/public.php:595
 msgid "Title:"
 msgstr "Titel:"
 
-#: classes/handler/public.php:397
-#: classes/pref/feeds.php:539
+#: classes/handler/public.php:600
+#: classes/pref/feeds.php:548
 msgid "URL:"
 msgstr "URL:"
 
-#: classes/handler/public.php:399
+#: classes/handler/public.php:605
 msgid "Content:"
 msgstr "Inhoud:"
 
-#: classes/handler/public.php:401
+#: classes/handler/public.php:610
 msgid "Labels:"
 msgstr "Labels:"
 
-#: classes/handler/public.php:420
-msgid "Shared article will appear in the Published feed."
-msgstr "Gedeeld artikel zal verschijnen in de Gepubliceerd feed."
-
-#: classes/handler/public.php:422
+#: classes/handler/public.php:620
 msgid "Share"
 msgstr "Delen"
 
-#: classes/handler/public.php:444
-msgid "Not logged in"
-msgstr "Niet ingelogd"
+#: classes/handler/public.php:622
+msgid "Shared article will appear in the Published feed."
+msgstr "Gedeeld artikel zal verschijnen in de Gepubliceerd feed."
 
-#: classes/handler/public.php:504
+#: classes/handler/public.php:716
 msgid "Incorrect username or password"
 msgstr "Onjuiste gebruikersnaam of wachtwoord"
 
-#: classes/handler/public.php:557
+#: classes/handler/public.php:805
 #, php-format
 msgid "Already subscribed to <b>%s</b>."
 msgstr "Reeds geabonneerd op <b>%s</b>."
 
-#: classes/handler/public.php:560
+#: classes/handler/public.php:808
 #, php-format
 msgid "Subscribed to <b>%s</b>."
-msgstr "Geabonneerd op  <b>%s</b>."
+msgstr "Geabonneerd op <b>%s</b>."
 
-#: classes/handler/public.php:563
+#: classes/handler/public.php:811
 #, php-format
 msgid "Could not subscribe to <b>%s</b>."
-msgstr "Kon niet abonneren op  <b>%s</b>."
+msgstr "Kon niet abonneren op <b>%s</b>."
 
-#: classes/handler/public.php:566
+#: classes/handler/public.php:814
 #, php-format
 msgid "No feeds found in <b>%s</b>."
 msgstr "Geen feeds gevonden in <b>%s</b>."
 
-#: classes/handler/public.php:569
-msgid "Multiple feed URLs found."
-msgstr "Meerdere feed-URL's gevonden."
-
-#: classes/handler/public.php:573
+#: classes/handler/public.php:820
 #, php-format
 msgid "Could not subscribe to <b>%s</b>.<br>Can't download the Feed URL."
-msgstr "Kon niet abonneren op  <b>%s</b>.<br>Kon de feed URL niet downloaden."
+msgstr "Kon niet abonneren op <b>%s</b>.<br>Kon de feed URL niet downloaden."
 
-#: classes/handler/public.php:591
+#: classes/handler/public.php:830
+msgid "Multiple feed URLs found:"
+msgstr "Meerdere feed-URL's gevonden:"
+
+#: classes/handler/public.php:843
 msgid "Subscribe to selected feed"
 msgstr "Abonneren op de geselecteerde feed"
 
-#: classes/handler/public.php:618
+#: classes/handler/public.php:867
 msgid "Edit subscription options"
-msgstr "Bewerk abonnement opties"
+msgstr "Bewerk abonnementopties"
 
-#: classes/handler/public.php:656
+#: classes/handler/public.php:920
 msgid "Password recovery"
 msgstr "Wachtwoordherstel"
 
-#: classes/handler/public.php:701
-#, fuzzy
-msgid "You will need to provide valid account name and email. A password reset link will be sent to your email address."
-msgstr "Je moet een geldige naam en emailadres opgeven. Het nieuwe wachtwoord wordt naar je emailadres verzonden."
+#: classes/handler/public.php:963
+msgid "You will need to provide valid account name and email. Password reset link will be sent to your email address."
+msgstr "Je moet een geldige naam en emailadres opgeven. Een link om je wachtwoord aan te passen wordt naar je emailadres verzonden."
 
-#: classes/handler/public.php:723
-#: classes/pref/users.php:372
+#: classes/handler/public.php:983
+#, php-format
+msgid "How much is %d + %d:"
+msgstr "Hoeveel is %d + %d:"
+
+#: classes/handler/public.php:989
+#: classes/pref/users.php:356
 msgid "Reset password"
 msgstr "Herstel wachtwoord"
 
-#: classes/handler/public.php:733
+#: classes/handler/public.php:1001
 msgid "Some of the required form parameters are missing or incorrect."
 msgstr "Sommige vereiste velden ontbreken of zijn onjuist."
 
-#: classes/handler/public.php:737
-#: classes/handler/public.php:806
+#: classes/handler/public.php:1005
+#: classes/handler/public.php:1071
 msgid "Go back"
 msgstr "Ga terug"
 
-#: classes/handler/public.php:775
-#, fuzzy
+#: classes/handler/public.php:1047
 msgid "[tt-rss] Password reset request"
-msgstr "[tt-rss] Melding verandering van wachtwoord"
+msgstr "[tt-rss] Aanvraag verandering van wachtwoord"
 
-#: classes/handler/public.php:802
+#: classes/handler/public.php:1067
 msgid "Sorry, login and email combination not found."
 msgstr "Sorry, deze combinatie van naam en wachtwoord is onbekend."
 
-#: classes/handler/public.php:824
+#: classes/handler/public.php:1090
 msgid "Your access level is insufficient to run this script."
 msgstr "Uw toegangsrechten zijn niet voldoende om dit script uit te voeren."
 
-#: classes/handler/public.php:850
+#: classes/handler/public.php:1131
 msgid "Database Updater"
-msgstr "Database updater"
+msgstr "Database-updater"
 
-#: classes/handler/public.php:915
+#: classes/handler/public.php:1142
+#, fuzzy, php-format
+msgid "Performing updates to version %d"
+msgstr "Uitvoeren van updates naar versie %d..."
+
+#: classes/handler/public.php:1147
+#, fuzzy, php-format
+msgid "Updating to version %d"
+msgstr "Updaten naar schema-versie %d"
+
+#: classes/handler/public.php:1160
+msgid "Try again"
+msgstr ""
+
+#: classes/handler/public.php:1166
+#, fuzzy
+msgid "Completed."
+msgstr "Upload voltooid."
+
+#: classes/handler/public.php:1183
+#, fuzzy, php-format
+msgid "Tiny Tiny RSS database needs update to the latest version (%d to %d)."
+msgstr "Uw Tiny Tiny RSS database moet worden geüpdate naar de laatste versie (<b>%d</b> naar <b>%d</b>)."
+
+#: classes/handler/public.php:1195
 msgid "Perform updates"
-msgstr "Voor de updates uit"
+msgstr "Voer de updates uit"
 
-#: classes/pref/labels.php:25
-#: classes/pref/filters.php:377
-#: classes/pref/filters.php:866
-msgid "Caption"
-msgstr "Onderschrift"
+#: classes/opml.php:28
+#: classes/opml.php:32
+msgid "OPML Utility"
+msgstr "OPML-hulpprogramma"
 
-#: classes/pref/labels.php:40
-msgid "Colors"
-msgstr "Kleuren"
+#: classes/opml.php:36
+msgid "Importing OPML..."
+msgstr "OPML aan 't importeren…"
 
-#: classes/pref/labels.php:45
-msgid "Foreground:"
-msgstr "Voorgrond:"
+#: classes/opml.php:41
+msgid "Return to preferences"
+msgstr "Terug naar voorkeuren"
 
-#: classes/pref/labels.php:45
-msgid "Background:"
-msgstr "Achtergrond:"
-
-#: classes/pref/labels.php:244
+#: classes/opml.php:316
 #, php-format
-msgid "Created label <b>%s</b>"
-msgstr "Label <b>%s</b> aangemaakt"
+msgid "Adding feed: %s"
+msgstr "Feed toevoegen: %s"
 
-#: classes/pref/labels.php:270
-#: classes/pref/users.php:356
-#: classes/pref/feeds.php:1191
-#: classes/pref/feeds.php:1422
-#: classes/pref/feeds.php:1487
-#: classes/pref/filters.php:388
-#: classes/pref/filters.php:446
-#: classes/pref/filters.php:792
-#: classes/pref/filters.php:875
-#: classes/pref/filters.php:902
-#: classes/pref/prefs.php:999
-msgid "Select"
-msgstr "Selecteer"
-
-#: classes/pref/labels.php:273
-#: classes/pref/users.php:359
-#: classes/pref/feeds.php:1194
-#: classes/pref/feeds.php:1425
-#: classes/pref/feeds.php:1490
-#: classes/pref/filters.php:391
-#: classes/pref/filters.php:449
-#: classes/pref/filters.php:795
-#: classes/pref/filters.php:878
-#: classes/pref/filters.php:905
-#: classes/pref/prefs.php:1002
-#: classes/feeds.php:102
-msgid "All"
-msgstr "Alles"
-
-#: classes/pref/labels.php:275
-#: classes/pref/users.php:361
-#: classes/pref/feeds.php:1196
-#: classes/pref/feeds.php:1427
-#: classes/pref/feeds.php:1492
-#: classes/pref/filters.php:393
-#: classes/pref/filters.php:451
-#: classes/pref/filters.php:797
-#: classes/pref/filters.php:880
-#: classes/pref/filters.php:907
-#: classes/pref/prefs.php:1004
-#: classes/feeds.php:105
-msgid "None"
-msgstr "Niets"
-
-#: classes/pref/labels.php:282
-#: classes/pref/users.php:370
-#: classes/pref/feeds.php:760
-#: classes/pref/filters.php:518
-#: classes/pref/filters.php:814
-#: classes/feeds.php:1086
-msgid "Remove"
-msgstr "Verwijderen"
-
-#: classes/pref/labels.php:285
-msgid "Clear colors"
-msgstr "Wis kleuren"
-
-#: classes/pref/users.php:6
-#: classes/pref/system.php:8
-msgid "Your access level is insufficient to open this tab."
-msgstr "Uw toegangsniveau is niet toereikend om deze tab te openen."
-
-#: classes/pref/users.php:26
-#, fuzzy
-msgid "Edit user"
-msgstr "Bewerk regel"
-
-#: classes/pref/users.php:61
-#: classes/pref/feeds.php:630
-#: classes/pref/feeds.php:857
-#: classes/feeds.php:1007
-msgid "Authentication"
-msgstr "Authenticatie"
-
-#: classes/pref/users.php:64
-msgid "Access level: "
-msgstr "Toegangsniveau:"
-
-#: classes/pref/users.php:82
-#: classes/pref/feeds.php:656
-#: classes/pref/feeds.php:875
-msgid "Options"
-msgstr "Opties"
-
-#: classes/pref/users.php:96
-#: js/prefs.js:479
-msgid "User details"
-msgstr "Gebruiker's details"
-
-#: classes/pref/users.php:136
-#: classes/pref/users.php:407
-msgid "Registered"
-msgstr "Geregistreerd"
-
-#: classes/pref/users.php:137
-msgid "Last logged in"
-msgstr "Laatst ingelogd"
-
-#: classes/pref/users.php:145
-msgid "Subscribed feeds count"
-msgstr "Aantal geabonneerde feeds"
-
-#: classes/pref/users.php:146
-#, fuzzy
-msgid "Stored articles"
-msgstr "Artikelen met ster"
-
-#: classes/pref/users.php:150
-#: classes/pref/users.php:406
-msgid "Subscribed feeds"
-msgstr "Geabonneerde feeds"
-
-#: classes/pref/users.php:176
-msgid "User not found"
-msgstr "Gebruiker niet gevonden"
-
-#: classes/pref/users.php:246
+#: classes/opml.php:333
 #, php-format
-msgid "Added user <b>%s</b> with password <b>%s</b>"
-msgstr "Gebruiker <b>%s</b> toegevoegd met wachtwoord <b>%s</b>"
+msgid "Duplicate feed: %s"
+msgstr "Dubbele feed: %s"
 
-#: classes/pref/users.php:253
+#: classes/opml.php:347
 #, php-format
-msgid "Could not create user <b>%s</b>"
-msgstr "Kon gebruiker <b>%s</b> niet aanmaken"
+msgid "Adding label %s"
+msgstr "Toevoegen label %s"
 
-#: classes/pref/users.php:257
+#: classes/opml.php:350
 #, php-format
-msgid "User <b>%s</b> already exists."
-msgstr "Gebruiker <b>%s</b> bestaat al."
+msgid "Duplicate label: %s"
+msgstr "Dubbele label: %s"
 
-#: classes/pref/users.php:285
+#: classes/opml.php:362
 #, php-format
-msgid "Changed password of user <b>%s</b> to <b>%s</b>"
-msgstr "Wachtwoord van gebruiker<b>%s</b> naar <b>%s</b> gewijzigd"
+msgid "Setting preference key %s to %s"
+msgstr "Instellen voorkeursleutel %s op %s"
 
-#: classes/pref/users.php:287
+#: classes/opml.php:398
+#, fuzzy, php-format
+msgid "Adding filter %s..."
+msgstr "Filter toevoegen..."
+
+#: classes/opml.php:536
 #, php-format
-msgid "Sending new password of user <b>%s</b> to <b>%s</b>"
-msgstr "Wachtwoord van gebruiker<b>%s</b>naar <b>%s</b> versturen"
+msgid "Processing category: %s"
+msgstr "Verwerken categorie: %s"
 
-#: classes/pref/users.php:311
-msgid "[tt-rss] Password change notification"
-msgstr "[tt-rss] Melding verandering van wachtwoord"
+#: classes/opml.php:582
+#, php-format
+msgid "Upload failed with error code %d"
+msgstr "Upload mislukt met fout nummer %d"
 
-#: classes/pref/users.php:346
-#: classes/pref/feeds.php:1187
-#: classes/pref/filters.php:788
-#: classes/feeds.php:1057
-#: classes/feeds.php:1125
-#: js/tt-rss.js:165
-msgid "Search"
-msgstr "Zoeken"
+#: classes/opml.php:594
+#: plugins/import_export/init.php:493
+msgid "Unable to move uploaded file."
+msgstr "Kan het geüploade bestand niet verplaatsen."
 
-#: classes/pref/users.php:364
-msgid "Create user"
-msgstr "Gebruiker aanmaken"
+#: classes/opml.php:598
+#: plugins/import_export/init.php:497
+msgid "Error: please upload OPML file."
+msgstr "Fout: OPML-bestand uploaden aub."
 
-#: classes/pref/users.php:368
-#: classes/pref/filters.php:807
-msgid "Edit"
-msgstr "Bewerken"
+#: classes/opml.php:609
+msgid "Error: unable to find moved OPML file."
+msgstr "Fout: kan het verplaatste OPML-bestand niet vinden."
 
-#: classes/pref/users.php:404
-#: classes/pref/feeds.php:634
-#: classes/pref/feeds.php:861
-#: classes/pref/feeds.php:1657
-#: classes/feeds.php:1011
-msgid "Login"
-msgstr "LoginID"
+#: classes/opml.php:618
+msgid "Error while parsing document."
+msgstr "Fout bij het parsen van het document."
 
-#: classes/pref/users.php:405
-msgid "Access Level"
-msgstr "Toegangsniveau"
-
-#: classes/pref/users.php:408
-msgid "Last login"
-msgstr "Laatste loginID"
-
-#: classes/pref/users.php:427
-msgid "Click to edit"
-msgstr "Klik om te bewerken"
-
-#: classes/pref/users.php:447
-msgid "No users defined."
-msgstr "Geen gebruikers gedefinieerd."
-
-#: classes/pref/users.php:449
-msgid "No matching users found."
-msgstr "Geen overeenkomstige gebruikers gevonden."
-
-#: classes/pref/system.php:29
-msgid "Error Log"
-msgstr "Fouten Log"
-
-#: classes/pref/system.php:40
-msgid "Refresh"
-msgstr "Herlaad"
-
-#: classes/pref/system.php:43
-#, fuzzy
-msgid "Clear log"
-msgstr "Wis kleuren"
-
-#: classes/pref/system.php:48
-msgid "Error"
-msgstr "Fout"
-
-#: classes/pref/system.php:49
-msgid "Filename"
-msgstr "Bestandsnaam"
-
-#: classes/pref/system.php:50
-msgid "Message"
-msgstr "Bericht"
-
-#: classes/pref/system.php:52
-msgid "Date"
-msgstr "Datum"
-
-#: classes/pref/feeds.php:15
+#: classes/pref/feeds.php:28
 msgid "Check to enable field"
 msgstr "Aanvinken om veld in te schakelen"
 
-#: classes/pref/feeds.php:64
-#: classes/pref/feeds.php:219
-#: classes/pref/feeds.php:267
-#: classes/pref/feeds.php:273
-#: classes/pref/feeds.php:302
+#: classes/pref/feeds.php:77
+#: classes/pref/feeds.php:232
+#: classes/pref/feeds.php:280
+#: classes/pref/feeds.php:286
+#: classes/pref/feeds.php:315
 #, fuzzy, php-format
 msgid "(%d feed)"
 msgid_plural "(%d feeds)"
 msgstr[0] "(%d feeds)"
 msgstr[1] "(%d feeds)"
 
-#: classes/pref/feeds.php:514
-#: classes/pref/prefs.php:18
+#: classes/pref/feeds.php:521
+#: classes/pref/prefs.php:20
 msgid "General"
 msgstr "Algemeen"
 
-#: classes/pref/feeds.php:530
+#: classes/pref/feeds.php:537
 msgid "Feed Title"
 msgstr "Feed titel"
 
-#: classes/pref/feeds.php:562
-#: classes/pref/feeds.php:809
-#: classes/pref/feeds.php:1643
-#: classes/feeds.php:987
-msgid "Place in category:"
-msgstr "Plaats in categorie:"
-
-#: classes/pref/feeds.php:574
-#, fuzzy
-msgid "Site URL:"
-msgstr "Artikel URL:"
-
-#: classes/pref/feeds.php:576
-#, fuzzy
-msgid "Site URL"
+#: classes/pref/feeds.php:550
+msgid "Feed URL"
 msgstr "Feed URL"
 
-#: classes/pref/feeds.php:587
-#: classes/pref/feeds.php:823
-#, fuzzy
-msgid "Language:"
-msgstr "Taal"
+#: classes/pref/feeds.php:585
+msgid "Site URL:"
+msgstr "Site URL:"
 
-#: classes/pref/feeds.php:594
-#: classes/pref/feeds.php:832
+#: classes/pref/feeds.php:587
+msgid "Site URL"
+msgstr "Site URL"
+
+#: classes/pref/feeds.php:612
+#: classes/pref/feeds.php:852
 msgid "Update"
 msgstr "Bijwerken"
 
-#: classes/pref/feeds.php:609
-#: classes/pref/feeds.php:848
+#: classes/pref/feeds.php:621
+#: classes/pref/feeds.php:859
+msgid "Interval:"
+msgstr "Interval:"
+
+#: classes/pref/feeds.php:634
+#: classes/pref/feeds.php:874
 msgid "Article purging:"
 msgstr "Artikelopschoning:"
 
-#: classes/pref/feeds.php:640
-#: classes/pref/feeds.php:869
-#: classes/pref/feeds.php:1660
-#: classes/pref/prefs.php:243
-#: classes/feeds.php:1015
-msgid "Password"
-msgstr "Wachtwoord"
+#: classes/pref/feeds.php:651
+#: classes/pref/feeds.php:885
+#: classes/pref/feeds.php:1673
+#: classes/pref/users.php:63
+#: plugins/auth_internal/init.php:60
+msgid "Authentication"
+msgstr "Authenticatie"
 
-#: classes/pref/feeds.php:644
+#: classes/pref/feeds.php:669
 msgid "<b>Hint:</b> you need to fill in your login information if your feed requires authentication, except for Twitter feeds."
-msgstr "<b>Hint:</b> U moet uw aanmeld informatie invullen als uw feed authenticatie vereist, behalve voor Twitter feeds."
-
-#: classes/pref/feeds.php:654
-#: classes/feeds.php:1026
-msgid "This feed requires authentication."
-msgstr "Deze feed vereist authenticatie."
-
-#: classes/pref/feeds.php:670
-#: classes/pref/feeds.php:879
-msgid "Hide from Popular feeds"
-msgstr "Verbergen voor populaire feeds"
+msgstr "<b>Hint:</b> U moet uw aanmeldinformatie invullen als uw feed authenticatie vereist, behalve voor Twitter feeds."
 
 #: classes/pref/feeds.php:682
-#: classes/pref/feeds.php:885
-msgid "Include in e-mail digest"
-msgstr "Toevoegen aan e-mail samenvatting"
+#: classes/pref/feeds.php:907
+#: classes/pref/filters.php:459
+#: classes/pref/filters.php:913
+#: classes/pref/users.php:90
+msgid "Options"
+msgstr "Opties"
 
-#: classes/pref/feeds.php:695
-#: classes/pref/feeds.php:891
+#: classes/pref/feeds.php:698
+#: classes/pref/feeds.php:912
+msgid "Include in e-mail digest"
+msgstr "Toevoegen aan e-mailsamenvatting"
+
+#: classes/pref/feeds.php:714
+#: classes/pref/feeds.php:919
 msgid "Always display image attachments"
 msgstr "Altijd afbeeldingsbijlagen weergeven"
 
-#: classes/pref/feeds.php:708
-#: classes/pref/feeds.php:899
-msgid "Do not embed images"
-msgstr "Afbeeldingen niet insluiten."
+#: classes/pref/feeds.php:729
+#: classes/pref/feeds.php:926
+#: classes/pref/prefs.php:97
+msgid "Do not embed media"
+msgstr "Afbeeldingen niet insluiten"
 
-#: classes/pref/feeds.php:721
-#: classes/pref/feeds.php:907
+#: classes/pref/feeds.php:744
+#: classes/pref/feeds.php:933
 msgid "Cache media"
-msgstr ""
+msgstr "Cache media"
 
-#: classes/pref/feeds.php:733
-#: classes/pref/feeds.php:913
+#: classes/pref/feeds.php:759
+#: classes/pref/feeds.php:940
 msgid "Mark updated articles as unread"
 msgstr "Markeer bijgewerkte artikelen als niet-gelezen"
 
-#: classes/pref/feeds.php:737
+#: classes/pref/feeds.php:763
 msgid "Icon"
 msgstr "Pictogram"
 
-#: classes/pref/feeds.php:751
-#: classes/pref/feeds.php:1292
-#, fuzzy
+#: classes/pref/feeds.php:771
+#: classes/pref/feeds.php:1324
+#: plugins/import_export/init.php:72
 msgid "Choose file..."
-msgstr "Filter aanmaken…"
+msgstr "Bestand kiezen…"
 
-#: classes/pref/feeds.php:758
+#: classes/pref/feeds.php:778
 msgid "Replace"
 msgstr "Vervangen"
 
-#: classes/pref/feeds.php:765
-#: classes/pref/prefs.php:679
+#: classes/pref/feeds.php:780
+#: classes/pref/filters.php:502
+#: classes/pref/filters.php:798
+#: classes/pref/labels.php:269
+#: classes/pref/users.php:354
+msgid "Remove"
+msgstr "Verwijderen"
+
+#: classes/pref/feeds.php:785
+#: classes/pref/prefs.php:745
 msgid "Plugins"
 msgstr "Plug-ins"
 
-#: classes/pref/feeds.php:1162
+#: classes/pref/feeds.php:1192
 msgid "Feeds with errors"
 msgstr "Feeds met fouten"
 
-#: classes/pref/feeds.php:1169
+#: classes/pref/feeds.php:1199
 msgid "Inactive feeds"
 msgstr "Inactieve feeds"
 
-#: classes/pref/feeds.php:1205
+#: classes/pref/feeds.php:1221
+#: classes/pref/feeds.php:1454
+#: classes/pref/feeds.php:1511
+#: classes/pref/filters.php:360
+#: classes/pref/filters.php:420
+#: classes/pref/filters.php:776
+#: classes/pref/filters.php:862
+#: classes/pref/filters.php:891
+#: classes/pref/labels.php:257
+#: classes/pref/prefs.php:1027
+#: classes/pref/users.php:340
+msgid "Select"
+msgstr "Selecteer"
+
+#: classes/pref/feeds.php:1235
 msgid "Edit selected feeds"
 msgstr "Bewerk geselecteerde feeds"
 
-#: classes/pref/feeds.php:1207
-#: classes/pref/feeds.php:1221
-#: classes/pref/filters.php:810
+#: classes/pref/feeds.php:1237
+#: classes/pref/feeds.php:1251
+#: classes/pref/filters.php:794
 msgid "Reset sort order"
 msgstr "Herstel sorteervolgorde"
 
-#: classes/pref/feeds.php:1209
-#: js/prefs.js:1458
+#: classes/pref/feeds.php:1239
+#: js/PrefFeedTree.js:347
 msgid "Batch subscribe"
 msgstr "Batchmatig abonneren"
 
-#: classes/pref/feeds.php:1216
+#: classes/pref/feeds.php:1246
 msgid "Categories"
 msgstr "Categorieën"
 
-#: classes/pref/feeds.php:1219
+#: classes/pref/feeds.php:1249
 msgid "Add category"
 msgstr "Categorie toevoegen"
 
-#: classes/pref/feeds.php:1223
+#: classes/pref/feeds.php:1253
 msgid "Remove selected"
 msgstr "Verwijder geselecteerde"
 
-#: classes/pref/feeds.php:1280
+#: classes/pref/feeds.php:1311
 msgid "OPML"
 msgstr "OPML"
 
-#: classes/pref/feeds.php:1282
+#: classes/pref/feeds.php:1313
 msgid "Using OPML you can export and import your feeds, filters, labels and Tiny Tiny RSS settings."
 msgstr "Met OPML kunt u feeds, filters, labels en Tiny Tiny RSS instellingen exporteren en importeren."
 
-#: classes/pref/feeds.php:1283
-msgid "Only main settings profile can be migrated using OPML."
-msgstr "Alleen instellingen van het hoofdprofiel kunnen worden overgebracht met OPML."
+#: classes/pref/feeds.php:1330
+msgid "Import OPML"
+msgstr "Importeer OPML"
 
-#: classes/pref/feeds.php:1298
-msgid "Import my OPML"
-msgstr "Importeer mijn OPML"
-
-#: classes/pref/feeds.php:1304
-msgid "Filename:"
-msgstr "Bestandsnaam:"
-
-#: classes/pref/feeds.php:1306
-msgid "Include settings"
-msgstr "Toevoegingsinstellingen"
-
-#: classes/pref/feeds.php:1310
+#: classes/pref/feeds.php:1338
 msgid "Export OPML"
 msgstr "OPML exporteren"
 
-#: classes/pref/feeds.php:1314
+#: classes/pref/feeds.php:1342
+msgid "Include settings"
+msgstr "Toevoegingsinstellingen"
+
+#: classes/pref/feeds.php:1349
+msgid "Published OPML"
+msgstr "Gepubliceerde OPML"
+
+#: classes/pref/feeds.php:1351
 msgid "Your OPML can be published publicly and can be subscribed by anyone who knows the URL below."
 msgstr "Uw OPML kan openbaar worden gepubliceerd en er kan op worden geabonneerd door iedereen die de URL hieronder kent."
 
-#: classes/pref/feeds.php:1318
+#: classes/pref/feeds.php:1353
+msgid "Published OPML does not include your Tiny Tiny RSS settings, feeds that require authentication or feeds hidden from Popular feeds."
+msgstr "De gepubliceerde OPML bevatten niet uw Tiny Tiny RSS instellingen, feeds die authenticatie vereisen of feeds verborgen voor Populaire feeds."
+
+#: classes/pref/feeds.php:1355
 msgid "Public OPML URL"
-msgstr "Publieke OPML URL"
+msgstr "Publieke OPML-URL"
 
-#: classes/pref/feeds.php:1319
+#: classes/pref/feeds.php:1356
 msgid "Display published OPML URL"
-msgstr "Gepubliceerde OPML URL weergeven"
+msgstr "Gepubliceerde OPML-URL weergeven"
 
-#: classes/pref/feeds.php:1326
+#: classes/pref/feeds.php:1364
 msgid "Published & shared articles / Generated feeds"
 msgstr "Gepubliceerde & gedeelde artikelen / Gegenereerde feeds"
 
-#: classes/pref/feeds.php:1328
-msgid "Published articles are exported as a public RSS feed and can be subscribed by anyone who knows the URL specified below."
-msgstr "Gepubliceerde artikelen worden geëxporteerd als publieke RSS-feed en er kan door iedereen die de URL hieronder kent op worden geabonneerd."
+#: classes/pref/feeds.php:1366
+msgid "Published articles can be subscribed by anyone who knows the following URL:"
+msgstr "Iedereen die de volgende URL kent kan zich abonneeren op de gepubliceerde artikelen:"
 
-#: classes/pref/feeds.php:1335
-#: classes/feeds.php:54
-#: classes/feeds.php:140
-msgid "View as RSS"
-msgstr "Toon als RSS"
-
-#: classes/pref/feeds.php:1336
+#: classes/pref/feeds.php:1372
 msgid "Display URL"
 msgstr "Toon URL"
 
-#: classes/pref/feeds.php:1339
+#: classes/pref/feeds.php:1375
 msgid "Clear all generated URLs"
 msgstr "Wis alle gegenereerde URL's"
 
-#: classes/pref/feeds.php:1418
-msgid "These feeds have not been updated with new content for 3 months (oldest first):"
-msgstr "Deze feeds hebben al 3 maanden geen nieuwe inhoud (oudste eerst):"
-
-#: classes/pref/feeds.php:1452
-#: classes/pref/feeds.php:1517
+#: classes/pref/feeds.php:1480
+#: classes/pref/feeds.php:1537
 msgid "Click to edit feed"
 msgstr "Klik om feed te bewerken"
 
-#: classes/pref/feeds.php:1470
-#: classes/pref/feeds.php:1537
+#: classes/pref/feeds.php:1497
+#: classes/pref/feeds.php:1556
 msgid "Unsubscribe from selected feeds"
 msgstr "Abonnement opzeggen voor geselecteerde feeds"
 
-#: classes/pref/feeds.php:1640
-msgid "Add one valid RSS feed per line (no feed detection is done)"
-msgstr "Een geldige RSS feed per regel toevoegen (er wordt geen feed detectie uitgevoerd)"
+#: classes/pref/feeds.php:1655
+msgid "One valid feed per line (no detection is done)"
+msgstr "Een geldige feed per regel (er wordt geen detectie uitgevoerd)"
 
-#: classes/pref/feeds.php:1649
-msgid "Feeds to subscribe, One per line"
-msgstr "Te abonneren feeds: één per regel"
-
-#: classes/pref/feeds.php:1672
+#: classes/pref/feeds.php:1686
 msgid "Feeds require authentication."
 msgstr "Feeds vereisen authenticatie."
 
-#: classes/pref/feeds.php:1679
-#: classes/feeds.php:1029
-#: classes/feeds.php:1085
-msgid "Subscribe"
-msgstr "Abonneren"
-
-#: classes/pref/filters.php:155
-#, fuzzy
-msgid "Preview article"
-msgstr "Nieuwe artikelen"
-
-#: classes/pref/filters.php:267
-#: classes/pref/filters.php:573
+#: classes/pref/filters.php:234
+#: classes/pref/filters.php:557
 msgid "(inverse)"
 msgstr "(omgekeerd)"
 
-#: classes/pref/filters.php:263
-#: classes/pref/filters.php:572
+#: classes/pref/filters.php:230
+#: classes/pref/filters.php:556
 #, php-format
 msgid "%s on %s in %s %s"
 msgstr "%s op %s in %s %s"
 
-#: classes/pref/filters.php:383
-#: classes/pref/filters.php:870
-#: classes/pref/filters.php:977
+#: classes/pref/filters.php:349
+#: classes/pref/filters.php:850
+#: classes/pref/labels.php:25
+msgid "Caption"
+msgstr "Onderschrift"
+
+#: classes/pref/filters.php:354
+#: classes/pref/filters.php:856
+#: classes/pref/filters.php:974
 msgid "Match"
 msgstr "Match"
 
-#: classes/pref/filters.php:397
-#: classes/pref/filters.php:455
-#: classes/pref/filters.php:884
-#: classes/pref/filters.php:911
+#: classes/pref/filters.php:369
+#: classes/pref/filters.php:429
+#: classes/pref/filters.php:871
+#: classes/pref/filters.php:900
 msgid "Add"
 msgstr "Toevoegen"
 
-#: classes/pref/filters.php:400
-#: classes/pref/filters.php:458
-#: classes/pref/filters.php:887
-#: classes/pref/filters.php:914
-#: classes/feeds.php:122
-msgid "Delete"
-msgstr "Verwijderen"
-
-#: classes/pref/filters.php:441
-#: classes/pref/filters.php:897
+#: classes/pref/filters.php:413
+#: classes/pref/filters.php:884
 msgid "Apply actions"
 msgstr "Acties toepassen"
 
-#: classes/pref/filters.php:492
-#: classes/pref/filters.php:926
+#: classes/pref/filters.php:470
+#: classes/pref/filters.php:919
 msgid "Enabled"
 msgstr "Ingeschakeld"
 
-#: classes/pref/filters.php:501
-#: classes/pref/filters.php:929
+#: classes/pref/filters.php:481
+#: classes/pref/filters.php:924
 msgid "Match any rule"
 msgstr "Match elke regel"
 
-#: classes/pref/filters.php:510
-#: classes/pref/filters.php:932
+#: classes/pref/filters.php:492
+#: classes/pref/filters.php:929
 msgid "Inverse matching"
 msgstr "Omgekeerde matching"
 
-#: classes/pref/filters.php:522
-#: classes/pref/filters.php:939
+#: classes/pref/filters.php:506
+#: classes/pref/filters.php:938
 msgid "Test"
 msgstr "Test"
 
-#: classes/pref/filters.php:804
+#: classes/pref/filters.php:788
 msgid "Combine"
 msgstr "Combineren"
 
-#: classes/pref/filters.php:942
+#: classes/pref/filters.php:791
+#: classes/pref/users.php:352
+msgid "Edit"
+msgstr "Bewerken"
+
+#: classes/pref/filters.php:940
 msgid "Create"
 msgstr "Aanmaken"
 
-#: classes/pref/filters.php:987
+#: classes/pref/filters.php:984
 msgid "Regular expression, without outer delimiters (i.e. slashes)"
-msgstr ""
+msgstr "Reguliere expressie, zonder buitenste afscheiding (bijv. slashes)"
 
-#: classes/pref/filters.php:993
+#: classes/pref/filters.php:990
 msgid "Inverse regular expression matching"
-msgstr "Omgekeerde regular expression matching"
+msgstr "Omgekeerde reguliere expressie matching"
 
-#: classes/pref/filters.php:995
+#: classes/pref/filters.php:994
 msgid "on field"
 msgstr "op veld"
 
-#: classes/pref/filters.php:1001
-#: js/PrefFilterTree.js:64
+#: classes/pref/filters.php:997
+#: js/PrefFilterTree.js:45
 msgid "in"
 msgstr "in"
 
-#: classes/pref/filters.php:1014
-#, fuzzy
-msgid "Wiki: Filters"
-msgstr "Filters"
-
-#: classes/pref/filters.php:1019
+#: classes/pref/filters.php:1018
 msgid "Save rule"
 msgstr "Regel opslaan"
 
-#: classes/pref/filters.php:1019
-#: js/functions.js:797
+#: classes/pref/filters.php:1018
+#: js/CommonFilters.js:133
 msgid "Add rule"
 msgstr "Regel toevoegen"
 
-#: classes/pref/filters.php:1042
+#: classes/pref/filters.php:1041
 msgid "Perform Action"
 msgstr "Actie uitvoeren"
 
-#: classes/pref/filters.php:1093
-#, fuzzy
+#: classes/pref/filters.php:1092
 msgid "No actions available"
-msgstr "Nieuwe versie beschikbaar!"
+msgstr "Geen acties beschikbaar"
 
-#: classes/pref/filters.php:1112
+#: classes/pref/filters.php:1111
 msgid "Save action"
 msgstr "Actie opslaan"
 
-#: classes/pref/filters.php:1112
-#: js/functions.js:819
+#: classes/pref/filters.php:1111
+#: js/CommonFilters.js:155
 msgid "Add action"
 msgstr "Actie toevoegen"
 
@@ -1824,854 +1785,778 @@ msgstr[0] "Regel toevoegen"
 msgstr[1] "Regel toevoegen"
 
 #: classes/pref/filters.php:1155
-#, fuzzy
 msgid "matches any rule"
-msgstr "Match elke regel"
+msgstr "match elke regel"
 
-#: classes/pref/filters.php:1158
+#: classes/pref/filters.php:1156
+#, fuzzy
+msgid "inverse"
+msgstr "(omgekeerd)"
+
+#: classes/pref/filters.php:1159
 #, fuzzy, php-format
 msgid "%s (+%d action)"
 msgid_plural "%s (+%d actions)"
 msgstr[0] "Actie toevoegen"
 msgstr[1] "Actie toevoegen"
 
-#: classes/pref/prefs.php:19
-msgid "Interface"
-msgstr "Interface"
+#: classes/pref/labels.php:38
+msgid "Colors"
+msgstr "Kleuren"
 
-#: classes/pref/prefs.php:20
-msgid "Advanced"
-msgstr "Geavanceerd"
+#: classes/pref/labels.php:42
+msgid "Foreground:"
+msgstr "Voorgrond:"
 
-#: classes/pref/prefs.php:21
+#: classes/pref/labels.php:42
+msgid "Background:"
+msgstr "Achtergrond:"
+
+#: classes/pref/labels.php:231
+#, php-format
+msgid "Created label <b>%s</b>"
+msgstr "Label <b>%s</b> aangemaakt"
+
+#: classes/pref/labels.php:272
+msgid "Clear colors"
+msgstr "Wis kleuren"
+
+#: classes/pref/prefs.php:41
+msgid "Articles"
+msgstr "Artikelen"
+
+#: classes/pref/prefs.php:54
 msgid "Digest"
 msgstr "Samenvatting"
 
-#: classes/pref/prefs.php:25
-msgid "Allow duplicate articles"
-msgstr "Sta dubbele artikels  toe"
+#: classes/pref/prefs.php:59
+msgid "Advanced"
+msgstr "Geavanceerd"
 
-#: classes/pref/prefs.php:26
+#: classes/pref/prefs.php:70
+msgid "Allow duplicate articles"
+msgstr "Sta dubbele artikels toe"
+
+#: classes/pref/prefs.php:71
 msgid "Blacklisted tags"
 msgstr "Op de zwarte lijst geplaatste tags"
 
-#: classes/pref/prefs.php:26
-msgid "When auto-detecting tags in articles these tags will not be applied (comma-separated list)."
-msgstr "Wanneer tags automatisch worden gedetecteerd in artikelen, zullen deze tags niet worden toegekend (komma-gescheiden lijst)."
+#: classes/pref/prefs.php:71
+msgid "Never apply these tags automatically (comma-separated list)."
+msgstr "Deze tags nooit automatisch toekennen (kommagescheiden lijst)."
 
-#: classes/pref/prefs.php:27
-msgid "Automatically mark articles as read"
-msgstr "Artikelen automatisch als gelezen markeren"
+#: classes/pref/prefs.php:72
+#, fuzzy
+msgid "Default language"
+msgstr "Standaard profiel"
 
-#: classes/pref/prefs.php:27
-msgid "This option enables marking articles as read automatically while you scroll article list."
-msgstr "Deze optie schakelt het automatisch markeren als gelezen van artikelen (terwijl u door de artikellijst scrolt) in."
+#: classes/pref/prefs.php:72
+msgid "Used for full-text search"
+msgstr ""
 
-#: classes/pref/prefs.php:28
-msgid "Automatically expand articles in combined mode"
-msgstr "Artikelen automatisch uitklappen in gecombineerde modus"
+#: classes/pref/prefs.php:73
+msgid "Mark read on scroll"
+msgstr "Markeer als gelezen bij scrollen"
 
-#: classes/pref/prefs.php:29
-msgid "Combined feed display"
-msgstr "Gecombineerde feed weergave"
+#: classes/pref/prefs.php:73
+msgid "Mark articles as read as you scroll past them"
+msgstr "Markeer artikelen als gelezen als je erlangs scrollt"
 
-#: classes/pref/prefs.php:29
-msgid "Display expanded list of feed articles, instead of separate displays for headlines and article content"
-msgstr "Uitgeklapte lijst van artikelen weergeven in plaats van afzonderlijke weergave van kopteksten en artikelinhoud"
+#: classes/pref/prefs.php:74
+msgid "Always expand articles"
+msgstr "Altijd artikelen uitklappen"
 
-#: classes/pref/prefs.php:30
-msgid "Confirm marking feed as read"
-msgstr "Bevestig feed markeren als gelezen"
+#: classes/pref/prefs.php:75
+msgid "Combined mode"
+msgstr "Gecombineerde modus"
 
-#: classes/pref/prefs.php:31
+#: classes/pref/prefs.php:75
+msgid "Show flat list of articles instead of separate panels"
+msgstr "Platte lijst van artikelen weergeven in plaats van afzonderlijke weergave van kopteksten en artikelinhoud"
+
+#: classes/pref/prefs.php:76
+msgid "Confirm marking feeds as read"
+msgstr "Bevestig feeds markeren als gelezen"
+
+#: classes/pref/prefs.php:77
 msgid "Amount of articles to display at once"
-msgstr "Aantal tegelijkertijd weer te geven artikelen "
+msgstr "Aantal tegelijkertijd weer te geven artikelen"
 
-#: classes/pref/prefs.php:32
-msgid "Default feed update interval"
-msgstr "Standaard feed update interval"
+#: classes/pref/prefs.php:78
+msgid "Default update interval"
+msgstr "Standaard update-interval"
 
-#: classes/pref/prefs.php:32
-msgid "Shortest interval at which a feed will be checked for updates regardless of update method"
-msgstr "Kortste interval waarmee een feed wordt gecontroleerd op updates, onafhankelijk van upate methode"
+#: classes/pref/prefs.php:79
+msgid "Mark sent articles as read"
+msgstr "Markeer verstuurde artikelen als gelezen"
 
-#: classes/pref/prefs.php:33
-msgid "Mark articles in e-mail digest as read"
-msgstr "Markeer artikelen in e-mail samenvatting als gelezen"
+#: classes/pref/prefs.php:80
+msgid "Enable digest"
+msgstr "Schakel e-mailsamenvatting in"
 
-#: classes/pref/prefs.php:34
-msgid "Enable e-mail digest"
-msgstr "Schakel e-mail samenvatting in"
+#: classes/pref/prefs.php:80
+msgid "Send daily digest of new (and unread) headlines to your e-mail address"
+msgstr "Verstuur een dagelijkse samenvatting van nieuwe (en ongelezen) kopteksten naar uw e-mailadres"
 
-#: classes/pref/prefs.php:34
-msgid "This option enables sending daily digest of new (and unread) headlines on your configured e-mail address"
-msgstr "Deze optie schakelt het verzenden van een dagelijkse samenvatting van nieuwe (en ongelezen) kopteksten naar het door u ingestelde e-mailadres in"
+#: classes/pref/prefs.php:81
+msgid "Try to send around this time"
+msgstr "Probeer te versturen rond deze tijd"
 
-#: classes/pref/prefs.php:35
-msgid "Try to send digests around specified time"
-msgstr "Tracht samenvattingen te verzenden rond een bepaalde tijd"
+#: classes/pref/prefs.php:81
+msgid "Time in UTC"
+msgstr "Tijd in UTC"
 
-#: classes/pref/prefs.php:35
-msgid "Uses UTC timezone"
-msgstr "Gebruikt UTC tijdzone"
+#: classes/pref/prefs.php:82
+msgid "Enable API"
+msgstr "Inschakelen API"
 
-#: classes/pref/prefs.php:36
-msgid "Enable API access"
-msgstr "Sta API toegang toe"
+#: classes/pref/prefs.php:82
+msgid "Allows accessing this account through the API"
+msgstr "Laat toegang tot dit account toe via de API"
 
-#: classes/pref/prefs.php:36
-msgid "Allows external clients to access this account through the API"
-msgstr "Laat externe clienten to tot dit account via de API"
+#: classes/pref/prefs.php:83
+msgid "Enable categories"
+msgstr "Inschakelen categorieën"
 
-#: classes/pref/prefs.php:37
-msgid "Enable feed categories"
-msgstr "Inschakelen feed categorieën"
-
-#: classes/pref/prefs.php:38
+#: classes/pref/prefs.php:84
 msgid "Sort feeds by unread articles count"
 msgstr "Sorteer feeds op aantal ongelezen artikelen"
 
-#: classes/pref/prefs.php:39
-msgid "Maximum age of fresh articles (in hours)"
-msgstr "Maximum leeftijd van nieuwe artikelen (uren) "
+#: classes/pref/prefs.php:85
+msgid "Maximum age of fresh articles"
+msgstr "Maximum leeftijd van nieuwe artikelen"
 
-#: classes/pref/prefs.php:40
-msgid "Hide feeds with no unread articles"
-msgstr "Feeds zonder ongelezen artikelen verbergen"
+#: classes/pref/prefs.php:85
+msgid "hours"
+msgstr "uren"
 
-#: classes/pref/prefs.php:41
-msgid "Show special feeds when hiding read feeds"
-msgstr "Toon speciale feeds bij verbergen gelezen feeds"
+#: classes/pref/prefs.php:86
+msgid "Hide read feeds"
+msgstr "Toon/Verberg gelezen feeds"
 
-#: classes/pref/prefs.php:42
+#: classes/pref/prefs.php:87
+msgid "Always show special feeds"
+msgstr "Laat speciale feeds altijd zien"
+
+#: classes/pref/prefs.php:87
+msgid "While hiding read feeds"
+msgstr "Terwijl gelezen feeds verborgen zijn"
+
+#: classes/pref/prefs.php:88
 msgid "Long date format"
 msgstr "Lang datumformaat"
 
-#: classes/pref/prefs.php:42
-msgid "The syntax used is identical to the PHP <a href='http://php.net/manual/function.date.php'>date()</a> function."
-msgstr ""
+#: classes/pref/prefs.php:88
+msgid "Syntax is identical to PHP <a href='http://php.net/manual/function.date.php'>date()</a> function."
+msgstr "De gebruikte syntax is gelijk aan de PHP <a href='http://php.net/manual/function.date.php'>date()</a> functie."
 
-#: classes/pref/prefs.php:43
-msgid "On catchup show next feed"
-msgstr "Toon volgende feed na bijwerken"
+#: classes/pref/prefs.php:89
+msgid "Automatically show next feed"
+msgstr "Toon volgende feed automatisch"
 
-#: classes/pref/prefs.php:43
-msgid "Automatically open next feed with unread articles after marking one as read"
-msgstr "Automatisch volgende feed met ongelezen artikelen openen nadat er een is gemarkeerd als gelezen"
+#: classes/pref/prefs.php:89
+msgid "After marking one as read"
+msgstr "Na markeren van een feed als gelezen"
 
-#: classes/pref/prefs.php:44
-msgid "Purge articles after this number of days (0 - disables)"
-msgstr "Permanent verwijderen van artikelen na dit aantal dagen (0 - zet dit uit)"
+#: classes/pref/prefs.php:90
+msgid "Purge articles older than"
+msgstr "Verwijder artikelen permanent indien ouder dan"
 
-#: classes/pref/prefs.php:45
+#: classes/pref/prefs.php:90
+msgid "<strong>days</strong> (0 disables)"
+msgstr "<strong>dagen</strong> (0 zet dit uit)"
+
+#: classes/pref/prefs.php:91
 msgid "Purge unread articles"
 msgstr "Ongelezen artikelen permanent verwijderen"
 
-#: classes/pref/prefs.php:46
+#: classes/pref/prefs.php:92
 msgid "Reverse headline order (oldest first)"
 msgstr "Draai de koptekst volgorde om (oudste eerst)"
 
-#: classes/pref/prefs.php:47
+#: classes/pref/prefs.php:93
 msgid "Short date format"
 msgstr "Korte datumformaat"
 
-#: classes/pref/prefs.php:48
-msgid "Show content preview in headlines list"
+#: classes/pref/prefs.php:94
+msgid "Show content preview in headlines"
 msgstr "Toon voorbeeld van inhoud in lijst van kopteksten"
 
-#: classes/pref/prefs.php:49
+#: classes/pref/prefs.php:95
 msgid "Sort headlines by feed date"
 msgstr "Sorteer kopteksten op feed datum"
 
-#: classes/pref/prefs.php:49
+#: classes/pref/prefs.php:95
 msgid "Use feed-specified date to sort headlines instead of local import date."
 msgstr "Door feed gespecificeerde data gebruiken om kopteksten te sorteren in plaats van lokaal geïmporteerde data."
 
-#: classes/pref/prefs.php:50
-msgid "Login with an SSL certificate"
-msgstr "Aanmelden met een SSL-certificaat"
+#: classes/pref/prefs.php:96
+msgid "SSL client certificate"
+msgstr "SSL-clientcertificaat"
 
-#: classes/pref/prefs.php:50
-msgid "Click to register your SSL client certificate with tt-rss"
-msgstr "Klik om uw SSL cliëntcertificaat te registreren bij tt-rss"
-
-#: classes/pref/prefs.php:51
-msgid "Do not embed images in articles"
-msgstr "Afbeeldingen niet insluiten in artikelen"
-
-#: classes/pref/prefs.php:52
+#: classes/pref/prefs.php:98
 msgid "Strip unsafe tags from articles"
 msgstr "Verwijder onveilige tags uit artikelen"
 
-#: classes/pref/prefs.php:52
+#: classes/pref/prefs.php:98
 msgid "Strip all but most common HTML tags when reading articles."
 msgstr "Verwijder alles behalve de meest algemene HTML tags bij het lezen van artikelen."
 
-#: classes/pref/prefs.php:53
-#: js/prefs.js:1420
+#: classes/pref/prefs.php:99
+#: js/PrefHelpers.js:113
 msgid "Customize stylesheet"
 msgstr "Aanpassen opmaakmodel"
 
-#: classes/pref/prefs.php:53
-msgid "Customize CSS stylesheet to your liking"
-msgstr "Aanpassen CSS opmaakmodel aan uw voorkeur"
-
-#: classes/pref/prefs.php:54
+#: classes/pref/prefs.php:100
 msgid "Time zone"
 msgstr "Gebruiker's tijdzone"
 
-#: classes/pref/prefs.php:55
-msgid "Group headlines in virtual feeds"
-msgstr "Kopteksten in virtuele feeds groeperen"
+#: classes/pref/prefs.php:101
+msgid "Group by feed"
+msgstr "Groepeer op feed"
 
-#: classes/pref/prefs.php:55
-msgid "Special feeds, labels, and categories are grouped by originating feeds"
-msgstr "Speciale feeds, labels en categorieën worden gegroepeerd op oorspronkelijke feeds"
+#: classes/pref/prefs.php:101
+msgid "Group multiple-feed output by originating feed"
+msgstr "Groepeer meervoudige feedoutput op originele feed"
 
-#: classes/pref/prefs.php:56
+#: classes/pref/prefs.php:102
 msgid "Language"
 msgstr "Taal"
 
-#: classes/pref/prefs.php:57
+#: classes/pref/prefs.php:103
 msgid "Theme"
 msgstr "Thema"
 
-#: classes/pref/prefs.php:57
-msgid "Select one of the available CSS themes"
-msgstr "Selecteer een van de beschikbare CSS themas"
-
-#: classes/pref/prefs.php:126
+#: classes/pref/prefs.php:187
 msgid "The configuration was saved."
 msgstr "De configuratie is opgeslagen."
 
-#: classes/pref/prefs.php:140
+#: classes/pref/prefs.php:201
 msgid "Your personal data has been saved."
 msgstr "Uw persoonlijke gegevens zijn opgeslagen."
 
-#: classes/pref/prefs.php:156
+#: classes/pref/prefs.php:217
 msgid "Your preferences are now set to default values."
 msgstr "Je voorkeuren zijn nu ingesteld op de standaardwaarden."
 
-#: classes/pref/prefs.php:179
+#: classes/pref/prefs.php:228
 msgid "Personal data / Authentication"
 msgstr "Persoonlijke gegevens / Authenticatie"
 
-#: classes/pref/prefs.php:199
+#: classes/pref/prefs.php:231
 msgid "Personal data"
 msgstr "Persoonlijke gegevens"
 
-#: classes/pref/prefs.php:211
-msgid "Full name"
-msgstr "Volledige naam"
+#: classes/pref/prefs.php:260
+msgid "Full name:"
+msgstr "Volledige naam:"
 
-#: classes/pref/prefs.php:215
-msgid "E-mail"
-msgstr "E-mail"
+#: classes/pref/prefs.php:265
+#: classes/pref/users.php:94
+msgid "E-mail:"
+msgstr "E-mail:"
 
-#: classes/pref/prefs.php:221
-msgid "Access level"
-msgstr "Toegangsniveau"
+#: classes/pref/prefs.php:273
+msgid "Access level:"
+msgstr "Toegangsniveau:"
 
-#: classes/pref/prefs.php:231
+#: classes/pref/prefs.php:284
 msgid "Save data"
 msgstr "Gegevens opslaan"
 
-#: classes/pref/prefs.php:279
+#: classes/pref/prefs.php:333
 msgid "Changing your current password will disable OTP."
 msgstr "Je wachtwoord wijzigen schakelt Eenmalig Wachtwoord uit."
 
-#: classes/pref/prefs.php:284
-msgid "Old password"
-msgstr "Oud wachtwoord"
+#: classes/pref/prefs.php:337
+msgid "Old password:"
+msgstr "Oud wachtwoord:"
 
-#: classes/pref/prefs.php:287
-msgid "New password"
-msgstr "Nieuw wachtwoord"
+#: classes/pref/prefs.php:342
+#: classes/pref/users.php:82
+msgid "New password:"
+msgstr "Nieuw wachtwoord:"
 
-#: classes/pref/prefs.php:292
-msgid "Confirm password"
-msgstr "Bevestig wachtwoord"
+#: classes/pref/prefs.php:347
+msgid "Confirm password:"
+msgstr "Bevestig wachtwoord:"
 
-#: classes/pref/prefs.php:302
+#: classes/pref/prefs.php:357
 msgid "Change password"
 msgstr "Wijzig wachtwoord"
 
-#: classes/pref/prefs.php:308
+#: classes/pref/prefs.php:362
 msgid "One time passwords / Authenticator"
 msgstr "Eenmalig wachtwoord / Authenticator"
 
-#: classes/pref/prefs.php:312
-msgid "One time passwords are currently enabled. Enter your current password below to disable."
-msgstr "Eenmalig wachtwoord is geactiveerd. Voer je huidige wachtwoord in om dit uit te schakelen."
+#: classes/pref/prefs.php:392
+#: classes/pref/prefs.php:440
+msgid "Your password:"
+msgstr "Je wachtwoord:"
 
-#: classes/pref/prefs.php:337
-#: classes/pref/prefs.php:388
-msgid "Enter your password"
-msgstr "Vul uw wachtwoord in"
-
-#: classes/pref/prefs.php:348
+#: classes/pref/prefs.php:402
 msgid "Disable OTP"
-msgstr "EW (Eenmalig wachtwoord) uitschakelen"
+msgstr "Eenmalig Wachtwoord uitschakelen"
 
-#: classes/pref/prefs.php:354
-msgid "You will need a compatible Authenticator to use this. Changing your password would automatically disable OTP."
-msgstr "U heeft een compatibele Authenticator nodig om dit te gebruiken. Veranderen van wachtwoord schakelt automatisch EW uit."
+#: classes/pref/prefs.php:446
+msgid "One time password:"
+msgstr "Eenmalig wachtwoord:"
 
-#: classes/pref/prefs.php:356
-msgid "Scan the following code by the Authenticator application:"
-msgstr "Scan de volgende code met de Authenticator applicatie:"
-
-#: classes/pref/prefs.php:393
-msgid "Enter the generated one time password"
-msgstr "Geef aub uw eenmalig wachtwoord"
-
-#: classes/pref/prefs.php:407
+#: classes/pref/prefs.php:453
 msgid "Enable OTP"
 msgstr "Inschakelen EW"
 
-#: classes/pref/prefs.php:413
-msgid "PHP GD functions are required for OTP support."
-msgstr "PHP GD functies zijn noodzakelijk voor EW ondersteuning."
-
-#: classes/pref/prefs.php:456
+#: classes/pref/prefs.php:506
 msgid "Some preferences are only available in default profile."
 msgstr "Sommige instellingen zijn alleen beschikbaar in het standaard profiel."
 
-#: classes/pref/prefs.php:545
+#: classes/pref/prefs.php:601
+msgid "default"
+msgstr "standaard"
+
+#: classes/pref/prefs.php:611
 msgid "Customize"
 msgstr "Aanpassen"
 
-#: classes/pref/prefs.php:612
+#: classes/pref/prefs.php:614
+msgid "More themes..."
+msgstr "Meer thema's…"
+
+#: classes/pref/prefs.php:675
 msgid "Register"
 msgstr "Registreren"
 
-#: classes/pref/prefs.php:616
+#: classes/pref/prefs.php:679
+#: classes/pref/system.php:44
 msgid "Clear"
 msgstr "Wissen"
 
-#: classes/pref/prefs.php:622
+#: classes/pref/prefs.php:690
 #, php-format
-msgid "Current server time: %s (UTC)"
-msgstr "Huidige servertijd: %s (UTC)"
+msgid "Current server time: %s"
+msgstr "Huidige servertijd: %s"
 
-#: classes/pref/prefs.php:654
+#: classes/pref/prefs.php:719
 msgid "Save configuration"
 msgstr "Configuratie opslaan"
 
-#: classes/pref/prefs.php:658
+#: classes/pref/prefs.php:723
 msgid "Save and exit preferences"
-msgstr "Verlaat voorkeuren"
+msgstr "Opslaan en voorkeuren verlaten"
 
-#: classes/pref/prefs.php:663
+#: classes/pref/prefs.php:728
 msgid "Manage profiles"
 msgstr "Profielbeheer"
 
-#: classes/pref/prefs.php:666
+#: classes/pref/prefs.php:731
 msgid "Reset to defaults"
 msgstr "Terugzetten naar de standaardwaarden"
 
-#: classes/pref/prefs.php:681
-msgid "You will need to reload Tiny Tiny RSS for plugin changes to take effect."
-msgstr "Je moet Tiny Tiny RSS herladen om wijzigingen te kunnen zien."
-
-#: classes/pref/prefs.php:711
+#: classes/pref/prefs.php:776
 msgid "System plugins"
 msgstr "Systeem plug-ins"
 
-#: classes/pref/prefs.php:712
-msgid "System plugins are enabled in <strong>config.php</strong> for all users."
+#: classes/pref/prefs.php:810
+#: classes/pref/prefs.php:856
+#, php-format
+msgid "v%.2f, by %s"
 msgstr ""
 
-#: classes/pref/prefs.php:717
-#: classes/pref/prefs.php:773
-msgid "Plugin"
-msgstr "Plug-in"
+#: classes/pref/prefs.php:818
+msgid "User plugins"
+msgstr "Gebruikers plug-ins"
 
-#: classes/pref/prefs.php:718
-#: classes/pref/prefs.php:774
-msgid "Description"
-msgstr "Omschrijving"
-
-#: classes/pref/prefs.php:719
-#: classes/pref/prefs.php:775
-msgid "Version"
-msgstr "Versie"
-
-#: classes/pref/prefs.php:720
-#: classes/pref/prefs.php:776
-msgid "Author"
-msgstr "Auteur"
-
-#: classes/pref/prefs.php:751
-#: classes/pref/prefs.php:810
-msgid "more info"
-msgstr "meer info"
-
-#: classes/pref/prefs.php:760
-#: classes/pref/prefs.php:819
+#: classes/pref/prefs.php:845
 msgid "Clear data"
 msgstr "Wis data"
 
-#: classes/pref/prefs.php:769
-msgid "User plugins"
-msgstr "Gebruiker's plug-ins"
-
-#: classes/pref/prefs.php:834
+#: classes/pref/prefs.php:870
 msgid "Enable selected plugins"
 msgstr "Geselecteerd plug-ins inschakelen"
 
-#: classes/pref/prefs.php:912
+#: classes/pref/prefs.php:945
 msgid "Incorrect one time password"
 msgstr "Onjuist Eenmalig Wachtwoord"
 
-#: classes/pref/prefs.php:917
-#: classes/pref/prefs.php:948
+#: classes/pref/prefs.php:950
+#: classes/pref/prefs.php:981
 msgid "Incorrect password"
 msgstr "Onjuist wachtwoord"
 
-#: classes/pref/prefs.php:973
-#, php-format
-msgid "You can override colors, fonts and layout of your currently selected theme with custom CSS declarations here. <a target=\"_blank\" class=\"visibleLink\" href=\"%s\">This file</a> can be used as a baseline."
-msgstr "U kunt door de CSS-declaraties aan te passen de kleuren, lettertypen en lay-out van uw huidige thema hier aanpassen. <a target=\"_blank\" class=\"visibleLink\" href=\"%s\">Dit bestand</a> kan als richtlijn worden gebruikt."
+#: classes/pref/prefs.php:1005
+msgid "You can override colors, fonts and layout of your currently selected theme with custom CSS declarations here."
+msgstr "U kunt door de CSS-declaraties aan te passen de kleuren, lettertypen en lay-out van uw huidige thema hier aanpassen."
 
-#: classes/pref/prefs.php:1013
+#: classes/pref/prefs.php:1041
 msgid "Create profile"
 msgstr "Maak profiel"
 
-#: classes/pref/prefs.php:1037
-#: classes/pref/prefs.php:1065
+#: classes/pref/prefs.php:1060
+#: classes/pref/prefs.php:1080
 msgid "(active)"
 msgstr "(actief)"
 
-#: classes/pref/prefs.php:1099
+#: classes/pref/prefs.php:1111
 msgid "Remove selected profiles"
 msgstr "Verwijder geselecteerde profielen"
 
-#: classes/pref/prefs.php:1101
+#: classes/pref/prefs.php:1113
 msgid "Activate profile"
 msgstr "Activeer profiel"
 
-#: classes/feeds.php:53
-msgid "View as RSS feed"
-msgstr "Toon als RSS feed"
+#: classes/pref/system.php:8
+#: classes/pref/users.php:6
+msgid "Your access level is insufficient to open this tab."
+msgstr "Uw toegangsniveau is niet toereikend om deze tab te openen."
 
-#: classes/feeds.php:62
+#: classes/pref/system.php:30
+msgid "Event Log"
+msgstr "Gebeurtenissenlogboek"
+
+#: classes/pref/system.php:41
+msgid "Refresh"
+msgstr "Herlaad"
+
+#: classes/pref/system.php:49
+msgid "Error"
+msgstr "Fout"
+
+#: classes/pref/system.php:50
+msgid "Filename"
+msgstr "Bestandsnaam"
+
+#: classes/pref/system.php:51
+msgid "Message"
+msgstr "Bericht"
+
+#: classes/pref/system.php:53
+msgid "Date"
+msgstr "Datum"
+
+#: classes/pref/system.php:85
+msgid "PHP Information"
+msgstr "PHP-informatie"
+
+#: classes/pref/users.php:26
+msgid "Edit user"
+msgstr "Bewerk gebruiker"
+
+#: classes/pref/users.php:68
+msgid "Access level: "
+msgstr "Toegangsniveau: "
+
+#: classes/pref/users.php:107
+msgid "User details"
+msgstr "Gebruikersdetails"
+
+#: classes/pref/users.php:148
+#: classes/pref/users.php:390
+msgid "Registered"
+msgstr "Geregistreerd"
+
+#: classes/pref/users.php:149
+msgid "Last logged in"
+msgstr "Laatst ingelogd"
+
+#: classes/pref/users.php:157
+msgid "Subscribed feeds count"
+msgstr "Aantal geabonneerde feeds"
+
+#: classes/pref/users.php:158
+msgid "Stored articles"
+msgstr "Opgeslagen artikelen"
+
+#: classes/pref/users.php:162
+#: classes/pref/users.php:389
+msgid "Subscribed feeds"
+msgstr "Geabonneerde feeds"
+
+#: classes/pref/users.php:188
+msgid "User not found"
+msgstr "Gebruiker niet gevonden"
+
+#: classes/pref/users.php:259
 #, php-format
-msgid "Last updated: %s"
-msgstr "Laatst geüpdatet: %s"
+msgid "Added user %s with password %s"
+msgstr "Gebruiker %s toegevoegd met wachtwoord %s"
 
-#: classes/feeds.php:100
-#, fuzzy
-msgid "Select..."
-msgstr "Selecteer"
-
-#: classes/feeds.php:104
-msgid "Invert"
-msgstr "Omkeren"
-
-#: classes/feeds.php:107
-msgid "Selection toggle:"
-msgstr "Selectie schakelaar:"
-
-#: classes/feeds.php:113
-msgid "Selection:"
-msgstr "Selectie:"
-
-#: classes/feeds.php:116
-msgid "Set score"
-msgstr "Geef score"
-
-#: classes/feeds.php:119
-msgid "Archive"
-msgstr "Archiveer"
-
-#: classes/feeds.php:121
-msgid "Move back"
-msgstr "Terugzetten"
-
-#: classes/feeds.php:127
-#: classes/feeds.php:132
-#: plugins/mail/init.php:76
-#: plugins/mailto/init.php:25
-msgid "Forward by email"
-msgstr "Doorsturen per e-mail"
-
-#: classes/feeds.php:136
-msgid "Feed:"
-msgstr "Feed:"
-
-#: classes/feeds.php:193
-#: classes/feeds.php:817
-msgid "Feed not found."
-msgstr "Feed niet gevonden."
-
-#: classes/feeds.php:255
-msgid "Never"
-msgstr "Nooit"
-
-#: classes/feeds.php:342
+#: classes/pref/users.php:266
 #, php-format
-msgid "Imported at %s"
-msgstr "Geïmporteerd op %s"
+msgid "Could not create user %s"
+msgstr "Kon gebruiker %s niet aanmaken"
 
-#: classes/feeds.php:394
-#: classes/feeds.php:485
-#, fuzzy
-msgid "mark feed as read"
-msgstr "Markeer alle feeds als gelezen"
-
-#: classes/feeds.php:540
-msgid "Collapse article"
-msgstr "Artikel inklappen"
-
-#: classes/feeds.php:701
-msgid "No unread articles found to display."
-msgstr "Er zijn geen ongelezen artikelen gevonden om weer te geven."
-
-#: classes/feeds.php:704
-msgid "No updated articles found to display."
-msgstr "Geen bijgewerkte artikelen gevonden om weer te geven."
-
-#: classes/feeds.php:707
-msgid "No starred articles found to display."
-msgstr "Er zijn geen artikelen met ster gevonden om weer te geven."
-
-#: classes/feeds.php:711
-msgid "No articles found to display. You can assign articles to labels manually from article header context menu (applies to all selected articles) or use a filter."
-msgstr "Geen artikelen gevonden voor weergave. U kunt handmatig labels aan artikels toekennen (zie het Actie menu hierboven) of een filter gebruiken."
-
-#: classes/feeds.php:713
-msgid "No articles found to display."
-msgstr "Geen artikelen gevonden om weer te geven."
-
-#: classes/feeds.php:729
-#: classes/feeds.php:920
+#: classes/pref/users.php:270
 #, php-format
-msgid "Feeds last updated at %s"
-msgstr "Feeds laatst bijgewerkt op %s"
+msgid "User %s already exists."
+msgstr "Gebruiker %s bestaat al."
 
-#: classes/feeds.php:741
-#: classes/feeds.php:932
-msgid "Some feeds have update errors (click for details)"
-msgstr "Sommige feeds hebben update fouten (klik voor details)"
-
-#: classes/feeds.php:909
-msgid "No feed selected."
-msgstr "Geen feeds geselecteerd."
-
-#: classes/feeds.php:973
-#: classes/feeds.php:981
-msgid "Feed or site URL"
-msgstr "Feed of website URL"
-
-#: classes/feeds.php:995
-msgid "Available feeds"
-msgstr "Beschikbare feeds"
-
-#: classes/feeds.php:1032
-msgid "More feeds"
-msgstr "Meer feeds"
-
-#: classes/feeds.php:1061
-msgid "Popular feeds"
-msgstr "Populaire feeds"
-
-#: classes/feeds.php:1062
-msgid "Feed archive"
-msgstr "Feed archief"
-
-#: classes/feeds.php:1065
-msgid "limit:"
-msgstr "beperking:"
-
-#: classes/feeds.php:1099
-msgid "Look for"
-msgstr "Zoek naar"
-
-#: classes/feeds.php:1107
+#: classes/pref/users.php:295
 #, php-format
-msgid "in %s"
-msgstr ""
+msgid "Changed password of user %s to %s"
+msgstr "Wachtwoord van gebruiker %s gewijzigd in %s"
 
-#: classes/feeds.php:1112
-msgid "Used for word stemming"
-msgstr ""
+#: classes/pref/users.php:348
+msgid "Create user"
+msgstr "Gebruiker aanmaken"
 
-#: classes/feeds.php:1121
-#, fuzzy
-msgid "Search syntax"
-msgstr "Zoeken"
+#: classes/pref/users.php:388
+msgid "Access Level"
+msgstr "Toegangsniveau"
 
-#: classes/feeds.php:1575
-msgid "Starred articles"
-msgstr "Artikelen met ster"
+#: classes/pref/users.php:391
+msgid "Last login"
+msgstr "Laatste login"
 
-#: classes/feeds.php:1577
-msgid "Published articles"
-msgstr "Gepubliceerde artikelen"
+#: classes/pref/users.php:408
+msgid "Click to edit"
+msgstr "Klik om te bewerken"
 
-#: classes/feeds.php:1579
-msgid "Fresh articles"
-msgstr "Nieuwe artikelen"
+#: classes/pref/users.php:424
+msgid "No users defined."
+msgstr "Geen gebruikers gedefinieerd."
 
-#: classes/feeds.php:1583
-msgid "Archived articles"
-msgstr "Gearchiveerde artikelen"
+#: classes/pref/users.php:426
+msgid "No matching users found."
+msgstr "Geen overeenkomstige gebruikers gevonden."
 
-#: classes/feeds.php:1585
-msgid "Recently read"
-msgstr "Recent gelezen"
+#: plugins/af_comics/init.php:51
+msgid "Feeds supported by af_comics"
+msgstr "Feeds ondersteund door af_comics"
 
-#: classes/feeds.php:1706
-msgid "Special"
-msgstr "Speciaal"
+#: plugins/af_comics/init.php:53
+msgid "The following comics are currently supported:"
+msgstr "De volgende comics worden op dit moment ondersteund:"
 
-#: classes/feeds.php:1963
-#, php-format
-msgid "Search results: %s"
-msgstr "Zoekresultaten: %s"
+#: plugins/af_comics/init.php:71
+msgid "To subscribe to GoComics use the comic's regular web page as the feed URL (e.g. for the <em>Garfield</em> comic use <code>http://www.gocomics.com/garfield</code>)."
+msgstr "Om te abonneren op GoComics gebruik de comics reguliere webpagina als het feed URL (bijv. voor de comic <em>Garfield</em> gebruik <code>http://www.gocomics.com/garfield</code>)."
 
-#: plugins/nsfw/init.php:30
-#: plugins/nsfw/init.php:42
-msgid "Not work safe (click to toggle)"
-msgstr "NVVW (Niet Veilig Voor Werk) (klik om in/uit te schakelen)"
-
-#: plugins/nsfw/init.php:52
-msgid "NSFW Plugin"
-msgstr "NVVW (Niet Veilig Voor Werk) Plug-in"
-
-#: plugins/nsfw/init.php:79
-msgid "Tags to consider NSFW (comma-separated)"
-msgstr "Tags te overwegen als NVVW (komma gescheiden)"
-
-#: plugins/nsfw/init.php:100
-msgid "Configuration saved."
-msgstr "Configuratie opgeslagen."
-
-#: plugins/note/init.php:28
-#: plugins/note/note.js:11
-msgid "Edit article note"
-msgstr "Bewerk artikel notitie"
-
-#: plugins/vf_shared/init.php:17
-#: plugins/vf_shared/init.php:73
-#, fuzzy
-msgid "Shared articles"
-msgstr "Artikelen met ster"
-
-#: plugins/auth_internal/init.php:71
-msgid "Please enter your one time password:"
-msgstr "Geef aub uw eenmalig wachtwoord:"
-
-#: plugins/auth_internal/init.php:212
-msgid "Password has been changed."
-msgstr "Wachtwoord is veranderd."
-
-#: plugins/auth_internal/init.php:214
-msgid "Old password is incorrect."
-msgstr "Oud wachtwoord is onjuist."
-
-#: plugins/af_readability/init.php:22
-msgid "Data saved."
-msgstr ""
-
-#: plugins/af_readability/init.php:34
-#, fuzzy
-msgid "Inline content"
-msgstr "Bewerk artikel notitie"
-
-#: plugins/af_readability/init.php:40
-msgid "Readability settings (af_readability)"
-msgstr ""
-
-#: plugins/af_readability/init.php:67
-msgid "Use Readability for pages shared via bookmarklet."
-msgstr ""
-
-#: plugins/af_readability/init.php:79
-#: plugins/af_psql_trgm/init.php:198
-msgid "Currently enabled for (click to edit):"
-msgstr ""
-
-#: plugins/af_readability/init.php:96
-#, fuzzy
-msgid "Readability"
-msgstr "Controleer beschikbaarheid"
-
-#: plugins/af_readability/init.php:107
-#, fuzzy
-msgid "Inline article content"
-msgstr "Bewerk artikel notitie"
-
-#: plugins/af_redditimgur/init.php:27
-msgid "Reddit content settings (af_redditimgur)"
-msgstr ""
-
-#: plugins/af_redditimgur/init.php:52
-msgid "Uses Readability (full-text-rss) implementation by <a target='_blank' href='https://bitbucket.org/fivefilters/'>FiveFilters.org</a>"
-msgstr ""
-
-#: plugins/af_redditimgur/init.php:56
-msgid "Extract missing content using Readability"
-msgstr ""
-
-#: plugins/af_redditimgur/init.php:61
-msgid "Enable additional duplicate checking"
-msgstr ""
-
-#: plugins/af_redditimgur/init.php:75
-#: plugins/af_zz_imgproxy/init.php:252
-#, fuzzy
-msgid "Configuration saved"
-msgstr "Configuratie opgeslagen."
+#: plugins/af_comics/init.php:73
+msgid "Drop any updated filters into <code>filters.local</code> in plugin directory."
+msgstr "Zet elk aangepast filter in <code>filters.local</code> in de plugin directory."
 
 #: plugins/af_psql_trgm/init.php:29
 #, php-format
 msgid "Data saved (%s, %d)"
-msgstr ""
+msgstr "Gegevens opgeslagen (%s,%d)"
 
-#: plugins/af_psql_trgm/init.php:119
-#, fuzzy
+#: plugins/af_psql_trgm/init.php:120
 msgid "Show related articles"
-msgstr "Artikelen met ster"
+msgstr "Toon verwante artikelen"
 
-#: plugins/af_psql_trgm/init.php:125
-#: plugins/af_psql_trgm/init.php:227
-#, fuzzy
+#: plugins/af_psql_trgm/init.php:127
+#: plugins/af_psql_trgm/init.php:236
 msgid "Mark similar articles as read"
-msgstr "Markeer alle artikelen als gelezen?"
+msgstr "Markeer gelijksoortige artikelen als gelezen"
 
-#: plugins/af_psql_trgm/init.php:164
-msgid "PostgreSQL trigram extension returns string similarity as a floating point number (0-1). Setting it too low might produce false positives, zero disables checking."
-msgstr ""
-
-#: plugins/af_psql_trgm/init.php:167
-#, fuzzy
+#: plugins/af_psql_trgm/init.php:166
+#: plugins/af_readability/init.php:58
 msgid "Global settings"
-msgstr "Toevoegingsinstellingen"
+msgstr "Algemene instellingen"
 
-#: plugins/af_psql_trgm/init.php:171
+#: plugins/af_psql_trgm/init.php:172
 msgid "Minimum similarity:"
-msgstr ""
+msgstr "Minimale overeenkomst:"
 
-#: plugins/af_psql_trgm/init.php:176
+#: plugins/af_psql_trgm/init.php:178
+msgid "PostgreSQL trigram extension returns string similarity as a floating point number (0-1). Setting it too low might produce false positives, zero disables checking."
+msgstr "PostgreSQL trigram extensie geeft string overeenkomst weer als een floating point nummer (0-1). Het te laag instellen geeft valse positieven, nul zet controleren uit."
+
+#: plugins/af_psql_trgm/init.php:183
 msgid "Minimum title length:"
-msgstr ""
+msgstr "Minimale titellengte:"
 
-#: plugins/af_psql_trgm/init.php:181
-#, fuzzy
+#: plugins/af_psql_trgm/init.php:192
 msgid "Enable for all feeds:"
-msgstr "Inschakelen feed categorieën"
+msgstr "Inschakelen voor alle feeds:"
 
-#: plugins/af_psql_trgm/init.php:216
+#: plugins/af_psql_trgm/init.php:207
+#: plugins/af_readability/init.php:101
+msgid "Currently enabled for (click to edit):"
+msgstr "Op dit moment ingeschakeld voor (klik om te bewerken):"
+
+#: plugins/af_psql_trgm/init.php:224
 msgid "Similarity (pg_trgm)"
+msgstr "Overeenkomst (pg_trgm)"
+
+#: plugins/af_readability/init.php:25
+msgid "Data saved."
+msgstr "Gegevens opgeslagen."
+
+#: plugins/af_readability/init.php:45
+msgid "Inline content"
+msgstr "Inhoud weergeven"
+
+#: plugins/af_readability/init.php:52
+msgid "Readability settings (af_readability)"
+msgstr "Readability-instellingen (af_readability)"
+
+#: plugins/af_readability/init.php:87
+msgid "Provide full-text services to core code (bookmarklets) and other plugins"
 msgstr ""
 
-#: plugins/af_comics/init.php:49
-msgid "Feeds supported by af_comics"
-msgstr ""
+#: plugins/af_readability/init.php:118
+msgid "Readability"
+msgstr "Readability"
 
-#: plugins/af_comics/init.php:51
-msgid "The following comics are currently supported:"
-msgstr ""
+#: plugins/af_readability/init.php:130
+msgid "Inline article content"
+msgstr "Artikelinhoud weergeven"
 
-#: plugins/af_comics/init.php:69
-msgid "To subscribe to GoComics use the comic's regular web page as the feed URL (e.g. for the <em>Garfield</em> comic use <code>http://www.gocomics.com/garfield</code>)."
-msgstr ""
+#: plugins/af_redditimgur/init.php:28
+msgid "Reddit content settings (af_redditimgur)"
+msgstr "Reddit inhoudinstellingen (af_redditimgur)"
 
-#: plugins/af_comics/init.php:71
-msgid "Drop any updated filters into <code>filters.local</code> in plugin directory."
-msgstr ""
+#: plugins/af_redditimgur/init.php:60
+#, fuzzy
+msgid "Extract missing content using Readability (requires af_readability)"
+msgstr "Leid missende inhoud af met Readability"
 
-#: plugins/import_export/init.php:62
+#: plugins/af_redditimgur/init.php:66
+msgid "Enable additional duplicate checking"
+msgstr "Schakel additionele controle op duplicaten in"
+
+#: plugins/af_redditimgur/init.php:82
+#: plugins/af_zz_imgproxy/init.php:253
+msgid "Configuration saved"
+msgstr "Configuratie opgeslagen"
+
+#: plugins/af_zz_imgproxy/init.php:209
+msgid "Image proxy settings (af_zz_imgproxy)"
+msgstr "Afbeelding proxy-instellingen (af_zz_imgproxy)"
+
+#: plugins/af_zz_imgproxy/init.php:233
+msgid "Enable proxy for all remote images."
+msgstr "Zet proxy voor alle externe afbeeldingen aan."
+
+#: plugins/af_zz_imgproxy/init.php:237
+msgid "Don't cache files locally."
+msgstr "Bestanden niet lokaal in cache plaatsen."
+
+#: plugins/auth_internal/init.php:72
+msgid "Please enter your one time password:"
+msgstr "Geef aub uw eenmalig wachtwoord:"
+
+#: plugins/auth_internal/init.php:214
+msgid "Password has been changed."
+msgstr "Wachtwoord is veranderd."
+
+#: plugins/auth_internal/init.php:216
+msgid "Old password is incorrect."
+msgstr "Oud wachtwoord is onjuist."
+
+#: plugins/bookmarklets/init.php:23
+msgid "Bookmarklets"
+msgstr "Bookmarklets"
+
+#: plugins/bookmarklets/init.php:25
+msgid "Drag the link below to your browser toolbar, open the feed you're interested in in your browser and click on the link to subscribe to it."
+msgstr "Sleep de link hieronder naar uw browser's werkbalk, open de feed waar u geïnteresseerd in bent in uw browser en klik op de link om u er op te abonneren."
+
+#: plugins/bookmarklets/init.php:29
+#, php-format
+msgid "Subscribe to %s in Tiny Tiny RSS?"
+msgstr "Abonneren op %s in Tiny Tiny RSS?"
+
+#: plugins/bookmarklets/init.php:34
+msgid "Subscribe in Tiny Tiny RSS"
+msgstr "Abonneren in Tiny Tiny RSS"
+
+#: plugins/bookmarklets/init.php:37
+msgid "Use this bookmarklet to publish arbitrary pages using Tiny Tiny RSS"
+msgstr "Gebruik deze bookmarklet om willekeurige pagina's met Tiny Tiny RSS te publiceren"
+
+#: plugins/close_button/init.php:28
+msgid "Close article"
+msgstr "Sluit artikel"
+
+#: plugins/import_export/init.php:54
 msgid "Import and export"
 msgstr "Import en export"
 
-#: plugins/import_export/init.php:64
-#, fuzzy
+#: plugins/import_export/init.php:56
 msgid "You can export and import your Starred and Archived articles for safekeeping or when migrating between tt-rss instances of same version."
-msgstr "U kunt uw gearchiveerde of artikelen met ster exporteren en importeren om veilig te bewaren wanneer u migreert tussen tt-rss instanties."
+msgstr "U kunt uw gearchiveerde artikelen of artikelen met ster exporteren en importeren om veilig te bewaren wanneer u migreert tussen tt-rss-instanties met dezelfde versie."
 
-#: plugins/import_export/init.php:69
+#: plugins/import_export/init.php:61
 msgid "Export my data"
 msgstr "Exporteer mijn data"
 
-#: plugins/import_export/init.php:85
+#: plugins/import_export/init.php:79
 msgid "Import"
 msgstr "Importeren"
 
-#: plugins/import_export/init.php:235
+#: plugins/import_export/init.php:243
 msgid "Could not import: incorrect schema version."
-msgstr "Kon niet importeren: onjuiste schema versie."
+msgstr "Kon niet importeren: onjuiste schema-versie."
 
-#: plugins/import_export/init.php:240
+#: plugins/import_export/init.php:248
 msgid "Could not import: unrecognized document format."
 msgstr "Kon niet importeren: onbekend documentindeling."
 
-#: plugins/import_export/init.php:401
+#: plugins/import_export/init.php:441
 msgid "Finished: "
-msgstr "Klaar:"
+msgstr "Klaar: "
 
-#: plugins/import_export/init.php:402
+#: plugins/import_export/init.php:442
 #, php-format
 msgid "%d article processed, "
 msgid_plural "%d articles processed, "
 msgstr[0] "%d artikel verwerkt, "
 msgstr[1] "%d artikels verwerkt, "
 
-#: plugins/import_export/init.php:403
+#: plugins/import_export/init.php:443
 #, php-format
 msgid "%d imported, "
 msgid_plural "%d imported, "
 msgstr[0] "%d geïmporteerd, "
 msgstr[1] "%d geïmporteerd, "
 
-#: plugins/import_export/init.php:404
+#: plugins/import_export/init.php:444
 #, php-format
 msgid "%d feed created."
 msgid_plural "%d feeds created."
 msgstr[0] "%d feed gemaakt."
 msgstr[1] "%d feeds gemaakt."
 
-#: plugins/import_export/init.php:409
+#: plugins/import_export/init.php:449
 msgid "Could not load XML document."
 msgstr "Kon XML-document niet laden."
 
-#: plugins/import_export/init.php:421
+#: plugins/import_export/init.php:464
 msgid "Prepare data"
 msgstr "Voorbereiden data"
 
-#: plugins/import_export/init.php:438
-#, fuzzy, php-format
+#: plugins/import_export/init.php:481
+#, php-format
 msgid "Upload failed with error code %d (%s)"
-msgstr "Upload mislukt met fout nummer %d"
+msgstr "Upload mislukt met foutcode %d (%s)"
 
-#: plugins/import_export/init.php:464
+#: plugins/import_export/init.php:505
 msgid "No file uploaded."
 msgstr "Geen bestand geupload."
 
 #: plugins/mail/init.php:29
 msgid "Mail addresses saved."
-msgstr ""
+msgstr "Emailadressen opgeslagen."
 
-#: plugins/mail/init.php:35
-#, fuzzy
+#: plugins/mail/init.php:36
 msgid "Mail plugin"
-msgstr "Gebruiker's plug-ins"
+msgstr "Mail plug-in"
 
-#: plugins/mail/init.php:37
+#: plugins/mail/init.php:38
 msgid "You can set predefined email addressed here (comma-separated list):"
-msgstr ""
+msgstr "Je kunt voorgedefinieerde emailadressen hier instellen (komma-gescheiden lijst):"
 
 #: plugins/mail/init.php:118
 #: plugins/mail/init.php:124
-#: plugins/mailto/init.php:50
-#: plugins/mailto/init.php:58
+#: plugins/mailto/init.php:49
+#: plugins/mailto/init.php:57
 msgid "[Forwarded]"
 msgstr "[Doorgestuurd]"
 
 #: plugins/mail/init.php:118
-#: plugins/mailto/init.php:50
+#: plugins/mailto/init.php:49
 msgid "Multiple articles"
 msgstr "Meerdere artikelen"
 
@@ -2683,537 +2568,461 @@ msgstr "Naar:"
 msgid "Subject:"
 msgstr "Onderwerp:"
 
-#: plugins/mail/init.php:178
+#: plugins/mail/init.php:177
 msgid "Send e-mail"
 msgstr "Verzend e-mail"
 
-#: plugins/close_button/init.php:25
-msgid "Close article"
-msgstr "Sluit artikel"
-
-#: plugins/bookmarklets/init.php:20
-msgid "Bookmarklets"
-msgstr "Bookmarklets"
-
-#: plugins/bookmarklets/init.php:22
-msgid "Drag the link below to your browser toolbar, open the feed you're interested in in your browser and click on the link to subscribe to it."
-msgstr "Sleep de link hieronder naar uw browser's werkbalk, open de feed waar u geïnteresseerd in bent in uw browser en klik op de link om u er op te abonneren."
-
-#: plugins/bookmarklets/init.php:26
-#, php-format
-msgid "Subscribe to %s in Tiny Tiny RSS?"
-msgstr "Abonneren op %s in Tiny Tiny RSS?"
-
-#: plugins/bookmarklets/init.php:31
-msgid "Subscribe in Tiny Tiny RSS"
-msgstr "Abonneren in Tiny Tiny RSS"
-
-#: plugins/bookmarklets/init.php:34
-msgid "Use this bookmarklet to publish arbitrary pages using Tiny Tiny RSS"
-msgstr "Gebruik deze bookmarklet om willekeurige pagina's met Tiny Tiny RSS te publiceren"
-
-#: plugins/toggle_sidebar/init.php:23
-msgid "Collapse feedlist"
-msgstr "Feedlijst inklappen"
-
-#: plugins/af_zz_imgproxy/init.php:208
-msgid "Image proxy settings (af_zz_imgproxy)"
-msgstr ""
-
-#: plugins/af_zz_imgproxy/init.php:232
-#, fuzzy
-msgid "Enable proxy for all remote images."
-msgstr "Inschakelen feed categorieën"
-
-#: plugins/af_zz_imgproxy/init.php:236
-#, fuzzy
-msgid "Don't cache files locally."
-msgstr "Afbeelding lokaal in cache plaatsen"
-
-#: plugins/mailto/init.php:74
+#: plugins/mailto/init.php:73
 msgid "Clicking the following link to invoke your mail client:"
-msgstr "Klikken op de volgende link om uw e-mail cliënt te starten:"
+msgstr "Klikken op de volgende link om uw e-mailprogramma te starten:"
 
-#: plugins/mailto/init.php:78
+#: plugins/mailto/init.php:77
 msgid "Forward selected article(s) by email."
 msgstr "Geselecteerde artikel(en) doorsturen per e-mail."
 
-#: plugins/mailto/init.php:81
+#: plugins/mailto/init.php:80
 msgid "You should be able to edit the message before sending in your mail client."
-msgstr "U zou in staat moeten zijn het bericht te bewerken vóórdat u het verzendt met uw e-mail cliënt."
+msgstr "U zou in staat moeten zijn het bericht te bewerken vóórdat u het verzendt met uw e-mailprogramma."
 
-#: plugins/mailto/init.php:86
+#: plugins/mailto/init.php:85
 msgid "Close this dialog"
 msgstr "Sluit dit dialoogvenster"
 
-#: plugins/share/init.php:41
+#: plugins/note/init.php:26
+#: plugins/note/note.js:10
+msgid "Edit article note"
+msgstr "Bewerk artikelnotitie"
+
+#: plugins/nsfw/init.php:30
+#: plugins/nsfw/init.php:42
+msgid "Not work safe (click to toggle)"
+msgstr "NVVW (Niet Veilig Voor Werk) (klik om in/uit te schakelen)"
+
+#: plugins/nsfw/init.php:53
+msgid "NSFW Plugin"
+msgstr "NVVW (Niet Veilig Voor Werk) Plug-in"
+
+#: plugins/nsfw/init.php:80
+msgid "Tags to consider NSFW (comma-separated)"
+msgstr "Tags te overwegen als NVVW (komma gescheiden)"
+
+#: plugins/nsfw/init.php:101
+msgid "Configuration saved."
+msgstr "Configuratie opgeslagen."
+
+#: plugins/share/init.php:45
 msgid "You can disable all articles shared by unique URLs here."
 msgstr "U kunt alle artikelen gedeeld via unieke URL's hier uitschakelen."
 
-#: plugins/share/init.php:44
+#: plugins/share/init.php:48
 msgid "Unshare all articles"
 msgstr "Delen alle artikelen teniet doen"
 
-#: plugins/share/init.php:78
+#: plugins/share/init.php:81
 msgid "Share by URL"
 msgstr "Deel via URL"
 
-#: plugins/share/init.php:100
+#: plugins/share/init.php:103
 msgid "You can share this article by the following unique URL:"
 msgstr "U kunt dit artikel delen via de volgende unieke URL:"
 
-#: plugins/share/init.php:122
-#, fuzzy
+#: plugins/share/init.php:127
 msgid "Unshare article"
-msgstr "Ster weghalen bij artikel"
+msgstr "Artikel niet meer delen"
 
-#: js/FeedTree.js:172
+#: plugins/toggle_sidebar/init.php:27
 #, fuzzy
-msgid "(Un)collapse"
-msgstr "Uit/Inklappen zijbalk"
+msgid "Toggle sidebar"
+msgstr "In/uitschakelen sterren"
 
-#: js/PrefFeedTree.js:54
-msgid "Edit category"
-msgstr "Bewerk categorie"
+#: plugins/vf_shared/init.php:17
+#: plugins/vf_shared/init.php:73
+msgid "Shared articles"
+msgstr "Gedeelde artikelen"
 
-#: js/PrefFeedTree.js:61
-msgid "Remove category"
-msgstr "Categorie verwijderen"
-
-#: js/PrefFilterTree.js:67
-msgid "Inverse"
-msgstr "Omgekeerd"
-
-#: js/feedlist.js:511
-#, fuzzy
-msgid "Mark %w in %s older than 1 day as read?"
-msgstr "Markeer alle artikelen in %s ouder dan 1 dag als gelezen?"
-
-#: js/feedlist.js:514
-#, fuzzy
-msgid "Mark %w in %s older than 1 week as read?"
-msgstr "Markeer alle artikelen in %s ouder dan 1 week als gelezen?"
-
-#: js/feedlist.js:517
-#, fuzzy
-msgid "Mark %w in %s older than 2 weeks as read?"
-msgstr "Markeer alle artikelen in %s ouder dan 2 weken als gelezen?"
-
-#: js/feedlist.js:520
-#, fuzzy
-msgid "Mark %w in %s as read?"
-msgstr "Markeer alle artikelen in %s als gelezen?"
-
-#: js/feedlist.js:523
-#, fuzzy
-msgid "search results"
-msgstr "Zoekresultaten: %s"
-
-#: js/feedlist.js:523
-#, fuzzy
-msgid "all articles"
-msgstr "Alle artikelen"
-
-#: js/functions.js:74
-msgid "Close"
-msgstr ""
-
-#: js/functions.js:141
-msgid "Click to close"
-msgstr "Klik om te sluiten"
-
-#: js/functions.js:448
+#: js/AppBase.js:386
 msgid "Error explained"
-msgstr "Fout uitleg"
+msgstr "Foutuitleg"
 
-#: js/functions.js:592
+#: js/AppBase.js:403
+msgid "Fatal error"
+msgstr "Fatale fout"
+
+#: js/Article.js:33
+msgid "Please enter new score for selected articles:"
+msgstr "Geef aub een nieuwe score voor de geselecteerde artikelen:"
+
+#: js/Article.js:59
+#: js/Headlines.js:919
+#: js/Headlines.js:937
+#: js/Headlines.js:955
+#: js/Headlines.js:1096
+#: js/Headlines.js:1132
+#: plugins/mail/mail.js:7
+#: plugins/mailto/init.js:7
+#: js/Headlines.js:742
+#: js/Headlines.js:768
+#: js/Headlines.js:780
+msgid "No articles selected."
+msgstr "Geen artikel geselecteerd."
+
+#: js/Article.js:67
+msgid "Please enter new score for this article:"
+msgstr "Geef aub een nieuwe score voor dit artikel:"
+
+#: js/Article.js:111
+msgid "Article URL:"
+msgstr "Artikel-URL:"
+
+#: js/Article.js:152
+msgid "comments"
+msgstr "commentaren"
+
+#: js/Article.js:155
+msgid "comment"
+msgid_plural "comments"
+msgstr[0] ""
+msgstr[1] ""
+
+#: js/CommonDialogs.js:11
+msgid "Remove stored feed icon?"
+msgstr "Opgeslagen feed-pictogram verwijderen?"
+
+#: js/CommonDialogs.js:38
+msgid "Please select an image file to upload."
+msgstr "Selecteer aub een afbeeldingsbestand om te uploaden."
+
+#: js/CommonDialogs.js:39
+msgid "Upload new icon for this feed?"
+msgstr "Nieuw pictogram voor deze feed uploaden?"
+
+#: js/CommonDialogs.js:83
 msgid "Subscribe to Feed"
 msgstr "Abonneren op feed"
 
-#: js/functions.js:621
+#: js/CommonDialogs.js:110
 msgid "Failed to parse output. This can indicate server timeout and/or network issues. Backend output was logged to browser console."
-msgstr ""
+msgstr "Kan de uitvoer niet ontleden. Dit kan een server-timeout en/of netwerkproblemen aangeven. Backend-output is naar de browser-console geschreven."
 
-#: js/functions.js:636
+#: js/CommonDialogs.js:125
 #, perl-format
 msgid "Subscribed to %s"
 msgstr "Geabonneerd op %s"
 
-#: js/functions.js:641
+#: js/CommonDialogs.js:134
 msgid "Specified URL seems to be invalid."
 msgstr "Gespecificeerde URL lijkt ongeldig te zijn."
 
-#: js/functions.js:644
+#: js/CommonDialogs.js:137
 msgid "Specified URL doesn't seem to contain any feeds."
 msgstr "Gespecificeerde URL lijkt geen feeds te bevatten."
 
-#: js/functions.js:656
+#: js/CommonDialogs.js:149
 msgid "Expand to select feed"
 msgstr "Uitklappen tot geselecteerde feed"
 
-#: js/functions.js:668
+#: js/CommonDialogs.js:163
 #, perl-format
 msgid "Couldn't download the specified URL: %s"
 msgstr "Kon de gespecificeerde URL: %s niet downloaden"
 
-#: js/functions.js:672
+#: js/CommonDialogs.js:166
 #, perl-format
 msgid "XML validation failed: %s"
-msgstr "XML validatie mislukt: %s"
+msgstr "XML-validatie mislukt: %s"
 
-#: js/functions.js:676
+#: js/CommonDialogs.js:169
 msgid "You are already subscribed to this feed."
 msgstr "U bent al geabonneerd op deze feed."
 
-#: js/functions.js:1136
-msgid "Generate new syndication address for this feed?"
-msgstr "Nieuw syndicatie-adres voor deze feed genereren?"
-
-#: js/functions.js:1140
-#: js/prefs.js:1091
-msgid "Trying to change address..."
-msgstr "Adres aan het aanpassen..."
-
-#: js/functions.js:1245
-#: js/tt-rss.js:445
-#: js/tt-rss.js:672
-msgid "You can't edit this kind of feed."
-msgstr "U kunt dit type feed niet bewerken."
-
-#: js/functions.js:1260
-msgid "Edit Feed"
-msgstr "Bewerk feed"
-
-#: js/functions.js:1266
-#: js/prefs.js:100
-#: js/prefs.js:209
-#: js/prefs.js:647
-msgid "Saving data..."
-msgstr "Gegevens opslaan..."
-
-#: js/functions.js:1293
-msgid "More Feeds"
-msgstr "Meer feeds"
-
-#: js/functions.js:1355
-#: js/functions.js:1464
-#: js/prefs.js:398
-#: js/prefs.js:540
-#: js/prefs.js:558
-#: js/prefs.js:1073
-msgid "No feeds are selected."
-msgstr "Er zijn geen feeds geselecteerd."
-
-#: js/functions.js:1398
-msgid "Remove selected feeds from the archive? Feeds with stored articles will not be removed."
-msgstr "Geselecteerde feeds uit het archief verwijderen? Feeds met opgeslagen artikelen zullen niet worden verwijderd."
-
-#: js/functions.js:1435
+#: js/CommonDialogs.js:193
 msgid "Feeds with update errors"
-msgstr "Feeds met update fouten"
+msgstr "Feeds met update-fouten"
 
-#: js/functions.js:1446
-#: js/prefs.js:1054
+#: js/CommonDialogs.js:202
+#: js/PrefFeedTree.js:382
 msgid "Remove selected feeds?"
 msgstr "Geselecteerde feeds verwijderen?"
 
-#: js/functions.js:1449
-#: js/prefs.js:1057
-msgid "Removing selected feeds..."
-msgstr "Geselecteerde feeds verwijderen..."
+#: js/CommonDialogs.js:223
+#: js/CommonDialogs.js:308
+#: js/PrefFeedTree.js:168
+#: js/PrefFeedTree.js:230
+#: js/PrefFeedTree.js:246
+#: js/PrefFeedTree.js:398
+msgid "No feeds selected."
+msgstr "Geen feeds geselecteerd."
 
-#: js/prefs.js:60
-msgid "Please enter login:"
-msgstr "Geef loginID aub:"
+#: js/CommonDialogs.js:248
+msgid "More Feeds"
+msgstr "Meer feeds"
 
-#: js/prefs.js:67
-msgid "Can't create user: no login specified."
-msgstr "Kan gebruiker niet aanmaken: geen loginID gespecificeerd."
+#: js/CommonDialogs.js:340
+msgid "Remove selected feeds from the archive? Feeds with stored articles will not be removed."
+msgstr "Geselecteerde feeds uit het archief verwijderen? Feeds met opgeslagen artikelen zullen niet worden verwijderd."
 
-#: js/prefs.js:71
-msgid "Adding user..."
-msgstr "Gebruiker toevoegen..."
+#: js/CommonDialogs.js:362
+msgid "Please enter label caption:"
+msgstr "Geeft een onderschrift voor label:"
 
-#: js/prefs.js:96
-msgid "User Editor"
-msgstr "Gebruikers bewerken"
-
-#: js/prefs.js:131
-msgid "Edit Filter"
-msgstr "Bewerk filter"
-
-#: js/prefs.js:170
-msgid "Remove filter?"
-msgstr "Filter verwijderen?"
-
-#: js/prefs.js:175
-msgid "Removing filter..."
-msgstr "Filter verwijderen..."
-
-#: js/prefs.js:292
-msgid "Remove selected labels?"
-msgstr "Geselecteerde labels verwijderen?"
-
-#: js/prefs.js:295
-msgid "Removing selected labels..."
-msgstr "Geselecteerde labels verwijderen..."
-
-#: js/prefs.js:308
-#: js/prefs.js:1140
-msgid "No labels are selected."
-msgstr "Er zijn geen labels geselecteerd."
-
-#: js/prefs.js:320
-msgid "Remove selected users? Neither default admin nor your account will be removed."
-msgstr "Geselecteerde gebruikers verwijderen? Noch de standaard admin gebruiker, noch uw eigen account zal worden verwijderd."
-
-#: js/prefs.js:323
-msgid "Removing selected users..."
-msgstr "Geselecteerde gebruikers verwijderen..."
-
-#: js/prefs.js:338
-#: js/prefs.js:408
-#: js/prefs.js:427
-#: js/prefs.js:461
-msgid "No users are selected."
-msgstr "Er zijn geen gebruikers geselecteerd."
-
-#: js/prefs.js:350
-msgid "Remove selected filters?"
-msgstr "Geselecteerde filters verwijderen?"
-
-#: js/prefs.js:353
-msgid "Removing selected filters..."
-msgstr "Geselecteerde filters verwijderen..."
-
-#: js/prefs.js:366
-#: js/prefs.js:495
-#: js/prefs.js:514
-msgid "No filters are selected."
-msgstr "Er zijn geen filters geselecteerd."
-
-#: js/prefs.js:378
-msgid "Unsubscribe from selected feeds?"
-msgstr "Abonnement opzeggen voor geselecteerde feeds?"
-
-#: js/prefs.js:382
-msgid "Unsubscribing from selected feeds..."
-msgstr "Abonnement opzeggen voor geselecteerde feeds..."
-
-#: js/prefs.js:413
-#: js/prefs.js:432
-#: js/prefs.js:466
-msgid "Please select only one user."
-msgstr "Selecteer aub slechts één gebruiker."
-
-#: js/prefs.js:436
-msgid "Reset password of selected user?"
-msgstr "Wachtwoord van geselecteerde gebruiker opnieuw instellen?"
-
-#: js/prefs.js:439
-msgid "Resetting password for selected user..."
-msgstr "Wachtwoord van geselecteerde gebruiker opnieuw instellen..."
-
-#: js/prefs.js:500
-msgid "Please select only one filter."
-msgstr "Selecteer aub slecht één filter."
-
-#: js/prefs.js:518
-msgid "Combine selected filters?"
-msgstr "Geselecteerde filters combineren?"
-
-#: js/prefs.js:521
-msgid "Joining filters..."
-msgstr "Filters samenvoegen..."
-
-#: js/prefs.js:580
-msgid "Edit Multiple Feeds"
-msgstr "Bewerk meervoudige feeds"
-
-#: js/prefs.js:604
-msgid "Save changes to selected feeds?"
-msgstr "Veranderingen aan geselecteerde feeds opslaan?"
-
-#: js/prefs.js:681
-msgid "OPML Import"
-msgstr "OPML import"
-
-#: js/prefs.js:700
-msgid "Please choose an OPML file first."
-msgstr "kies eerst een OPML-bestand aub."
-
-#: js/prefs.js:703
-#: plugins/import_export/import_export.js:115
-msgid "Importing, please wait..."
-msgstr "Aan 't importeren, even wachten aub..."
-
-#: js/prefs.js:865
-msgid "Reset to defaults?"
-msgstr "Terugzetten naar de standaardwaarden?"
-
-#: js/prefs.js:1464
-msgid "Subscribing to feeds..."
-msgstr "Abonneren op feeds..."
-
-#: js/prefs.js:1483
-msgid "Clear stored data for this plugin?"
-msgstr "Wis opgeslagen data voor deze plug-in?"
-
-#: js/prefs.js:1497
-msgid "Clear all messages in the error log?"
-msgstr ""
-
-#: js/tt-rss.js:118
-msgid "Mark all articles as read?"
-msgstr "Markeer alle artikelen als gelezen?"
-
-#: js/tt-rss.js:124
-msgid "Marking all feeds as read..."
-msgstr "Alle feeds als gelezen markeren..."
-
-#: js/tt-rss.js:397
-msgid "Please enable mail plugin first."
-msgstr "Eerst de e-mail plug-in inschakelen aub."
-
-#: js/tt-rss.js:526
-msgid "Please enable embed_original plugin first."
-msgstr "Eerst embed_original plug-in inschakelen aub."
-
-#: js/tt-rss.js:539
-#: js/tt-rss.js:722
-msgid "Widescreen is not available in combined mode."
-msgstr ""
-
-#: js/tt-rss.js:820
-msgid "You can't rescore this kind of feed."
-msgstr "U kunt dit type feed geen andere score geven."
-
-#: js/tt-rss.js:825
-#: js/tt-rss.js:685
-msgid "Please select some feed first."
-msgstr "Selecteer aub eerst een feed."
-
-#: js/tt-rss.js:830
+#: js/CommonDialogs.js:386
+#: js/tt-rss.js:543
 #, perl-format
-msgid "Rescore articles in %s?"
-msgstr "Artikelen in %s opnieuw een score geven?"
+msgid "Unsubscribe from %s?"
+msgstr "Abonnement opzeggen voor %s?"
 
-#: js/tt-rss.js:833
-msgid "Rescoring articles..."
-msgstr "Artikelen nieuwe score geven..."
+#: js/CommonDialogs.js:414
+#: js/tt-rss.js:391
+#: js/tt-rss.js:524
+msgid "You can't edit this kind of feed."
+msgstr "U kunt dit type feed niet bewerken."
 
-#: js/viewfeed.js:917
-#: js/viewfeed.js:955
-#: js/viewfeed.js:1003
-#: js/viewfeed.js:1924
-#: plugins/mail/mail.js:7
-#: plugins/mailto/init.js:7
-#: js/viewfeed.js:675
-#: js/viewfeed.js:697
-#: js/viewfeed.js:718
-#: js/viewfeed.js:777
-#: js/viewfeed.js:805
-msgid "No articles are selected."
-msgstr "Geen artikelen geselecteerd."
+#: js/CommonDialogs.js:428
+msgid "Edit Feed"
+msgstr "Bewerk feed"
 
-#: js/viewfeed.js:925
+#: js/CommonDialogs.js:452
+msgid "Generate new syndication address for this feed?"
+msgstr "Nieuw syndicatie-adres voor deze feed genereren?"
+
+#: js/Feeds.js:221
+msgid "Your password is at default value"
+msgstr "Uw wachtwoord staat op de standaardwaarde"
+
+#: js/Headlines.js:633
+#: js/Headlines.js:681
+#: js/Headlines.js:698
+msgid "Click to open next unread feed."
+msgstr "Klik om volgende ongelezen feed te openen."
+
+#: js/Headlines.js:637
+msgid "Cancel search"
+msgstr "Zoeken annuleren"
+
+#: js/Headlines.js:695
+msgid "New articles found, reload feed to continue."
+msgstr "Nieuwe artikelen gevonden, herlaad feed om verder te gaan."
+
+#: js/Headlines.js:706
+msgid "Could not update headlines (invalid object received - see error console for details)"
+msgstr "Kon koptekst niet weergeven (ongeldig object ontvangen - zie error console voor details)"
+
+#: js/Headlines.js:963
 #, perl-format
 msgid "Delete %d selected article in %s?"
 msgid_plural "Delete %d selected articles in %s?"
 msgstr[0] "Verwijder %d geselecteerd artikel in %s?"
 msgstr[1] "Verwijder %d geselecteerde artikelen in %s?"
 
-#: js/viewfeed.js:927
+#: js/Headlines.js:965
 #, perl-format
 msgid "Delete %d selected article?"
 msgid_plural "Delete %d selected articles?"
 msgstr[0] "Verwijder %d geselecteerd artikel?"
 msgstr[1] "Verwijder %d geselecteerde artikelen?"
 
-#: js/viewfeed.js:964
+#: js/Headlines.js:1105
 #, perl-format
 msgid "Archive %d selected article in %s?"
 msgid_plural "Archive %d selected articles in %s?"
 msgstr[0] "%d geselecteerd artikel archiveren in %s?"
 msgstr[1] "%d geselecteerd artikelen archiveren in %s?"
 
-#: js/viewfeed.js:967
+#: js/Headlines.js:1108
 #, perl-format
 msgid "Move %d archived article back?"
 msgid_plural "Move %d archived articles back?"
 msgstr[0] "%d gearchiveerd artikel terugzetten?"
 msgstr[1] "%d gearchiveerde artikelen terugzetten?"
 
-#: js/viewfeed.js:969
+#: js/Headlines.js:1109
 msgid "Please note that unstarred articles might get purged on next feed update."
 msgstr "Let op, artikels zonder ster kunnen verloren gaan bij de volgende feed update."
 
-#: js/viewfeed.js:1009
+#: js/Headlines.js:1138
 #, perl-format
 msgid "Mark %d selected article in %s as read?"
 msgid_plural "Mark %d selected articles in %s as read?"
 msgstr[0] "Markeer %d geselecteerd artikel in %s als gelezen?"
 msgstr[1] "Markeer %d geselecteerde artikelen in %s als gelezen?"
 
-#: js/viewfeed.js:1029
-msgid "Edit article Tags"
-msgstr "Bewerk artikel tags"
+#: js/Headlines.js:1154
+msgid "No article is selected."
+msgstr "Geen artikel geselecteerd."
 
-#: js/viewfeed.js:1035
-msgid "Saving article tags..."
-msgstr "Artikel tags opslaan..."
+#: js/Headlines.js:1189
+msgid "No articles found to mark"
+msgstr "Geen artikelen gevonden om te markeren"
 
-#: js/viewfeed.js:1666
+#: js/Headlines.js:1191
+#, perl-format
+msgid "Mark %d article as read?"
+msgid_plural "Mark %d articles as read?"
+msgstr[0] "Markeer %d artikel als gelezen?"
+msgstr[1] "Markeer %d artikelen als gelezen?"
+
+#: js/Headlines.js:1254
 msgid "Open original article"
 msgstr "Open origineel artikel"
 
-#: js/viewfeed.js:1673
+#: js/Headlines.js:1261
 msgid "Display article URL"
-msgstr "Toon artikel URL"
+msgstr "Toon artikel-URL"
 
-#: js/viewfeed.js:1780
+#: js/Headlines.js:1368
 msgid "Assign label"
 msgstr "Labels toevoegen"
 
-#: js/viewfeed.js:1785
+#: js/Headlines.js:1373
 msgid "Remove label"
 msgstr "Label verwijderen"
 
-#: js/viewfeed.js:1817
-#, fuzzy
+#: js/Headlines.js:1404
 msgid "Select articles in group"
-msgstr "Selecteer artikel onder de cursor"
+msgstr "Selecteer artikelen in de groep"
 
-#: js/viewfeed.js:1827
-#, fuzzy
+#: js/Headlines.js:1414
 msgid "Mark group as read"
-msgstr "Markeren als gelezen"
+msgstr "Markeren groep als gelezen"
 
-#: js/viewfeed.js:1839
-#, fuzzy
+#: js/Headlines.js:1426
 msgid "Mark feed as read"
-msgstr "Markeer alle feeds als gelezen"
+msgstr "Markeer feed als gelezen"
 
-#: js/viewfeed.js:1892
-msgid "Please enter new score for selected articles:"
-msgstr "Geef aub een nieuwe score voor de geselecteerde artikelen:"
+#: js/PrefFeedTree.js:36
+msgid "Edit category"
+msgstr "Bewerk categorie"
 
-#: js/viewfeed.js:1955
-msgid "Please enter new score for this article:"
-msgstr "Geef aub een nieuwe score voor dit artikel:"
+#: js/PrefFeedTree.js:43
+msgid "Remove category"
+msgstr "Categorie verwijderen"
 
-#: js/viewfeed.js:1986
-msgid "Article URL:"
-msgstr "Artikel URL:"
+#: js/PrefFeedTree.js:140
+#, perl-format
+msgid "Remove category %s? Any nested feeds would be placed into Uncategorized."
+msgstr "Categorie %s verwijderen? Elke genestelde feed zal in de rubriek 'Ongecategoriseerd' worden geplaatst."
 
-#: plugins/note/note.js:17
-msgid "Saving article note..."
-msgstr "Artikel notitie opslaan..."
+#: js/PrefFeedTree.js:153
+msgid "Unsubscribe from selected feeds?"
+msgstr "Abonnement opzeggen voor geselecteerde feeds?"
 
-#: plugins/af_psql_trgm/init.js:11
-#, fuzzy
+#: js/PrefFeedTree.js:196
+msgid "Remove selected categories?"
+msgstr "Geselecteerde categorieën verwijderen?"
+
+#: js/PrefFeedTree.js:209
+msgid "No categories selected."
+msgstr "Geen categorieën geselecteerd."
+
+#: js/PrefFeedTree.js:260
+msgid "Edit Multiple Feeds"
+msgstr "Bewerk meervoudige feeds"
+
+#: js/PrefFeedTree.js:284
+msgid "Save changes to selected feeds?"
+msgstr "Veranderingen aan geselecteerde feeds opslaan?"
+
+#: js/PrefFeedTree.js:315
+msgid "Rename category to:"
+msgstr "Categorie hernoemen in:"
+
+#: js/PrefFeedTree.js:327
+msgid "Category title:"
+msgstr "Categorietitel:"
+
+#: js/PrefFeedTree.js:351
+msgid "Subscribing to feeds..."
+msgstr "Abonneren op feeds..."
+
+#: js/PrefFeedTree.js:373
+msgid "Feeds without recent updates"
+msgstr "Feeds zonder recente updates"
+
+#: js/PrefFilterTree.js:48
+msgid "Inverse"
+msgstr "Omgekeerd"
+
+#: js/PrefFilterTree.js:107
+#: js/PrefFilterTree.js:123
+#: js/PrefFilterTree.js:236
+msgid "No filters selected."
+msgstr "Er zijn geen filters geselecteerd."
+
+#: js/PrefFilterTree.js:111
+msgid "Combine selected filters?"
+msgstr "Geselecteerde filters combineren?"
+
+#: js/PrefFilterTree.js:128
+msgid "Please select only one filter."
+msgstr "Selecteer aub slecht één filter."
+
+#: js/PrefFilterTree.js:148
+msgid "Edit Filter"
+msgstr "Bewerk filter"
+
+#: js/PrefFilterTree.js:173
+msgid "Remove filter?"
+msgstr "Filter verwijderen?"
+
+#: js/PrefFilterTree.js:223
+msgid "Remove selected filters?"
+msgstr "Geselecteerde filters verwijderen?"
+
+#: js/PrefHelpers.js:4
+msgid "This will invalidate all previously generated feed URLs. Continue?"
+msgstr "Dit zal alle eerder gegenereerde feed-URL's ongeldig maken. Doorgaan?"
+
+#: js/PrefHelpers.js:21
+msgid "Clear event log?"
+msgstr "Wis gebeurtenissenlogboek?"
+
+#: js/PrefHelpers.js:40
+msgid "Settings Profiles"
+msgstr "Instellingsprofielen"
+
+#: js/PrefHelpers.js:49
+msgid "Remove selected profiles? Active and default profiles will not be removed."
+msgstr "Geselecteerde profielen verwijderen? Actieve en standaard profielen zullen niet worden verwijderd."
+
+#: js/PrefHelpers.js:64
+msgid "No profiles selected."
+msgstr "Er zijn geen profielen geselecteerd."
+
+#: js/PrefHelpers.js:71
+msgid "Activate selected profile?"
+msgstr "Geselecteerd profiel activeren?"
+
+#: js/PrefHelpers.js:80
+msgid "Please choose a profile to activate."
+msgstr "Kies een te activeren profiel aub."
+
+#: js/PrefHelpers.js:129
+msgid "Reset to defaults?"
+msgstr "Terugzetten naar de standaardwaarden?"
+
+#: js/PrefHelpers.js:137
+msgid "Clear stored data for this plugin?"
+msgstr "Wis opgeslagen data voor deze plug-in?"
+
+#: js/PrefHelpers.js:156
+msgid "Please choose an OPML file first."
+msgstr "Kies eerst een OPML-bestand aub."
+
+#: js/PrefHelpers.js:180
+msgid "OPML Import"
+msgstr "OPML import"
+
+#: js/PrefHelpers.js:202
+msgid "Replace current OPML publishing address with a new one?"
+msgstr "Huidig OPML publicatieadres vervangen door een nieuwe?"
+
+#: js/common.js:215
+msgid "Click to close"
+msgstr "Klik om te sluiten"
+
+#: plugins/af_psql_trgm/init.js:10
 msgid "Related articles"
-msgstr "Verwijder artikel"
+msgstr "Verwante artikelen"
 
 #: plugins/import_export/import_export.js:13
 msgid "Export Data"
@@ -3239,261 +3048,584 @@ msgstr "Kies het bestand eerst aub."
 msgid "Forward article by email"
 msgstr "Artikel doorsturen per e-mail"
 
-#: plugins/mail/mail.js:36
+#: plugins/mail/mail.js:30
 msgid "Error sending email:"
-msgstr ""
-
-#: plugins/mail/mail.js:38
-#, fuzzy
-msgid "Your message has been sent."
-msgstr "Uw persoonlijke gegevens zijn opgeslagen."
-
-#: plugins/embed_original/init.js:6
-msgid "Sorry, your browser does not support sandboxed iframes."
-msgstr "Sorry, uw browser lijkt iframes in een sandbox niet te ondersteunen."
-
-#: plugins/shorten_expanded/init.js:39
-#, fuzzy
-msgid "Click to expand article"
-msgstr "Klik om artikel uit te klappen."
+msgstr "Fout bij verzenden van e-mail:"
 
 #: plugins/share/share.js:10
 msgid "Share article by URL"
 msgstr "Deel artikel via URL"
 
-#: plugins/share/share.js:14
-#, fuzzy
+#: plugins/share/share.js:13
 msgid "Generate new share URL for this article?"
-msgstr "Geef aub een nieuwe score voor dit artikel:"
+msgstr "Genereer een nieuwe \"deel\"-URL voor dit artikel?"
 
-#: plugins/share/share.js:18
-#, fuzzy
-msgid "Trying to change URL..."
-msgstr "Adres aan het aanpassen..."
-
-#: plugins/share/share.js:55
-#, fuzzy
+#: plugins/share/share.js:48
 msgid "Remove sharing for this article?"
-msgstr "Bewerk tags voor dit artikel"
-
-#: plugins/share/share.js:59
-#, fuzzy
-msgid "Trying to unshare..."
-msgstr "Adres aan het aanpassen..."
+msgstr "Verwijder \"delen\" voor dit artikel?"
 
 #: plugins/share/share_prefs.js:3
 msgid "This will invalidate all previously shared article URLs. Continue?"
-msgstr "Dit zal all eerder gedeelde artikel-URL's ongeldig maken. Doorgaan?"
+msgstr "Dit zal alle eerder gedeelde artikel-URL's ongeldig maken. Doorgaan?"
 
-#: plugins/share/share_prefs.js:6
-#: js/prefs.js:1273
-msgid "Clearing URLs..."
-msgstr "URLs opruimen..."
-
-#: plugins/share/share_prefs.js:13
-msgid "Shared URLs cleared."
-msgstr "Gedeelde URLs opgeruimd."
-
-#: js/feedlist.js:204
-#, fuzzy
-msgid "Your password is at default value"
-msgstr "Uw wachtwoord staat op de standaard waarde. Verander het aub."
-
-#: js/feedlist.js:453
-msgid "Mark all articles in %s as read?"
-msgstr "Markeer alle artikelen in %s als gelezen?"
-
-#: js/functions.js:494
-msgid "Upload complete."
-msgstr "Upload voltooid."
-
-#: js/functions.js:511
-msgid "Remove stored feed icon?"
-msgstr "Opgeslagen feed pictogram verwijderen?"
-
-#: js/functions.js:516
-msgid "Removing feed icon..."
-msgstr "Opgeslagen feed pictogram verwijderen..."
-
-#: js/functions.js:521
-msgid "Feed icon removed."
-msgstr "Feed pictogram verwijderd."
-
-#: js/functions.js:537
-msgid "Please select an image file to upload."
-msgstr "Selecteer aub een afbeeldingsbestand om te uploaden."
-
-#: js/functions.js:539
-msgid "Upload new icon for this feed?"
-msgstr "Nieuw pictogram voor deze feed uploaden?"
-
-#: js/functions.js:540
-msgid "Uploading, please wait..."
-msgstr "Aan 't uploaden, even wachten aub..."
-
-#: js/functions.js:550
-msgid "Please enter label caption:"
-msgstr "Geeft een onderschrift voor label:"
-
-#: js/functions.js:555
-msgid "Can't create label: missing caption."
-msgstr "Kan label niet aanmaken: onderschrift ontbreekt."
-
-#: js/functions.js:797
-msgid "Edit rule"
-msgstr "Bewerk regel"
-
-#: js/functions.js:819
-msgid "Edit action"
-msgstr "Bewerk actie"
-
-#: js/functions.js:860
-msgid "Looking for articles (%d processed, %f found)..."
-msgstr ""
-
-#: js/functions.js:890
-#, fuzzy
-msgid "Found %d articles matching this filter:"
-msgstr "Artikelen volgens dit filter:"
-
-#: js/functions.js:942
-msgid "Create Filter"
-msgstr "Filter aanmaken"
-
-#: js/functions.js:1060
-#: js/tt-rss.js:691
-msgid "Unsubscribe from %s?"
-msgstr "Abonnement opzeggen voor %s?"
-
-#: js/functions.js:1063
-msgid "Removing feed..."
-msgstr "Feed wordt verwijderd..."
-
-#: js/functions.js:1489
+#: js/AppBase.js:139
 msgid "Help"
 msgstr "Help"
 
-#: js/prefs.js:969
-msgid "Remove category %s? Any nested feeds would be placed into Uncategorized."
-msgstr "Categorie %s verwijderen? elke genestelde feed zal in de rubriek 'Ongecategoriseerd' worden geplaatst."
+#: js/AppBase.js:265
+msgid "<span onclick=\"App.explainError(1)\">Update daemon is not running.</span>"
+msgstr "<span onclick=\"App.explainError(1)\">Update daemon draait niet.</span>"
 
-#: js/prefs.js:975
-msgid "Removing category..."
-msgstr "Categorie verwijderen..."
+#: js/AppBase.js:278
+msgid "<span onclick=\"App.explainError(3)\">Update daemon is not updating feeds.</span>"
+msgstr "<span onclick=\"App.explainError(3)\">Update daemon werkt geen feeds bij.</span>"
 
-#: js/prefs.js:993
-msgid "Remove selected categories?"
-msgstr "Geselecteerde categorieën verwijderen?"
+#: js/AppBase.js:453
+msgid "Unhandled exception"
+msgstr "Niet verwerkte uitzondering"
 
-#: js/prefs.js:996
-msgid "Removing selected categories..."
-msgstr "Geselecteerde categorieën verwijderen..."
+#: js/Article.js:236
+msgid "Edit article Tags"
+msgstr "Bewerk artikel-tags"
 
-#: js/prefs.js:1009
-msgid "No categories are selected."
-msgstr "Geen categorieën geselecteerd."
+#: js/Article.js:240
+msgid "Saving article tags..."
+msgstr "Artikel-tags opslaan..."
 
-#: js/prefs.js:1016
-msgid "Category title:"
-msgstr "Categorie titel:"
+#: js/CommonDialogs.js:12
+msgid "Removing feed icon..."
+msgstr "Opgeslagen feedpictogram verwijderen..."
 
-#: js/prefs.js:1020
-msgid "Creating category..."
-msgstr "Aanmaken categorie…"
+#: js/CommonDialogs.js:17
+msgid "Feed icon removed."
+msgstr "Feedpictogram verwijderd."
 
-#: js/prefs.js:1043
-msgid "Feeds without recent updates"
-msgstr "Feeds zonder recente updates"
+#: js/CommonDialogs.js:40
+msgid "Uploading, please wait..."
+msgstr "Aan 't uploaden, even wachten aub..."
 
-#: js/prefs.js:1087
-msgid "Replace current OPML publishing address with a new one?"
-msgstr "Huidig OPML publicatieadres vervangen door een nieuwe?"
+#: js/CommonDialogs.js:48
+msgid "Upload complete."
+msgstr "Upload voltooid."
 
-#: js/prefs.js:1125
-msgid "Reset selected labels to default colors?"
-msgstr "Geselecteerd label naar de standaard kleur terugzetten?"
+#: js/CommonDialogs.js:62
+msgid "Upload failed: icon is too big."
+msgstr "Upload mislukt: icoon is te groot."
 
-#: js/prefs.js:1157
-msgid "Settings Profiles"
-msgstr "Instellingsprofielen"
+#: js/CommonDialogs.js:65
+msgid "Upload failed."
+msgstr "Upload mislukt."
 
-#: js/prefs.js:1166
-msgid "Remove selected profiles? Active and default profiles will not be removed."
-msgstr "Geselecteerde profielen verwijderen? Actieve en standaard profielen zullen niet worden verwijderd."
+#: js/CommonDialogs.js:203
+#: js/PrefFeedTree.js:383
+msgid "Removing selected feeds..."
+msgstr "Geselecteerde feeds verwijderen..."
 
-#: js/prefs.js:1169
-msgid "Removing selected profiles..."
-msgstr "Geselecteerde profielen verwijderen..."
+#: js/CommonDialogs.js:389
+msgid "Removing feed..."
+msgstr "Feed wordt verwijderd..."
 
-#: js/prefs.js:1185
-msgid "No profiles are selected."
-msgstr "Er zijn geen profielen geselecteerd."
+#: js/CommonDialogs.js:432
+#: js/PrefFeedTree.js:296
+#: js/PrefFilterTree.js:206
+#: js/PrefUsers.js:40
+msgid "Saving data..."
+msgstr "Gegevens opslaan..."
 
-#: js/prefs.js:1193
-#: js/prefs.js:1246
-msgid "Activate selected profile?"
-msgstr "Geselecteerd profiel activeren?"
+#: js/CommonDialogs.js:454
+#: js/PrefHelpers.js:203
+msgid "Trying to change address..."
+msgstr "Adres aan het aanpassen..."
 
-#: js/prefs.js:1210
-#: js/prefs.js:1262
-msgid "Please choose a profile to activate."
-msgstr "Kies een te activeren profiel aub."
+#: js/CommonDialogs.js:474
+#: js/PrefHelpers.js:219
+msgid "Could not change feed URL."
+msgstr "Kon feed URL niet aanpassen."
 
-#: js/prefs.js:1215
-msgid "Creating profile..."
-msgstr "Profiel aanmaken..."
+#: js/CommonFilters.js:133
+msgid "Edit rule"
+msgstr "Bewerk regel"
 
-#: js/prefs.js:1270
-msgid "This will invalidate all previously generated feed URLs. Continue?"
-msgstr "Dit zal alle eerder gegenereerde feed-URL's ongeldig maken. Doorgaan?"
+#: js/CommonFilters.js:155
+msgid "Edit action"
+msgstr "Bewerk actie"
 
-#: js/prefs.js:1280
-msgid "Generated URLs cleared."
-msgstr "Genereerde URLs gewist."
+#: js/CommonFilters.js:194
+msgid "Looking for articles (%d processed, %f found)..."
+msgstr "Op zoek naar artikelen (%d verwerkt, %f gevonden)..."
 
-#: js/prefs.js:1352
-msgid "Label Editor"
-msgstr "Label editor"
+#: js/CommonFilters.js:225
+msgid "Found %d articles matching this filter:"
+msgstr "%d artikelen gevonden volgens dit filter:"
 
-#: js/tt-rss.js:680
-msgid "You can't unsubscribe from the category."
-msgstr "U kunt het abonnementen niet opzeggen in deze categorie."
+#: js/CommonFilters.js:236
+msgid "Error while trying to get filter test results."
+msgstr "Fout bij het verkijgen van de filter test resultaten."
 
-#: js/viewfeed.js:127
-#: js/viewfeed.js:177
-#: js/viewfeed.js:194
+#: js/CommonFilters.js:278
+msgid "Create Filter"
+msgstr "Filter aanmaken"
+
+#: js/FeedTree.js:71
 #, fuzzy
-msgid "Click to open next unread feed."
-msgstr "Klik om feed te bewerken"
+msgid "Debug feed"
+msgstr "Debug viewfeed()"
 
-#: js/viewfeed.js:131
-msgid "Cancel search"
-msgstr "Zoeken annuleren"
+#: js/FeedTree.js:99
+msgid "(Un)collapse"
+msgstr "Uit/Inklappen"
 
-#: js/viewfeed.js:191
-#, fuzzy
-msgid "New articles found, reload feed to continue."
-msgstr "Geen artikelen gevonden om weer te geven."
+#: js/Feeds.js:372
+msgid "Mark all articles as read?"
+msgstr "Markeer alle artikelen als gelezen?"
 
-#: js/viewfeed.js:620
+#: js/Feeds.js:376
+msgid "Marking all feeds as read..."
+msgstr "Alle feeds als gelezen markeren..."
+
+#: js/Feeds.js:394
+msgid "Mark %w in %s older than 1 day as read?"
+msgstr "Markeer %w in %s ouder dan 1 dag als gelezen?"
+
+#: js/Feeds.js:397
+msgid "Mark %w in %s older than 1 week as read?"
+msgstr "Markeer %w in %s ouder dan 1 week als gelezen?"
+
+#: js/Feeds.js:400
+msgid "Mark %w in %s older than 2 weeks as read?"
+msgstr "Markeer %w in %s ouder dan 2 weken als gelezen?"
+
+#: js/Feeds.js:403
+msgid "Mark %w in %s as read?"
+msgstr "Markeer %s in %s als gelezen?"
+
+#: js/Feeds.js:406
+msgid "search results"
+msgstr "zoekresultaten"
+
+#: js/Feeds.js:406
+msgid "all articles"
+msgstr "alle artikelen"
+
+#: js/Feeds.js:448
+msgid "Mark all articles in %s as read?"
+msgstr "Markeer alle artikelen in %s als gelezen?"
+
+#: js/Headlines.js:888
 msgid "%d article selected"
 msgid_plural "%d articles selected"
 msgstr[0] "%d artikel geselecteerd"
 msgstr[1] "%d artikelen geselecteerd"
 
-#: js/viewfeed.js:1284
-msgid "No article is selected."
-msgstr "Geen artikel geselecteerd."
+#: js/PrefFeedTree.js:141
+msgid "Removing category..."
+msgstr "Categorie verwijderen..."
 
-#: js/viewfeed.js:1319
-msgid "No articles found to mark"
-msgstr "Geen artikelen gevonden om te markeren"
+#: js/PrefFeedTree.js:155
+msgid "Unsubscribing from selected feeds..."
+msgstr "Abonnement opzeggen voor geselecteerde feeds..."
 
-#: js/viewfeed.js:1321
-msgid "Mark %d article as read?"
-msgid_plural "Mark %d articles as read?"
-msgstr[0] "Markeer %d artikel als gelezen?"
-msgstr[1] "Markeer %d artikelen als gelezen?"
+#: js/PrefFeedTree.js:197
+msgid "Removing selected categories..."
+msgstr "Geselecteerde categorieën verwijderen..."
+
+#: js/PrefFeedTree.js:330
+msgid "Creating category..."
+msgstr "Aanmaken categorie…"
+
+#: js/PrefFilterTree.js:112
+msgid "Joining filters..."
+msgstr "Filters samenvoegen..."
+
+#: js/PrefFilterTree.js:178
+msgid "Removing filter..."
+msgstr "Filter verwijderen..."
+
+#: js/PrefFilterTree.js:224
+msgid "Removing selected filters..."
+msgstr "Geselecteerde filters verwijderen..."
+
+#: js/PrefHelpers.js:5
+#: plugins/share/share_prefs.js:4
+msgid "Clearing URLs..."
+msgstr "URL's opruimen..."
+
+#: js/PrefHelpers.js:8
+msgid "Generated URLs cleared."
+msgstr "Genereerde URL's gewist."
+
+#: js/PrefHelpers.js:50
+msgid "Removing selected profiles..."
+msgstr "Geselecteerde profielen verwijderen..."
+
+#: js/PrefHelpers.js:85
+msgid "Creating profile..."
+msgstr "Profiel aanmaken..."
+
+#: js/PrefHelpers.js:159
+#: plugins/import_export/import_export.js:115
+msgid "Importing, please wait..."
+msgstr "Aan 't importeren, even wachten aub..."
+
+#: js/PrefLabelTree.js:69
+msgid "Label Editor"
+msgstr "Labeleditor"
+
+#: js/PrefLabelTree.js:126
+msgid "Reset selected labels to default colors?"
+msgstr "Geselecteerd label naar de standaard kleur terugzetten?"
+
+#: js/PrefLabelTree.js:139
+#: js/PrefLabelTree.js:159
+msgid "No labels selected."
+msgstr "Er zijn geen labels geselecteerd."
+
+#: js/PrefLabelTree.js:146
+msgid "Remove selected labels?"
+msgstr "Geselecteerde labels verwijderen?"
+
+#: js/PrefLabelTree.js:147
+msgid "Removing selected labels..."
+msgstr "Geselecteerde labels verwijderen..."
+
+#: js/PrefUsers.js:15
+msgid "Please enter username:"
+msgstr "Geef gebruikersnaam aub:"
+
+#: js/PrefUsers.js:18
+msgid "Adding user..."
+msgstr "Gebruiker toevoegen..."
+
+#: js/PrefUsers.js:36
+msgid "User Editor"
+msgstr "Gebruikers bewerken"
+
+#: js/PrefUsers.js:57
+#: js/PrefUsers.js:96
+#: js/PrefUsers.js:103
+msgid "No users selected."
+msgstr "Er zijn geen gebruikers geselecteerd."
+
+#: js/PrefUsers.js:62
+#: js/PrefUsers.js:108
+msgid "Please select one user."
+msgstr "Selecteer aub één gebruiker."
+
+#: js/PrefUsers.js:66
+msgid "Reset password of selected user?"
+msgstr "Wachtwoord van geselecteerde gebruiker opnieuw instellen?"
+
+#: js/PrefUsers.js:67
+msgid "Resetting password for selected user..."
+msgstr "Wachtwoord van geselecteerde gebruiker opnieuw aan het instellen..."
+
+#: js/PrefUsers.js:82
+msgid "Remove selected users? Neither default admin nor your account will be removed."
+msgstr "Geselecteerde gebruikers verwijderen? Noch de standaard admin gebruiker, noch uw eigen account zal worden verwijderd."
+
+#: js/PrefUsers.js:83
+msgid "Removing selected users..."
+msgstr "Geselecteerde gebruikers verwijderen..."
+
+#: js/tt-rss.js:344
+msgid "Please enable mail or mailto plugin first."
+msgstr "Eerst de e-mail plug-in inschakelen aub."
+
+#: js/tt-rss.js:460
+msgid "Please enable embed_original plugin first."
+msgstr "Eerst embed_original plug-in inschakelen aub."
+
+#: js/tt-rss.js:473
+#: js/tt-rss.js:563
+msgid "Widescreen is not available in combined mode."
+msgstr "Breedbeeld is niet beschikbaar in combinatie modus."
+
+#: js/tt-rss.js:532
+msgid "Please select some feed first."
+msgstr "Selecteer aub eerst een feed."
+
+#: js/tt-rss.js:537
+msgid "You can't unsubscribe from the category."
+msgstr "U kunt het abonnementen niet opzeggen in deze categorie."
+
+#: plugins/note/note.js:14
+msgid "Saving article note..."
+msgstr "Artikel notitie opslaan..."
+
+#: plugins/share/share.js:15
+msgid "Trying to change URL..."
+msgstr "URL aan het aanpassen..."
+
+#: plugins/share/share.js:40
+msgid "Could not change URL."
+msgstr "Kon URL niet aanpassen."
+
+#: plugins/share/share_prefs.js:9
+msgid "Shared URLs cleared."
+msgstr "Gedeelde URL's opgeruimd."
+
+#: plugins/shorten_expanded/init.js:42
+msgid "Click to expand article"
+msgstr "Klik om artikel uit te klappen"
+
+#~ msgid "%d archived article"
+#~ msgid_plural "%d archived articles"
+#~ msgstr[0] "%d gearchiveerd artikel"
+#~ msgstr[1] "%d gearchiveerde artikelen"
+
+#~ msgid "No feeds found."
+#~ msgstr "Geen feeds gevonden."
+
+#~ msgid "If you have imported labels and/or filters, you might need to reload preferences to see your new data."
+#~ msgstr "Indien u labels en/of filters heeft geïmporteerd moet u waarschijnlijk de voorkeuren herladen om uw bijgewerkte gegevens te zien."
+
+#~ msgid "Performing updates"
+#~ msgstr "Uitvoeren van updates"
+
+#~ msgid "FAILED!"
+#~ msgstr "MISLUKT!"
+
+#~ msgid "OK!"
+#~ msgstr "OK!"
+
+#~ msgid "Database update required"
+#~ msgstr "Database-update nodig"
+
+#~ msgid "Sending new password of user %s to %s"
+#~ msgstr "Nieuw wachtwoord van gebruiker %s naar %s versturen"
+
+#~ msgid "[tt-rss] Password change notification"
+#~ msgstr "[tt-rss] Melding verandering van wachtwoord"
+
+#~ msgid "Hide from Popular feeds"
+#~ msgstr "Verbergen voor populaire feeds"
+
+#~ msgid "These feeds have not been updated with new content for 3 months (oldest first):"
+#~ msgstr "Deze feeds hebben al 3 maanden geen nieuwe inhoud (oudste eerst):"
+
+#~ msgid "System plugins are enabled in <strong>config.php</strong> for all users."
+#~ msgstr "Systeem plugins zijn ingesteld in <strong>config.php</strong> voor alle gebruikers."
+
+#~ msgid "Plugin"
+#~ msgstr "Plug-in"
+
+#~ msgid "Description"
+#~ msgstr "Omschrijving"
+
+#~ msgid "Version"
+#~ msgstr "Versie"
+
+#~ msgid "Author"
+#~ msgstr "Auteur"
+
+#~ msgid "more info"
+#~ msgstr "meer info"
+
+#~ msgid "More feeds"
+#~ msgstr "Meer feeds"
+
+#~ msgid "Popular feeds"
+#~ msgstr "Populaire feeds"
+
+#~ msgid "Feed archive"
+#~ msgstr "Feed archief"
+
+#~ msgid "limit:"
+#~ msgstr "beperking:"
+
+#~ msgid "Use Readability for pages shared via bookmarklet."
+#~ msgstr "Gebruik Readability voor pagina's gedeeld via bookmarklet."
+
+#~ msgid "Toggle feedlist"
+#~ msgstr "Feedlijst inklappen"
+
+#, fuzzy
+#~ msgid "Automatically opens next unread feed after marking one as read"
+#~ msgstr "Automatisch volgende feed met ongelezen artikelen openen nadat er een is gemarkeerd als gelezen"
+
+#~ msgid "Other interface tips are available in the Tiny Tiny RSS wiki."
+#~ msgstr "Andere interface tips zijn te vinden in de Tiny Tiny RSS wiki."
+
+#~ msgid "Help topic not found."
+#~ msgstr "Helponderwerp niet gevonden."
+
+#~ msgid "Only main settings profile can be migrated using OPML."
+#~ msgstr "Alleen instellingen van het hoofdprofiel kunnen worden overgebracht met OPML."
+
+#~ msgid "Wiki: Filters"
+#~ msgstr "Wiki: Filters"
+
+#~ msgid "Interface"
+#~ msgstr "Interface"
+
+#~ msgid "When auto-detecting tags in articles these tags will not be applied (comma-separated list)."
+#~ msgstr "Wanneer tags automatisch worden gedetecteerd in artikelen, zullen deze tags niet worden toegekend (komma-gescheiden lijst)."
+
+#~ msgid "Automatically mark articles as read"
+#~ msgstr "Artikelen automatisch als gelezen markeren"
+
+#~ msgid "Automatically expand articles in combined mode"
+#~ msgstr "Artikelen automatisch uitklappen in gecombineerde modus"
+
+#~ msgid "Combined feed display"
+#~ msgstr "Gecombineerde feed weergave"
+
+#~ msgid "Mark articles in e-mail digest as read"
+#~ msgstr "Markeer artikelen in e-mailsamenvatting als gelezen"
+
+#~ msgid "Enable API access"
+#~ msgstr "Sta API-toegang toe"
+
+#~ msgid "Enable feed categories"
+#~ msgstr "Inschakelen feed categorieën"
+
+#~ msgid "Hide feeds with no unread articles"
+#~ msgstr "Feeds zonder ongelezen artikelen verbergen"
+
+#~ msgid "Click to register your SSL client certificate with tt-rss"
+#~ msgstr "Klik om uw SSL-cliëntcertificaat te registreren bij tt-rss"
+
+#~ msgid "Do not embed media in articles"
+#~ msgstr "Afbeeldingen niet insluiten in artikelen"
+
+#~ msgid "Group headlines in virtual feeds"
+#~ msgstr "Kopteksten in virtuele feeds groeperen"
+
+#~ msgid "Special feeds, labels, and categories are grouped by originating feeds"
+#~ msgstr "Speciale feeds, labels en categorieën worden gegroepeerd op oorspronkelijke feeds"
+
+#~ msgid "Feeds to subscribe, One per line"
+#~ msgstr "Te abonneren feeds: één per regel"
+
+#~ msgid "Look for"
+#~ msgstr "Zoek naar"
+
+#~ msgid "in %s"
+#~ msgstr "in %s"
+
+#~ msgid "This option enables marking articles as read automatically while you scroll article list."
+#~ msgstr "Deze optie schakelt het automatisch markeren als gelezen van artikelen terwijl u door de artikellijst scrolt in."
+
+#~ msgid "Shortest interval at which a feed will be checked for updates regardless of update method"
+#~ msgstr "Kortste interval waarmee een feed wordt gecontroleerd op updates, onafhankelijk van update methode"
+
+#~ msgid "Uses UTC timezone"
+#~ msgstr "Gebruikt UTC-tijdzone"
+
+#~ msgid "Purge articles after this number of days (0 - disables)"
+#~ msgstr "Permanent verwijderen van artikelen na dit aantal dagen (0 - zet dit uit)"
+
+#~ msgid "Customize CSS stylesheet to your liking"
+#~ msgstr "Aanpassen CSS-opmaakmodel aan uw voorkeur"
+
+#~ msgid "Select one of the available CSS themes"
+#~ msgstr "Selecteer een van de beschikbare CSS thema's"
+
+#~ msgid "E-mail"
+#~ msgstr "E-mail"
+
+#~ msgid "Access level"
+#~ msgstr "Toegangsniveau"
+
+#~ msgid "One time passwords are currently enabled. Enter your current password below to disable."
+#~ msgstr "Eenmalig wachtwoord is geactiveerd. Voer je huidige wachtwoord in om dit uit te schakelen."
+
+#~ msgid "Enter your password"
+#~ msgstr "Vul uw wachtwoord in"
+
+#~ msgid "You will need a compatible Authenticator to use this. Changing your password would automatically disable OTP."
+#~ msgstr "U heeft een compatibele Authenticator nodig om dit te gebruiken. Veranderen van wachtwoord schakelt automatisch EW uit."
+
+#~ msgid "Scan the following code by the Authenticator application:"
+#~ msgstr "Scan de volgende code met de Authenticator applicatie:"
+
+#~ msgid "Enter the generated one time password"
+#~ msgstr "Geef aub uw eenmalig wachtwoord"
+
+#~ msgid "PHP GD functions are required for OTP support."
+#~ msgstr "PHP GD functies zijn noodzakelijk voor EW ondersteuning."
+
+#~ msgid "Not logged in"
+#~ msgstr "Niet ingelogd"
+
+#~ msgid "Preview article"
+#~ msgstr "Artikel voorvertonen"
+
+#~ msgid "Sorry, your browser does not support sandboxed iframes."
+#~ msgstr "Sorry, uw browser lijkt iframes in een sandbox niet te ondersteunen."
+
+#~ msgid " - "
+#~ msgstr " - "
+
+#~ msgid "Edit tags for this article"
+#~ msgstr "Bewerk tags voor dit artikel"
+
+#~ msgid "Originally from:"
+#~ msgstr "Oorspronkelijk uit:"
+
+#~ msgid "(edit note)"
+#~ msgstr "(bewerk notitie)"
+
+#~ msgid "mark feed as read"
+#~ msgstr "markeer feed als gelezen"
+
+#~ msgid "You will need to reload Tiny Tiny RSS for plugin changes to take effect."
+#~ msgstr "Je moet Tiny Tiny RSS herladen om wijzigingen te kunnen zien."
+
+#~ msgid "Published articles are exported as a public RSS feed and can be subscribed by anyone who knows the URL specified below."
+#~ msgstr "Gepubliceerde artikelen worden geëxporteerd als publieke RSS-feed en er kan door iedereen die de URL hieronder kent op worden geabonneerd."
+
+#~ msgid "Trying to unshare..."
+#~ msgstr "Delen uitzetten..."
+
+#~ msgid "Filename:"
+#~ msgstr "Bestandsnaam:"
+
+#, fuzzy
+#~ msgid "Your message has been sent."
+#~ msgstr "Uw persoonlijke gegevens zijn opgeslagen."
+
+#~ msgid "View as RSS feed"
+#~ msgstr "Toon als RSS feed"
+
+#~ msgid "View as RSS"
+#~ msgstr "Toon als RSS"
+
+#~ msgid "Error Log"
+#~ msgstr "Fouten Log"
+
+#~ msgid "You can view this feed as RSS using the following URL:"
+#~ msgstr "u kunt deze feed bekijken als RSS via de volgende URL:"
+
+#~ msgid "No feeds are selected."
+#~ msgstr "Er zijn geen feeds geselecteerd."
+
+#~ msgid "No articles are selected."
+#~ msgstr "Geen artikelen geselecteerd."
+
+#~ msgid "Can't create user: no login specified."
+#~ msgstr "Kan gebruiker niet aanmaken: geen loginID gespecificeerd."
+
+#~ msgid "Rescore feed"
+#~ msgstr "Feed opnieuw score geven"
+
+#~ msgid "Create label..."
+#~ msgstr "Label aanmaken…"
+
+#~ msgid "Create filter..."
+#~ msgstr "Filter aanmaken…"
+
+#~ msgid "You can't rescore this kind of feed."
+#~ msgstr "U kunt dit type feed geen andere score geven."
+
+#~ msgid "Rescore articles in %s?"
+#~ msgstr "Artikelen in %s opnieuw een score geven?"
+
+#~ msgid "Rescoring articles..."
+#~ msgstr "Artikelen nieuwe score geven..."
+
+#~ msgid "Can't create label: missing caption."
+#~ msgstr "Kan label niet aanmaken: onderschrift ontbreekt."
 
 #~ msgid "Firefox integration"
 #~ msgstr "Firefox integratie"
@@ -3509,9 +3641,6 @@ msgstr[1] "Markeer %d artikelen als gelezen?"
 
 #~ msgid "All done."
 #~ msgstr "Alles gedaan."
-
-#~ msgid "More actions..."
-#~ msgstr "Meer acties…"
 
 #~ msgid "Manual purge"
 #~ msgstr "Handmatig opschonen"
@@ -3658,9 +3787,6 @@ msgstr[1] "Markeer %d artikelen als gelezen?"
 #~ msgid "Details"
 #~ msgstr "Details"
 
-#~ msgid "Published OPML does not include your Tiny Tiny RSS settings, feeds that require authentication or feeds hidden from Popular feeds."
-#~ msgstr "De gepubliceerde OPML bevatten niet uw Tiny Tiny RSS instellingen, feeds die authenticatie vereisen of feeds verborgen voor Populaire feeds."
-
 #~ msgid "No recent articles matching this filter have been found."
 #~ msgstr "Er zijn geen recente artikelen die overeenkomen met dit filter gevonden."
 
@@ -3713,9 +3839,6 @@ msgstr[1] "Markeer %d artikelen als gelezen?"
 
 #~ msgid "Limit search to:"
 #~ msgstr "Beperk zoeken naar:"
-
-#~ msgid "This feed"
-#~ msgstr "Deze feed"
 
 #~ msgid "Complex expressions might not give results while testing due to issues with database server regexp implementation."
 #~ msgstr "Complexe expressies kunnen geen resultaat geven bij het testen, tengevolge van problemen bij de database server's regexp implementatie."
@@ -3827,9 +3950,6 @@ msgstr[1] "Markeer %d artikelen als gelezen?"
 #~ msgid "Change password to"
 #~ msgstr "Wijzig wachtwoord naar"
 
-#~ msgid "E-mail: "
-#~ msgstr "E-mail: "
-
 #~ msgid "Login field cannot be blank."
 #~ msgstr "Het loginID veld kan niet leeg zijn."
 
@@ -3868,9 +3988,6 @@ msgstr[1] "Markeer %d artikelen als gelezen?"
 
 #~ msgid "Open regular version"
 #~ msgstr "Open de reguliere versie"
-
-#~ msgid "Enable categories"
-#~ msgstr "Inschakelen categorieën"
 
 #~ msgid "ON"
 #~ msgstr "AAN"
@@ -3970,20 +4087,8 @@ msgstr[1] "Markeer %d artikelen als gelezen?"
 #~ msgid "Please backup your database before proceeding."
 #~ msgstr "Maak aub een back-up van uw database voordat u verder gaat."
 
-#~ msgid "Your Tiny Tiny RSS database needs update to the latest version (<b>%d</b> to <b>%d</b>)."
-#~ msgstr "Uw Tiny Tiny RSS database moet worden geüpdate naar de laatste versie (<b>%d</b> naar <b>%d</b>)."
-
-#~ msgid "Performing updates..."
-#~ msgstr "Uitvoeren van updates..."
-
-#~ msgid "Updating to version %d..."
-#~ msgstr "Updaten naar versie %d..."
-
 #~ msgid "Checking version... "
 #~ msgstr "Versie controleren..."
-
-#~ msgid "OK!"
-#~ msgstr "OK!"
 
 #~ msgid "ERROR!"
 #~ msgstr "FOUT!"

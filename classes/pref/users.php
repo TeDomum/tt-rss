@@ -20,7 +20,7 @@ class Pref_Users extends Handler_Protected {
 		function edit() {
 			global $access_level_names;
 
-			print "<form id=\"user_edit_form\" onsubmit='return false' dojoType=\"dijit.form.Form\">";
+			print "<form id='user_edit_form' onsubmit='return false' dojoType='dijit.form.Form'>";
 
 			print '<div dojoType="dijit.layout.TabContainer" style="height : 400px">
         		<div dojoType="dijit.layout.ContentPane" title="'.__('Edit user').'">';
@@ -44,48 +44,59 @@ class Pref_Users extends Handler_Protected {
 
 				$sel_disabled = ($id == $_SESSION["uid"] || $login == "admin") ? "disabled" : "";
 
-				print "<div class=\"dlgSec\">".__("User")."</div>";
-				print "<div class=\"dlgSecCont\">";
+				print "<header>".__("User")."</header>";
+				print "<section>";
 
 				if ($sel_disabled) {
 					print_hidden("login", "$login");
 				}
 
-				print "<input size=\"30\" style=\"font-size : 16px\"
-					dojoType=\"dijit.form.ValidationTextBox\" required=\"1\"
-					$sel_disabled
-					name=\"login\" value=\"$login\">";
+				print "<fieldset>";
+				print "<label>" . __("Login:") . "</label>";
+				print "<input style='font-size : 16px'
+					dojoType='dijit.form.ValidationTextBox' required='1'
+					$sel_disabled name='login' value=\"$login\">";
+				print "</fieldset>";
 
-				print "</div>";
+				print "</section>";
 
-				print "<div class=\"dlgSec\">".__("Authentication")."</div>";
-				print "<div class=\"dlgSecCont\">";
+				print "<header>".__("Authentication")."</header>";
+				print "<section>";
 
-				print __('Access level: ') . " ";
+				print "<fieldset>";
+
+				print "<label>" . __('Access level: ') . "</label> ";
 
 				if (!$sel_disabled) {
 					print_select_hash("access_level", $access_level, $access_level_names,
-						"dojoType=\"dijit.form.Select\" $sel_disabled");
+						"dojoType=\"fox.form.Select\" $sel_disabled");
 				} else {
 					print_select_hash("", $access_level, $access_level_names,
-						"dojoType=\"dijit.form.Select\" $sel_disabled");
+						"dojoType=\"fox.form.Select\" $sel_disabled");
 					print_hidden("access_level", "$access_level");
 				}
 
-				print "<hr/>";
+				print "</fieldset>";
+				print "<fieldset>";
 
-				print "<input dojoType=\"dijit.form.TextBox\" type=\"password\" size=\"20\" placeholder=\"Change password\"
-				name=\"password\">";
+				print "<label>" . __("New password:") . "</label> ";
+				print "<input dojoType='dijit.form.TextBox' type='password' size='20' placeholder='Change password'
+					name='password'>";
 
-				print "</div>";
+				print "</fieldset>";
 
-				print "<div class=\"dlgSec\">".__("Options")."</div>";
-				print "<div class=\"dlgSecCont\">";
+				print "</section>";
 
-				print "<input dojoType=\"dijit.form.TextBox\" size=\"30\" name=\"email\" placeholder=\"E-mail\"
-				value=\"$email\">";
+				print "<header>".__("Options")."</header>";
+				print "<section>";
 
-				print "</div>";
+				print "<fieldset>";
+				print "<label>" . __("E-mail:") . "</label> ";
+				print "<input dojoType='dijit.form.TextBox' size='30' name='email'
+					value=\"$email\">";
+				print "</fieldset>";
+
+				print "</section>";
 
 				print "</table>";
 
@@ -98,11 +109,12 @@ class Pref_Users extends Handler_Protected {
 			print '</div>';
 			print '</div>';
 
-			print "<div class=\"dlgButtons\">
-				<button dojoType=\"dijit.form.Button\" class=\"btn-primary\" type=\"submit\" onclick=\"dijit.byId('userEditDlg').execute()\">".
+			print "<footer>
+				<button dojoType='dijit.form.Button' class='alt-primary' type='submit' onclick=\"dijit.byId('userEditDlg').execute()\">".
 				__('Save')."</button>
-				<button dojoType=\"dijit.form.Button\" onclick=\"dijit.byId('userEditDlg').hide()\">".
-				__('Cancel')."</button></div>";
+				<button dojoType='dijit.form.Button' onclick=\"dijit.byId('userEditDlg').hide()\">".
+				__('Cancel')."</button>
+				</footer>";
 
 			print "</form>";
 
@@ -153,16 +165,16 @@ class Pref_Users extends Handler_Protected {
 					WHERE owner_uid = ? ORDER BY title");
 				$sth->execute([$id]);
 
-				print "<ul class=\"userFeedList\">";
+				print "<ul class=\"panel panel-scrollable list list-unstyled\">";
 
 				while ($line = $sth->fetch()) {
 
 					$icon_file = ICONS_URL."/".$line["id"].".ico";
 
 					if (file_exists($icon_file) && filesize($icon_file) > 0) {
-						$feed_icon = "<img class=\"tinyFeedIcon\" src=\"$icon_file\">";
+						$feed_icon = "<img class=\"icon\" src=\"$icon_file\">";
 					} else {
-						$feed_icon = "<img class=\"tinyFeedIcon\" src=\"images/blank_icon.gif\">";
+						$feed_icon = "<img class=\"icon\" src=\"images/blank_icon.gif\">";
 					}
 
 					print "<li>$feed_icon&nbsp;<a href=\"".$line["site_url"]."\">".$line["title"]."</a></li>";
@@ -170,12 +182,12 @@ class Pref_Users extends Handler_Protected {
 				}
 
 				print "</ul>";
-				
-				
+
+
 			} else {
 				print "<h1>".__('User not found')."</h1>";
 			}
-		
+
 		}
 
 		function editSave() {
@@ -188,7 +200,7 @@ class Pref_Users extends Handler_Protected {
 			if ($password) {
 				$salt = substr(bin2hex(get_random_bytes(125)), 0, 250);
 				$pwd_hash = encrypt_password($password, $salt, true);
-				$pass_query_part = "pwd_hash = ".$this->pdo->quote($pwd_hash).", 
+				$pass_query_part = "pwd_hash = ".$this->pdo->quote($pwd_hash).",
 					salt = ".$this->pdo->quote($salt).",";
 			} else {
 				$pass_query_part = "";
@@ -218,11 +230,12 @@ class Pref_Users extends Handler_Protected {
 		}
 
 		function add() {
-
 			$login = trim(clean($_REQUEST["login"]));
-			$tmp_user_pwd = make_password(8);
+			$tmp_user_pwd = make_password();
 			$salt = substr(bin2hex(get_random_bytes(125)), 0, 250);
 			$pwd_hash = encrypt_password($tmp_user_pwd, $salt, true);
+
+			if (!$login) return; // no blank usernames
 
 			$sth = $this->pdo->prepare("SELECT id FROM ttrss_users WHERE
 				login = ?");
@@ -243,93 +256,64 @@ class Pref_Users extends Handler_Protected {
 
 					$new_uid = $row['id'];
 
-					print format_notice(T_sprintf("Added user <b>%s</b> with password <b>%s</b>",
-						$login, $tmp_user_pwd));
+					print T_sprintf("Added user %s with password %s",
+						$login, $tmp_user_pwd);
 
 					initialize_user($new_uid);
 
 				} else {
 
-					print format_warning(T_sprintf("Could not create user <b>%s</b>", $login));
+					print T_sprintf("Could not create user %s", $login);
 
 				}
 			} else {
-				print format_warning(T_sprintf("User <b>%s</b> already exists.", $login));
+				print T_sprintf("User %s already exists.", $login);
 			}
 		}
 
-		static function resetUserPassword($uid, $show_password) {
+		static function resetUserPassword($uid, $format_output = false) {
 
 			$pdo = Db::pdo();
 
-			$sth = $pdo->prepare("SELECT login, email
-				FROM ttrss_users WHERE id = ?");
+			$sth = $pdo->prepare("SELECT login FROM ttrss_users WHERE id = ?");
 			$sth->execute([$uid]);
-			
+
 			if ($row = $sth->fetch()) {
 
 				$login = $row["login"];
-				$email = $row["email"];
 
 				$new_salt = substr(bin2hex(get_random_bytes(125)), 0, 250);
-				$tmp_user_pwd = make_password(8);
+				$tmp_user_pwd = make_password();
 
 				$pwd_hash = encrypt_password($tmp_user_pwd, $new_salt, true);
 
-				$sth = $pdo->prepare("UPDATE ttrss_users 
+				$sth = $pdo->prepare("UPDATE ttrss_users
 					  SET pwd_hash = ?, salt = ?, otp_enabled = false
 					WHERE id = ?");
 				$sth->execute([$pwd_hash, $new_salt, $uid]);
 
-				if ($show_password) {
-					print T_sprintf("Changed password of user <b>%s</b> to <b>%s</b>", $login, $tmp_user_pwd);
-				} else {
-					print_notice(T_sprintf("Sending new password of user <b>%s</b> to <b>%s</b>", $login, $email));
-				}
+				$message = T_sprintf("Changed password of user %s to %s", "<strong>$login</strong>", "<strong>$tmp_user_pwd</strong>");
 
-				require_once 'classes/ttrssmailer.php';
+				if ($format_output)
+					print_notice($message);
+				else
+					print $message;
 
-				if ($email) {
-					require_once "lib/MiniTemplator.class.php";
-
-					$tpl = new MiniTemplator;
-
-					$tpl->readTemplateFromFile("templates/resetpass_template.txt");
-
-					$tpl->setVariable('LOGIN', $login);
-					$tpl->setVariable('NEWPASS', $tmp_user_pwd);
-
-					$tpl->addBlock('message');
-
-					$message = "";
-
-					$tpl->generateOutputToString($message);
-
-					$mail = new ttrssMailer();
-
-					$rc = $mail->quickMail($email, $login,
-						__("[tt-rss] Password change notification"),
-						$message, false);
-
-					if (!$rc) print_error($mail->ErrorInfo);
-				}
-				
 			}
 		}
 
 		function resetPass() {
 			$uid = clean($_REQUEST["id"]);
-			Pref_Users::resetUserPassword($uid, true);
+			Pref_Users::resetUserPassword($uid);
 		}
 
 		function index() {
 
 			global $access_level_names;
 
-			print "<div id=\"pref-user-wrap\" dojoType=\"dijit.layout.BorderContainer\" gutters=\"false\">";
-			print "<div id=\"pref-user-header\" dojoType=\"dijit.layout.ContentPane\" region=\"top\">";
-
-			print "<div id=\"pref-user-toolbar\" dojoType=\"dijit.Toolbar\">";
+			print "<div dojoType='dijit.layout.BorderContainer' gutters='false'>";
+			print "<div style='padding : 0px' dojoType='dijit.layout.ContentPane' region='top'>";
+			print "<div dojoType='fox.Toolbar'>";
 
 			$user_search = trim(clean($_REQUEST["search"]));
 
@@ -340,9 +324,9 @@ class Pref_Users extends Handler_Protected {
 			}
 
 			print "<div style='float : right; padding-right : 4px;'>
-				<input dojoType=\"dijit.form.TextBox\" id=\"user_search\" size=\"20\" type=\"search\"
+				<input dojoType='dijit.form.TextBox' id='user_search' size='20' type='search'
 					value=\"$user_search\">
-				<button dojoType=\"dijit.form.Button\" onclick=\"updateUsersList()\">".
+				<button dojoType='dijit.form.Button' onclick='Users.reload()'>".
 					__('Search')."</button>
 				</div>";
 
@@ -352,23 +336,23 @@ class Pref_Users extends Handler_Protected {
 				$sort = "login";
 			}
 
-			print "<div dojoType=\"dijit.form.DropDownButton\">".
+			print "<div dojoType='fox.form.DropDownButton'>".
 					"<span>" . __('Select')."</span>";
-			print "<div dojoType=\"dijit.Menu\" style=\"display: none;\">";
-			print "<div onclick=\"selectTableRows('prefUserList', 'all')\"
-				dojoType=\"dijit.MenuItem\">".__('All')."</div>";
-			print "<div onclick=\"selectTableRows('prefUserList', 'none')\"
-				dojoType=\"dijit.MenuItem\">".__('None')."</div>";
+			print "<div dojoType='dijit.Menu' style='display: none'>";
+			print "<div onclick=\"Tables.select('prefUserList', true)\"
+				dojoType='dijit.MenuItem'>".__('All')."</div>";
+			print "<div onclick=\"Tables.select('prefUserList', false)\"
+				dojoType='dijit.MenuItem'>".__('None')."</div>";
 			print "</div></div>";
 
-			print "<button dojoType=\"dijit.form.Button\" onclick=\"addUser()\">".__('Create user')."</button>";
+			print "<button dojoType='dijit.form.Button' onclick='Users.add()'>".__('Create user')."</button>";
 
 			print "
-				<button dojoType=\"dijit.form.Button\" onclick=\"editSelectedUser()\">".
+				<button dojoType='dijit.form.Button' onclick='Users.editSelected()'>".
 				__('Edit')."</button dojoType=\"dijit.form.Button\">
-				<button dojoType=\"dijit.form.Button\" onclick=\"removeSelectedUsers()\">".
+				<button dojoType='dijit.form.Button' onclick='Users.removeSelected()'>".
 				__('Remove')."</button dojoType=\"dijit.form.Button\">
-				<button dojoType=\"dijit.form.Button\" onclick=\"resetSelectedUserPass()\">".
+				<button dojoType='dijit.form.Button' onclick='Users.resetSelected()'>".
 				__('Reset password')."</button dojoType=\"dijit.form.Button\">";
 
 			PluginHost::getInstance()->run_hooks(PluginHost::HOOK_PREFS_TAB_SECTION,
@@ -376,9 +360,9 @@ class Pref_Users extends Handler_Protected {
 
 			print "</div>"; #toolbar
 			print "</div>"; #pane
-			print "<div id=\"pref-user-content\" dojoType=\"dijit.layout.ContentPane\" region=\"center\">";
+			print "<div style='padding : 0px' dojoType='dijit.layout.ContentPane' region='center'>";
 
-			$sort = validate_field($sort,
+			$sort = $this->validate_field($sort,
 				["login", "access_level", "created", "num_feeds", "created", "last_login"], "login");
 
 			if ($sort != "login") $sort = "$sort DESC";
@@ -396,16 +380,15 @@ class Pref_Users extends Handler_Protected {
 				ORDER BY $sort");
 			$sth->execute([":search" => $user_search ? "%$user_search%" : ""]);
 
-			print "<p><table width=\"100%\" cellspacing=\"0\"
-				class=\"prefUserList\" id=\"prefUserList\">";
+			print "<p><table width='100%' cellspacing='0' class='prefUserList' id='prefUserList'>";
 
-			print "<tr class=\"title\">
-						<td align='center' width=\"5%\">&nbsp;</td>
-						<td width='20%'><a href=\"#\" onclick=\"updateUsersList('login')\">".__('Login')."</a></td>
-						<td width='20%'><a href=\"#\" onclick=\"updateUsersList('access_level')\">".__('Access Level')."</a></td>
-						<td width='10%'><a href=\"#\" onclick=\"updateUsersList('num_feeds')\">".__('Subscribed feeds')."</a></td>
-						<td width='20%'><a href=\"#\" onclick=\"updateUsersList('created')\">".__('Registered')."</a></td>
-						<td width='20%'><a href=\"#\" onclick=\"updateUsersList('last_login')\">".__('Last login')."</a></td></tr>";
+			print "<tr class='title'>
+						<td align='center' width='5%'>&nbsp;</td>
+						<td width='20%'><a href='#' onclick=\"Users.reload('login')\">".__('Login')."</a></td>
+						<td width='20%'><a href='#' onclick=\"Users.reload('access_level')\">".__('Access Level')."</a></td>
+						<td width='10%'><a href='#' onclick=\"Users.reload('num_feeds')\">".__('Subscribed feeds')."</a></td>
+						<td width='20%'><a href='#' onclick=\"Users.reload('created')\">".__('Registered')."</a></td>
+						<td width='20%'><a href='#' onclick=\"Users.reload('last_login')\">".__('Last login')."</a></td></tr>";
 
 			$lnum = 0;
 
@@ -413,27 +396,21 @@ class Pref_Users extends Handler_Protected {
 
 				$uid = $line["id"];
 
-				print "<tr id=\"UMRR-$uid\">";
+				print "<tr data-row-id='$uid' onclick='Users.edit($uid)'>";
 
 				$line["login"] = htmlspecialchars($line["login"]);
-
 				$line["created"] = make_local_datetime($line["created"], false);
 				$line["last_login"] = make_local_datetime($line["last_login"], false);
 
-				print "<td align='center'><input onclick='toggleSelectRow2(this);'
-					dojoType=\"dijit.form.CheckBox\" type=\"checkbox\"
-					id=\"UMCHK-$uid\"></td>";
+				print "<td align='center'><input onclick='Tables.onRowChecked(this); event.stopPropagation();'
+					dojoType='dijit.form.CheckBox' type='checkbox'></td>";
 
-				$onclick = "onclick='editUser($uid, event)' title='".__('Click to edit')."'";
+				print "<td title='".__('Click to edit')."'><i class='material-icons'>person</i> " . $line["login"] . "</td>";
 
-				print "<td $onclick><img src='images/user.png' class='markedPic' alt=''> " . $line["login"] . "</td>";
-
-				if (!$line["email"]) $line["email"] = "&nbsp;";
-
-				print "<td $onclick>" .	$access_level_names[$line["access_level"]] . "</td>";
-				print "<td $onclick>" . $line["num_feeds"] . "</td>";
-				print "<td $onclick>" . $line["created"] . "</td>";
-				print "<td $onclick>" . $line["last_login"] . "</td>";
+				print "<td>" .	$access_level_names[$line["access_level"]] . "</td>";
+				print "<td>" . $line["num_feeds"] . "</td>";
+				print "<td>" . $line["created"] . "</td>";
+				print "<td>" . $line["last_login"] . "</td>";
 
 				print "</tr>";
 
@@ -458,4 +435,12 @@ class Pref_Users extends Handler_Protected {
 			print "</div>"; #container
 
 		}
-	}
+
+		function validate_field($string, $allowed, $default = "") {
+			if (in_array($string, $allowed))
+				return $string;
+			else
+				return $default;
+		}
+
+}

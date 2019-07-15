@@ -32,7 +32,8 @@ class Mail extends Plugin {
 	function hook_prefs_tab($args) {
 		if ($args != "prefPrefs") return;
 
-		print "<div dojoType=\"dijit.layout.AccordionPane\" title=\"".__('Mail plugin')."\">";
+		print "<div dojoType=\"dijit.layout.AccordionPane\" 
+			title=\"<i class='material-icons'>mail</i> ".__('Mail plugin')."\">";
 
 		print "<p>" . __("You can set predefined email addressed here (comma-separated list):") . "</p>";
 
@@ -45,7 +46,7 @@ class Mail extends Plugin {
 				new Ajax.Request('backend.php', {
 					parameters: dojo.objectToQuery(this.getValues()),
 					onComplete: function(transport) {
-						notify_info(transport.responseText);
+						Notify.info(transport.responseText);
 					}
 				});
 				//this.reset();
@@ -70,10 +71,9 @@ class Mail extends Plugin {
 	}
 
 	function hook_article_button($line) {
-		return "<img src=\"plugins/mail/mail.png\"
-					class='tagsPic' style=\"cursor : pointer\"
-					onclick=\"emailArticle(".$line["id"].")\"
-					alt='Zoom' title='".__('Forward by email')."'>";
+		return "<i class='material-icons' style=\"cursor : pointer\"
+					onclick=\"Plugins.Mail.send(".$line["id"].")\"
+					title='".__('Forward by email')."'>mail</i>";
 	}
 
 	function emailArticle() {
@@ -162,34 +162,29 @@ class Mail extends Plugin {
 
 		print "</td><td>";
 
-		print "<input dojoType=\"dijit.form.ValidationTextBox\" required=\"true\"
-				style=\"width : 30em;\"
-				name=\"subject\" value=\"$subject\" id=\"subject\">";
+		print "<input dojoType='dijit.form.ValidationTextBox' required='true'
+				style='width : 30em;' name='subject' value=\"$subject\" id='subject'>";
 
 		print "</td></tr>";
 
-		print "<tr><td colspan='2'><textarea dojoType=\"dijit.form.SimpleTextarea\" 
+		print "<tr><td colspan='2'><textarea dojoType='dijit.form.SimpleTextarea'
 			style='height : 200px; font-size : 12px; width : 98%' rows=\"20\"
 			name='content'>$content</textarea>";
 
 		print "</td></tr></table>";
 
-		print "<div class='dlgButtons'>";
-		print "<button dojoType=\"dijit.form.Button\" onclick=\"dijit.byId('emailArticleDlg').execute()\">".__('Send e-mail')."</button> ";
-		print "<button dojoType=\"dijit.form.Button\" onclick=\"dijit.byId('emailArticleDlg').hide()\">".__('Cancel')."</button>";
-		print "</div>";
+		print "<footer>";
+		print "<button dojoType='dijit.form.Button' onclick=\"dijit.byId('emailArticleDlg').execute()\">".__('Send e-mail')."</button> ";
+		print "<button dojoType='dijit.form.Button' onclick=\"dijit.byId('emailArticleDlg').hide()\">".__('Cancel')."</button>";
+		print "</footer>";
 
 		//return;
 	}
 
 	function sendEmail() {
-		require_once 'classes/ttrssmailer.php';
-
 		$reply = array();
 
-		$mail = new ttrssMailer();
-
-		$mail->AddReplyTo(strip_tags($_REQUEST['from_email']),
+		/*$mail->AddReplyTo(strip_tags($_REQUEST['from_email']),
 			strip_tags($_REQUEST['from_name']));
 		//$mail->AddAddress($_REQUEST['destination']);
 		$addresses = explode(';', $_REQUEST['destination']);
@@ -200,10 +195,22 @@ class Mail extends Plugin {
 		$mail->Subject = $_REQUEST['subject'];
 		$mail->Body = $_REQUEST['content'];
 
-		$rc = $mail->Send();
+		$rc = $mail->Send(); */
+
+		$to = $_REQUEST["destination"];
+		$subject = strip_tags($_REQUEST["subject"]);
+		$message = strip_tags($_REQUEST["content"]);
+		$from = strip_tags($_REQUEST["from_email"]);
+
+		$mailer = new Mailer();
+
+		$rc = $mailer->mail(["to_address" => $to,
+			"headers" => ["Reply-To: $from"],
+			"subject" => $subject,
+			"message" => $message]);
 
 		if (!$rc) {
-			$reply['error'] =  $mail->ErrorInfo;
+			$reply['error'] =  $mailer->error();
 		} else {
 			//save_email_address($destination);
 			$reply['message'] = "UPDATE_COUNTERS";

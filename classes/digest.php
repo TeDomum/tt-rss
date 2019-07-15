@@ -9,14 +9,12 @@ class Digest
 	 * @param integer $limit The maximum number of articles by digest.
 	 * @return boolean Return false if digests are not enabled.
 	 */
-	static function send_headlines_digests($debug = false) {
-
-		require_once 'classes/ttrssmailer.php';
+	static function send_headlines_digests() {
 
 		$user_limit = 15; // amount of users to process (e.g. emails to send out)
 		$limit = 1000; // maximum amount of headlines to include
 
-		if ($debug) _debug("Sending digests, batch of max $user_limit users, headline limit = $limit");
+		Debug::log("Sending digests, batch of max $user_limit users, headline limit = $limit");
 
 		if (DB_TYPE == "pgsql") {
 			$interval_qpart = "last_digest_sent < NOW() - INTERVAL '1 days'";
@@ -39,7 +37,7 @@ class Digest
 					time() - $preferred_ts <= 7200
 				) {
 
-					if ($debug) _debug("Sending digest for UID:" . $line['id'] . " - " . $line["email"]);
+					Debug::log("Sending digest for UID:" . $line['id'] . " - " . $line["email"]);
 
 					$do_catchup = get_pref('DIGEST_CATCHUP', $line['id'], false);
 
@@ -56,20 +54,26 @@ class Digest
 
 					if ($headlines_count > 0) {
 
-						$mail = new ttrssMailer();
+						$mailer = new Mailer();
 
-						$rc = $mail->quickMail($line["email"], $line["login"], DIGEST_SUBJECT, $digest, $digest_text);
+						//$rc = $mail->quickMail($line["email"], $line["login"], DIGEST_SUBJECT, $digest, $digest_text);
 
-						if (!$rc && $debug) _debug("ERROR: " . $mail->ErrorInfo);
+						$rc = $mailer->mail(["to_name" => $line["login"],
+							"to_address" => $line["email"],
+							"subject" => DIGEST_SUBJECT,
+							"message" => $digest_text,
+							"message_html" => $digest]);
 
-						if ($debug) _debug("RC=$rc");
+						//if (!$rc && $debug) Debug::log("ERROR: " . $mailer->lastError());
+
+						Debug::log("RC=$rc");
 
 						if ($rc && $do_catchup) {
-							if ($debug) _debug("Marking affected articles as read...");
+							Debug::log("Marking affected articles as read...");
 							Article::catchupArticlesById($affected_ids, 0, $line["id"]);
 						}
 					} else {
-						if ($debug) _debug("No headlines");
+						Debug::log("No headlines");
 					}
 
 					$sth = $pdo->prepare("UPDATE ttrss_users SET last_digest_sent = NOW()
@@ -80,7 +84,7 @@ class Digest
 			}
 		}
 
-		if ($debug) _debug("All done.");
+		Debug::log("All done.");
 
 	}
 
@@ -137,8 +141,8 @@ class Digest
 				AND score >= 0
 			ORDER BY ttrss_feed_categories.title, ttrss_feeds.title, score DESC, date_updated DESC
 			LIMIT :limit");
-		$sth->bindParam(':user_id', intval($user_id, 10), \PDO::PARAM_INT);
-		$sth->bindParam(':limit', intval($limit, 10), \PDO::PARAM_INT);
+		$sth->bindParam(':user_id', intval($user_id, 10), PDO::PARAM_INT);
+		$sth->bindParam(':limit', intval($limit, 10), PDO::PARAM_INT);
 		$sth->execute();
 
 		$headlines_count = 0;
@@ -162,6 +166,15 @@ class Digest
 				$line['feed_title'] = $line['cat_title'] . " / " . $line['feed_title'];
 			}
 
+			$article_labels = Article::get_article_labels($line["ref_id"], $user_id);
+			$article_labels_formatted = "";
+
+			if (is_array($article_labels) && count($article_labels) > 0) {
+				$article_labels_formatted = implode(", ", array_map(function($a) {
+					return $a[1];
+				}, $article_labels));
+			}
+
 			$tpl->setVariable('FEED_TITLE', $line["feed_title"]);
 			$tpl->setVariable('ARTICLE_TITLE', $line["title"]);
 			$tpl->setVariable('ARTICLE_LINK', $line["link"]);
@@ -170,6 +183,7 @@ class Digest
 				truncate_string(strip_tags($line["content"]), 300));
 //			$tpl->setVariable('ARTICLE_CONTENT',
 //				strip_tags($article_content));
+			$tpl->setVariable('ARTICLE_LABELS', $article_labels_formatted, true);
 
 			$tpl->addBlock('article');
 
@@ -177,8 +191,9 @@ class Digest
 			$tpl_t->setVariable('ARTICLE_TITLE', $line["title"]);
 			$tpl_t->setVariable('ARTICLE_LINK', $line["link"]);
 			$tpl_t->setVariable('ARTICLE_UPDATED', $updated);
-//			$tpl_t->setVariable('ARTICLE_EXCERPT',
-//				truncate_string(strip_tags($line["excerpt"]), 100));
+			$tpl_t->setVariable('ARTICLE_LABELS', $article_labels_formatted, true);
+			$tpl_t->setVariable('ARTICLE_EXCERPT',
+				truncate_string(strip_tags($line["content"]), 300, "..."), true);
 
 			$tpl_t->addBlock('article');
 

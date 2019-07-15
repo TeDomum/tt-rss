@@ -1,4 +1,7 @@
 <?php
+use andreskrey\Readability\Readability;
+use andreskrey\Readability\Configuration;
+
 class Af_Readability extends Plugin {
 
 	/* @var PluginHost $host */
@@ -26,10 +29,18 @@ class Af_Readability extends Plugin {
 	{
 		$this->host = $host;
 
+		if (version_compare(PHP_VERSION, '5.6.0', '<')) {
+			return;
+		}
+
 		$host->add_hook($host::HOOK_ARTICLE_FILTER, $this);
 		$host->add_hook($host::HOOK_PREFS_TAB, $this);
 		$host->add_hook($host::HOOK_PREFS_EDIT_FEED, $this);
 		$host->add_hook($host::HOOK_PREFS_SAVE_FEED, $this);
+
+		// Note: we have to install the hook even if disabled because init() is being run before plugin data has loaded
+		// so we can't check for our storage-set options here
+		$host->add_hook($host::HOOK_GET_FULL_TEXT, $this);
 
 		$host->add_filter_action($this, "action_inline", __("Inline content"));
 	}
@@ -37,64 +48,75 @@ class Af_Readability extends Plugin {
 	function hook_prefs_tab($args) {
 		if ($args != "prefFeeds") return;
 
-		print "<div dojoType=\"dijit.layout.AccordionPane\" title=\"".__('Readability settings (af_readability)')."\">";
+		print "<div dojoType='dijit.layout.AccordionPane'
+			title=\"<i class='material-icons'>extension</i> ".__('Readability settings (af_readability)')."\">";
 
-		print_notice("Enable the plugin for specific feeds in the feed editor.");
+		if (version_compare(PHP_VERSION, '5.6.0', '<')) {
+			print_error("This plugin requires PHP version 5.6.");
+		} else {
 
-		print "<form dojoType=\"dijit.form.Form\">";
+			print "<h2>" . __("Global settings") . "</h2>";
 
-		print "<script type=\"dojo/method\" event=\"onSubmit\" args=\"evt\">
+			print_notice("Enable for specific feeds in the feed editor.");
+
+			print "<form dojoType='dijit.form.Form'>";
+
+			print "<script type='dojo/method' event='onSubmit' args='evt'>
 			evt.preventDefault();
 			if (this.validate()) {
 				console.log(dojo.objectToQuery(this.getValues()));
 				new Ajax.Request('backend.php', {
 					parameters: dojo.objectToQuery(this.getValues()),
 					onComplete: function(transport) {
-						notify_info(transport.responseText);
+						Notify.info(transport.responseText);
 					}
 				});
 				//this.reset();
 			}
 			</script>";
 
-		print_hidden("op", "pluginhandler");
-		print_hidden("method", "save");
-		print_hidden("plugin", "af_readability");
+			print_hidden("op", "pluginhandler");
+			print_hidden("method", "save");
+			print_hidden("plugin", "af_readability");
 
-		$enable_share_anything = $this->host->get($this, "enable_share_anything");
+			$enable_share_anything = $this->host->get($this, "enable_share_anything");
 
-		print_checkbox("enable_share_anything", $enable_share_anything);
-		print "&nbsp;<label for=\"enable_share_anything\">" . __("Use Readability for pages shared via bookmarklet.") . "</label>";
+			print "<fieldset>";
+			print "<label class='checkbox'> ";
+			print_checkbox("enable_share_anything", $enable_share_anything);
+			print " " . __("Provide full-text services to core code (bookmarklets) and other plugins");
+			print "</label>";
+			print "</fieldset>";
 
-		print "<p>"; print_button("submit", __("Save"));
-		print "</form>";
+			print print_button("submit", __("Save"), "class='alt-primary'");
+			print "</form>";
 
-		$enabled_feeds = $this->host->get($this, "enabled_feeds");
-		if (!is_array($enabled_feeds)) $enabled_feeds = array();
+			$enabled_feeds = $this->host->get($this, "enabled_feeds");
+			if (!is_array($enabled_feeds)) $enabled_feeds = array();
 
-		$enabled_feeds = $this->filter_unknown_feeds($enabled_feeds);
-		$this->host->set($this, "enabled_feeds", $enabled_feeds);
+			$enabled_feeds = $this->filter_unknown_feeds($enabled_feeds);
+			$this->host->set($this, "enabled_feeds", $enabled_feeds);
 
-		if (count($enabled_feeds) > 0) {
-			print "<h3>" . __("Currently enabled for (click to edit):") . "</h3>";
+			if (count($enabled_feeds) > 0) {
+				print "<h3>" . __("Currently enabled for (click to edit):") . "</h3>";
 
-			print "<ul class=\"browseFeedList\" style=\"border-width : 1px\">";
-			foreach ($enabled_feeds as $f) {
-				print "<li>" .
-					"<img src='images/pub_set.png'
-						style='vertical-align : middle'> <a href='#'
-						onclick='editFeed($f)'>".
-					Feeds::getFeedTitle($f) . "</a></li>";
+				print "<ul class='panel panel-scrollable list list-unstyled'>";
+				foreach ($enabled_feeds as $f) {
+					print "<li><i class='material-icons'>rss_feed</i> <a href='#'
+						onclick='CommonDialogs.editFeed($f)'>".
+						Feeds::getFeedTitle($f) . "</a></li>";
+				}
+				print "</ul>";
 			}
-			print "</ul>";
+
 		}
 
 		print "</div>";
 	}
 
 	function hook_prefs_edit_feed($feed_id) {
-		print "<div class=\"dlgSec\">".__("Readability")."</div>";
-		print "<div class=\"dlgSecCont\">";
+		print "<header>".__("Readability")."</header>";
+		print "<section>";
 
 		$enabled_feeds = $this->host->get($this, "enabled_feeds");
 		if (!is_array($enabled_feeds)) $enabled_feeds = array();
@@ -102,11 +124,14 @@ class Af_Readability extends Plugin {
 		$key = array_search($feed_id, $enabled_feeds);
 		$checked = $key !== FALSE ? "checked" : "";
 
-		print "<hr/><input dojoType=\"dijit.form.CheckBox\" type=\"checkbox\" id=\"af_readability_enabled\"
-			name=\"af_readability_enabled\"
-			$checked>&nbsp;<label for=\"af_readability_enabled\">".__('Inline article content')."</label>";
+		print "<fieldset>";
 
-		print "</div>";
+		print "<label class='checkbox'><input dojoType='dijit.form.CheckBox' type='checkbox' id='af_readability_enabled'
+			name='af_readability_enabled' $checked>&nbsp;".__('Inline article content')."</label>";
+
+		print "</fieldset>";
+
+		print "</section>";
 	}
 
 	function hook_prefs_save_feed($feed_id) {
@@ -137,9 +162,8 @@ class Af_Readability extends Plugin {
 	}
 
 	public function extract_content($url) {
-		global $fetch_effective_url;
 
-		if (!class_exists("Readability")) require_once(dirname(dirname(__DIR__)). "/lib/readability/Readability.php");
+		global $fetch_effective_url;
 
 		$tmp = fetch_file_contents([
 			"url" => $url,
@@ -149,42 +173,42 @@ class Af_Readability extends Plugin {
 		if ($tmp && mb_strlen($tmp) < 1024 * 500) {
 			$tmpdoc = new DOMDocument("1.0", "UTF-8");
 
-			if (!$tmpdoc->loadHTML('<?xml encoding="utf-8" ?>\n' . $tmp))
+			if (!@$tmpdoc->loadHTML($tmp))
 				return false;
 
+			// this is the worst hack yet :(
 			if (strtolower($tmpdoc->encoding) != 'utf-8') {
-				$tmpxpath = new DOMXPath($tmpdoc);
-
-				foreach ($tmpxpath->query("//meta") as $elem) {
-					$elem->parentNode->removeChild($elem);
-				}
-
-				$tmp = $tmpdoc->saveHTML();
+				$tmp = preg_replace("/<meta.*?charset.*?\/?>/i", "", $tmp);
+				$tmp = mb_convert_encoding($tmp, 'utf-8', $tmpdoc->encoding);
 			}
 
-			$r = new Readability($tmp, $fetch_effective_url);
+			try {
+				$r = new Readability(new Configuration());
 
-			if ($r->init()) {
-				$tmpxpath = new DOMXPath($r->dom);
+				if ($r->parse($tmp)) {
 
-				$entries = $tmpxpath->query('(//a[@href]|//img[@src])');
+					$tmpxpath = new DOMXPath($r->getDOMDOcument());
+					$entries = $tmpxpath->query('(//a[@href]|//img[@src])');
 
-				foreach ($entries as $entry) {
-					if ($entry->hasAttribute("href")) {
-						$entry->setAttribute("href",
-								rewrite_relative_url($fetch_effective_url, $entry->getAttribute("href")));
+					foreach ($entries as $entry) {
+						if ($entry->hasAttribute("href")) {
+							$entry->setAttribute("href",
+									rewrite_relative_url($fetch_effective_url, $entry->getAttribute("href")));
 
+						}
+
+						if ($entry->hasAttribute("src")) {
+							$entry->setAttribute("src",
+									rewrite_relative_url($fetch_effective_url, $entry->getAttribute("src")));
+
+						}
 					}
 
-					if ($entry->hasAttribute("src")) {
-						$entry->setAttribute("src",
-								rewrite_relative_url($fetch_effective_url, $entry->getAttribute("src")));
-
-					}
-
+					return $r->getContent();
 				}
 
-				return $r->articleContent->innerHTML;
+			} catch (Exception $e) {
+				return false;
 			}
 		}
 
@@ -195,7 +219,10 @@ class Af_Readability extends Plugin {
 
 		$extracted_content = $this->extract_content($article["link"]);
 
-		if ($extracted_content) {
+		# let's see if there's anything of value in there
+		$content_test = trim(strip_tags(sanitize($extracted_content)));
+
+		if ($content_test) {
 			$article["content"] = $extracted_content;
 		}
 
@@ -212,6 +239,24 @@ class Af_Readability extends Plugin {
 
 		return $this->process_article($article);
 
+	}
+
+	function hook_get_full_text($link)
+	{
+		$enable_share_anything = $this->host->get($this, "enable_share_anything");
+
+		if ($enable_share_anything) {
+			$extracted_content = $this->extract_content($link);
+
+			# let's see if there's anything of value in there
+			$content_test = trim(strip_tags(sanitize($extracted_content)));
+
+			if ($content_test) {
+				return $extracted_content;
+			}
+		}
+
+		return false;
 	}
 
 	function api_version() {

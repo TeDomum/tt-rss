@@ -49,7 +49,8 @@ class NSFW extends Plugin {
 	function hook_prefs_tab($args) {
 		if ($args != "prefPrefs") return;
 
-		print "<div dojoType=\"dijit.layout.AccordionPane\" title=\"".__("NSFW Plugin")."\">";
+		print "<div dojoType=\"dijit.layout.AccordionPane\" 
+			title=\"<i class='material-icons'>extension</i> ".__("NSFW Plugin")."\">";
 
 		print "<br/>";
 
@@ -63,7 +64,7 @@ class NSFW extends Plugin {
 				new Ajax.Request('backend.php', {
 					parameters: dojo.objectToQuery(this.getValues()),
 					onComplete: function(transport) {
-						notify_info(transport.responseText);
+						Notify.info(transport.responseText);
 					}
 				});
 				//this.reset();
@@ -90,7 +91,7 @@ class NSFW extends Plugin {
 	}
 
 	function save() {
-		$tags = explode(",", db_escape_string($_POST["tags"]));
+		$tags = explode(",", $_POST["tags"]);
 		$tags = array_map("trim", $tags);
 		$tags = array_map("mb_strtolower", $tags);
 		$tags = join(", ", $tags);

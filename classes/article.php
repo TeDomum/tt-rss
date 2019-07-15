@@ -27,6 +27,7 @@ class Article extends Handler_Protected {
 		}
 	}
 
+	/*
 	function view() {
 		$id = clean($_REQUEST["id"]);
 		$cids = explode(",", clean($_REQUEST["cids"]));
@@ -63,8 +64,9 @@ class Article extends Handler_Protected {
 		}
 
 		print json_encode($articles);
-	}
+	} */
 
+	/*
 	private function catchupArticleById($id, $cmode) {
 
 		if ($cmode == 0) {
@@ -86,6 +88,7 @@ class Article extends Handler_Protected {
 		$feed_id = $this->getArticleFeed($id);
 		CCache::update($feed_id, $_SESSION["uid"]);
 	}
+	*/
 
 	static function create_published_article($title, $url, $content, $labels_str,
 			$owner_uid) {
@@ -97,15 +100,12 @@ class Article extends Handler_Protected {
 			$pluginhost->load_all(PluginHost::KIND_ALL, $owner_uid);
 			$pluginhost->load_data();
 
-			$af_readability = $pluginhost->get_plugin("Af_Readability");
+			foreach ($pluginhost->get_hooks(PluginHost::HOOK_GET_FULL_TEXT) as $p) {
+				$extracted_content = $p->hook_get_full_text($url);
 
-			if ($af_readability) {
-				$enable_share_anything = $pluginhost->get($af_readability, "enable_share_anything");
-
-				if ($enable_share_anything) {
-					$extracted_content = $af_readability->extract_content($url);
-
-					if ($extracted_content) $content = $extracted_content;
+				if ($extracted_content) {
+					$content = $extracted_content;
+					break;
 				}
 			}
 		}
@@ -126,7 +126,7 @@ class Article extends Handler_Protected {
 		if (filter_var($url, FILTER_VALIDATE_URL) === FALSE) return false;
 
 		$pdo = Db::pdo();
-		
+
 		$pdo->beginTransaction();
 
 		// only check for our user data here, others might have shared this with different content etc
@@ -148,6 +148,16 @@ class Article extends Handler_Protected {
 					content = ?, content_hash = ? WHERE id = ?");
 				$sth->execute([$content, $content_hash, $ref_id]);
 
+				if (DB_TYPE == "pgsql"){
+					$sth = $pdo->prepare("UPDATE ttrss_entries
+					SET tsvector_combined = to_tsvector( :ts_content)
+					WHERE id = :id");
+					$params = [
+						":ts_content" => mb_substr(strip_tags($content ), 0, 900000),
+						":id" => $ref_id];
+					$sth->execute($params);
+				}
+				
 				$sth = $pdo->prepare("UPDATE ttrss_user_entries SET published = true,
 						last_published = NOW() WHERE
 						int_id = ? AND owner_uid = ?");
@@ -183,7 +193,15 @@ class Article extends Handler_Protected {
 
 			if ($row = $sth->fetch()) {
 				$ref_id = $row["id"];
-
+				if (DB_TYPE == "pgsql"){
+					$sth = $pdo->prepare("UPDATE ttrss_entries
+					SET tsvector_combined = to_tsvector( :ts_content)
+					WHERE id = :id");
+					$params = [
+						":ts_content" => mb_substr(strip_tags($content ), 0, 900000),
+						":id" => $ref_id];
+					$sth->execute($params);
+				}
 				$sth = $pdo->prepare("INSERT INTO ttrss_user_entries
 					(ref_id, uuid, feed_id, orig_feed_id, owner_uid, published, tag_cache, label_cache,
 						last_read, note, unread, last_published)
@@ -208,8 +226,6 @@ class Article extends Handler_Protected {
 
 	function editArticleTags() {
 
-		print __("Tags for this article (separated by commas):")."<br>";
-
 		$param = clean($_REQUEST['param']);
 
 		$tags = Article::get_article_tags($param);
@@ -220,23 +236,22 @@ class Article extends Handler_Protected {
 		print_hidden("op", "article");
 		print_hidden("method", "setArticleTags");
 
-		print "<table width='100%'><tr><td>";
+		print "<header class='horizontal'>" . __("Tags for this article (separated by commas):")."</header>";
 
-		print "<textarea dojoType=\"dijit.form.SimpleTextarea\" rows='4'
-			style='height : 100px; font-size : 12px; width : 98%' id=\"tags_str\"
+		print "<section>";
+		print "<textarea dojoType='dijit.form.SimpleTextarea' rows='4'
+			style='height : 100px; font-size : 12px; width : 98%' id='tags_str'
 			name='tags_str'>$tags_str</textarea>
-		<div class=\"autocomplete\" id=\"tags_choices\"
-				style=\"display:none\"></div>";
+		<div class='autocomplete' id='tags_choices'
+				style='display:none'></div>";
+		print "</section>";
 
-		print "</td></tr></table>";
-
-		print "<div class='dlgButtons'>";
-
-		print "<button dojoType=\"dijit.form.Button\"
-			onclick=\"dijit.byId('editTagsDlg').execute()\">".__('Save')."</button> ";
-		print "<button dojoType=\"dijit.form.Button\"
+		print "<footer>";
+		print "<button dojoType='dijit.form.Button'
+			type='submit' class='alt-primary' onclick=\"dijit.byId('editTagsDlg').execute()\">".__('Save')."</button> ";
+		print "<button dojoType='dijit.form.Button'
 			onclick=\"dijit.byId('editTagsDlg').hide()\">".__('Cancel')."</button>";
-		print "</div>";
+		print "</footer>";
 
 	}
 
@@ -251,9 +266,7 @@ class Article extends Handler_Protected {
 
 		$sth->execute(array_merge([$score], $ids, [$_SESSION['uid']]));
 
-		print json_encode(array("id" => $ids,
-			"score" => (int)$score,
-			"score_pic" => get_score_pic($score)));
+		print json_encode(["id" => $ids, "score" => (int)$score]);
 	}
 
 	function getScore() {
@@ -265,9 +278,7 @@ class Article extends Handler_Protected {
 
 		$score = $row['score'];
 
-		print json_encode(array("id" => $id,
-			"score" => (int)$score,
-			"score_pic" => get_score_pic($score)));
+		print json_encode(["id" => $id, "score" => (int)$score]);
 	}
 
 
@@ -295,9 +306,9 @@ class Article extends Handler_Protected {
 			$sth->execute([$int_id, $_SESSION['uid']]);
 
 			foreach ($tags as $tag) {
-				$tag = sanitize_tag($tag);
+				$tag = Article::sanitize_tag($tag);
 
-				if (!tag_is_valid($tag)) {
+				if (!Article::tag_is_valid($tag)) {
 					continue;
 				}
 
@@ -309,7 +320,7 @@ class Article extends Handler_Protected {
 
 				if ($tag != '') {
 					$sth = $this->pdo->prepare("INSERT INTO ttrss_tags
-								(post_int_id, owner_uid, tag_name) 
+								(post_int_id, owner_uid, tag_name)
 								VALUES (?, ?, ?)");
 
 					$sth->execute([$int_id, $_SESSION['uid'], $tag]);
@@ -372,8 +383,7 @@ class Article extends Handler_Protected {
 		$ids = explode(",", clean($_REQUEST["ids"]));
 		$label_id = clean($_REQUEST["lid"]);
 
-		$label = db_escape_string(Labels::find_caption($label_id,
-		$_SESSION["uid"]));
+		$label = Labels::find_caption($label_id, $_SESSION["uid"]);
 
 		$reply["info-for-headlines"] = array();
 
@@ -457,7 +467,7 @@ class Article extends Handler_Protected {
 #				$entry .= " <a target=\"_blank\" href=\"" . htmlspecialchars($url) . "\" rel=\"noopener noreferrer\">" .
 #					$filename . " (" . $ctype . ")" . "</a>";
 
-				$entry = "<div onclick=\"openUrlPopup('".htmlspecialchars($url)."')\"
+				$entry = "<div onclick=\"popupOpenUrl('".htmlspecialchars($url)."')\"
 					dojoType=\"dijit.MenuItem\">$filename ($ctype)</div>";
 
 				array_push($entries_html, $entry);
@@ -516,12 +526,12 @@ class Article extends Handler_Protected {
 			}
 
 			if (count($entries_inline) > 0) {
-				$rv .= "<hr clear='both'/>";
+				//$rv .= "<hr clear='both'/>";
 				foreach ($entries_inline as $entry) { $rv .= $entry; };
-				$rv .= "<hr clear='both'/>";
+				$rv .= "<br clear='both'/>";
 			}
 
-			$rv .= "<div class=\"attachments\" dojoType=\"dijit.form.DropDownButton\">".
+			$rv .= "<div class=\"attachments\" dojoType=\"fox.form.DropDownButton\">".
 				"<span>" . __('Attachments')."</span>";
 
 			$rv .= "<div dojoType=\"dijit.Menu\" style=\"display: none;\">";
@@ -537,7 +547,7 @@ class Article extends Handler_Protected {
 				else
 					$filename = "";
 
-				$rv .= "<div onclick='openUrlPopup(\"".htmlspecialchars($entry["url"])."\")'
+				$rv .= "<div onclick='popupOpenUrl(\"".htmlspecialchars($entry["url"])."\")'
 					dojoType=\"dijit.MenuItem\">".$filename . $title."</div>";
 
 			};
@@ -549,275 +559,6 @@ class Article extends Handler_Protected {
 		return $rv;
 	}
 
-	static function format_article($id, $mark_as_read = true, $zoom_mode = false, $owner_uid = false) {
-		if (!$owner_uid) $owner_uid = $_SESSION["uid"];
-
-		$rv = array();
-
-		$rv['id'] = $id;
-
-		/* we can figure out feed_id from article id anyway, why do we
-		 * pass feed_id here? let's ignore the argument :(*/
-
-		$pdo = Db::pdo();
-
-		$sth = $pdo->prepare("SELECT feed_id FROM ttrss_user_entries
-			WHERE ref_id = ?");
-		$sth->execute([$id]);
-		$row = $sth->fetch();
-
-		$feed_id = (int) $row["feed_id"];
-
-		$rv['feed_id'] = $feed_id;
-
-		//if (!$zoom_mode) { print "<article id='$id'><![CDATA["; };
-
-		if ($mark_as_read) {
-			$sth = $pdo->prepare("UPDATE ttrss_user_entries
-				SET unread = false,last_read = NOW()
-				WHERE ref_id = ? AND owner_uid = ?");
-			$sth->execute([$id, $owner_uid]);
-
-			CCache::update($feed_id, $owner_uid);
-		}
-
-		$sth = $pdo->prepare("SELECT id,title,link,content,feed_id,comments,int_id,lang,
-			".SUBSTRING_FOR_DATE."(updated,1,16) as updated,
-			(SELECT site_url FROM ttrss_feeds WHERE id = feed_id) as site_url,
-			(SELECT title FROM ttrss_feeds WHERE id = feed_id) as feed_title,
-			(SELECT hide_images FROM ttrss_feeds WHERE id = feed_id) as hide_images,
-			(SELECT always_display_enclosures FROM ttrss_feeds WHERE id = feed_id) as always_display_enclosures,
-			num_comments,
-			tag_cache,
-			author,
-			guid,
-			orig_feed_id,
-			note
-			FROM ttrss_entries,ttrss_user_entries
-			WHERE	id = ? AND ref_id = id AND owner_uid = ?");
-		$sth->execute([$id, $owner_uid]);
-
-		if ($line = $sth->fetch()) {
-
-			$line["tags"] = Article::get_article_tags($id, $owner_uid, $line["tag_cache"]);
-			unset($line["tag_cache"]);
-
-			$line["content"] = sanitize($line["content"],
-				$line['hide_images'],
-				$owner_uid, $line["site_url"], false, $line["id"]);
-
-			foreach (PluginHost::getInstance()->get_hooks(PluginHost::HOOK_RENDER_ARTICLE) as $p) {
-				$line = $p->hook_render_article($line);
-			}
-
-			$num_comments = (int) $line["num_comments"];
-			$entry_comments = "";
-
-			if ($num_comments > 0) {
-				if ($line["comments"]) {
-					$comments_url = htmlspecialchars($line["comments"]);
-				} else {
-					$comments_url = htmlspecialchars($line["link"]);
-				}
-				$entry_comments = "<a class=\"postComments\"
-					target='_blank' rel=\"noopener noreferrer\" href=\"$comments_url\">$num_comments ".
-					_ngettext("comment", "comments", $num_comments)."</a>";
-
-			} else {
-				if ($line["comments"] && $line["link"] != $line["comments"]) {
-					$entry_comments = "<a class=\"postComments\" target='_blank' rel=\"noopener noreferrer\" href=\"".htmlspecialchars($line["comments"])."\">".__("comments")."</a>";
-				}
-			}
-
-			$enclosures = self::get_article_enclosures($line["id"]);
-
-			if ($zoom_mode) {
-				header("Content-Type: text/html");
-				$rv['content'] .= "<!DOCTYPE html>
-						<html><head>
-						<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\"/>
-						<title>".$line["title"]."</title>".
-						stylesheet_tag("css/default.css")."
-						<link rel=\"shortcut icon\" type=\"image/png\" href=\"images/favicon.png\">
-						<link rel=\"icon\" type=\"image/png\" sizes=\"72x72\" href=\"images/favicon-72px.png\">";
-				
-				$rv['content'] .= "<meta property=\"og:title\" content=\"".htmlspecialchars($line["title"])."\"/>\n";
-				$rv['content'] .= "<meta property=\"og:site_name\" content=\"".htmlspecialchars($line["feed_title"])."\"/>\n";
-				$rv['content'] .= "<meta property=\"og:description\" content=\"".
-					htmlspecialchars(truncate_string(strip_tags($line["content"]), 500, "..."))."\"/>\n";
-
-				$rv['content'] .= "</head>";
-
-				$og_image = false;
-
-				foreach ($enclosures as $enc) {
-					if (strpos($enc["content_type"], "image/") !== FALSE) {
-						$og_image = $enc["content_url"];
-						break;
-					}
-				}
-
-				if (!$og_image) {
-					$tmpdoc = new DOMDocument();
-
-					if (@$tmpdoc->loadHTML(mb_substr($line["content"], 0, 131070))) {
-						$tmpxpath = new DOMXPath($tmpdoc);
-						$first_img = $tmpxpath->query("//img")->item(0);
-
-						if ($first_img) {
-							$og_image = $first_img->getAttribute("src");
-						}
-					}
-				}
-
-				if ($og_image) {
-					$rv['content'] .= "<meta property=\"og:image\" content=\"" . htmlspecialchars($og_image) . "\"/>";
-				}
-
-				$rv['content'] .= "<body class=\"claro ttrss_utility ttrss_zoom\">";
-			}
-
-			$rv['content'] .= "<div class=\"postReply\" id=\"POST-$id\">";
-
-			$rv['content'] .= "<div class=\"postHeader\" id=\"POSTHDR-$id\">";
-
-			$entry_author = $line["author"];
-
-			if ($entry_author) {
-				$entry_author = __(" - ") . $entry_author;
-			}
-
-			$parsed_updated = make_local_datetime($line["updated"], true,
-				$owner_uid, true);
-
-			if (!$zoom_mode)
-				$rv['content'] .= "<div class=\"postDate\">$parsed_updated</div>";
-
-			if ($line["link"]) {
-				$rv['content'] .= "<div class='postTitle'><a target='_blank' rel='noopener noreferrer'
-					title=\"".htmlspecialchars($line['title'])."\"
-					href=\"" .
-					htmlspecialchars($line["link"]) . "\">" .
-					$line["title"] . "</a>" .
-					"<span class='author'>$entry_author</span></div>";
-			} else {
-				$rv['content'] .= "<div class='postTitle'>" . $line["title"] . "$entry_author</div>";
-			}
-
-			if ($zoom_mode) {
-				$feed_title = htmlspecialchars($line["feed_title"]);
-
-				$rv['content'] .= "<div class=\"postFeedTitle\">$feed_title</div>";
-
-				$rv['content'] .= "<div class=\"postDate\">$parsed_updated</div>";
-			}
-
-			$tags_str = Article::format_tags_string($line["tags"], $id);
-			$tags_str_full = join(", ", $line["tags"]);
-
-			if (!$tags_str_full) $tags_str_full = __("no tags");
-
-			if (!$entry_comments) $entry_comments = "&nbsp;"; # placeholder
-
-			$rv['content'] .= "<div class='postTags' style='float : right'>
-				<img src='images/tag.png'
-				class='tagsPic' alt='Tags' title='Tags'>&nbsp;";
-
-			if (!$zoom_mode) {
-				$rv['content'] .= "<span id=\"ATSTR-$id\">$tags_str</span>
-					<a title=\"".__('Edit tags for this article')."\"
-					href=\"#\" onclick=\"editArticleTags($id, $feed_id)\">(+)</a>";
-
-				$rv['content'] .= "<div dojoType=\"dijit.Tooltip\"
-					id=\"ATSTRTIP-$id\" connectId=\"ATSTR-$id\"
-					position=\"below\">$tags_str_full</div>";
-
-				foreach (PluginHost::getInstance()->get_hooks(PluginHost::HOOK_ARTICLE_BUTTON) as $p) {
-					$rv['content'] .= $p->hook_article_button($line);
-				}
-
-			} else {
-				$tags_str = strip_tags($tags_str);
-				$rv['content'] .= "<span id=\"ATSTR-$id\">$tags_str</span>";
-			}
-			$rv['content'] .= "</div>";
-			$rv['content'] .= "<div clear='both'>";
-
-			foreach (PluginHost::getInstance()->get_hooks(PluginHost::HOOK_ARTICLE_LEFT_BUTTON) as $p) {
-				$rv['content'] .= $p->hook_article_left_button($line);
-			}
-
-			$rv['content'] .= "$entry_comments</div>";
-
-			if ($line["orig_feed_id"]) {
-
-				$of_sth = $pdo->prepare("SELECT * FROM ttrss_archived_feeds
-					WHERE id = ? AND owner_uid = ?");
-				$of_sth->execute([$line["orig_feed_id"], $owner_uid]);
-
-				if ($tmp_line = $of_sth->fetch()) {
-
-					$rv['content'] .= "<div clear='both'>";
-					$rv['content'] .= __("Originally from:");
-
-					$rv['content'] .= "&nbsp;";
-
-					$rv['content'] .= "<a target='_blank' rel='noopener noreferrer'
-						href=' " . htmlspecialchars($tmp_line['site_url']) . "'>" .
-						$tmp_line['title'] . "</a>";
-
-					$rv['content'] .= "&nbsp;";
-
-					$rv['content'] .= "<a target='_blank' rel='noopener noreferrer' href='" . htmlspecialchars($tmp_line['feed_url']) . "'>";
-					$rv['content'] .= "<img title='".__('Feed URL')."' class='tinyFeedIcon' src='images/pub_set.png'></a>";
-
-					$rv['content'] .= "</div>";
-				}
-			}
-
-			$rv['content'] .= "</div>";
-
-			$rv['content'] .= "<div id=\"POSTNOTE-$id\">";
-			if ($line['note']) {
-				$rv['content'] .= Article::format_article_note($id, $line['note'], !$zoom_mode);
-			}
-			$rv['content'] .= "</div>";
-
-			if (!$line['lang']) $line['lang'] = 'en';
-
-			$rv['content'] .= "<div class=\"postContent\" lang=\"".$line['lang']."\">";
-
-			$rv['content'] .= $line["content"];
-
-			if (!$zoom_mode) {
-				$rv['content'] .= Article::format_article_enclosures($id,
-					$line["always_display_enclosures"],
-					$line["content"],
-					$line["hide_images"]);
-			}
-
-			$rv['content'] .= "</div>";
-
-			$rv['content'] .= "</div>";
-
-		}
-
-		if ($zoom_mode) {
-			$rv['content'] .= "
-				<div class='footer'>
-				<button onclick=\"return window.close()\">".
-				__("Close this window")."</button></div>";
-			$rv['content'] .= "</body></html>";
-		}
-
-		foreach (PluginHost::getInstance()->get_hooks(PluginHost::HOOK_FORMAT_ARTICLE) as $p) {
-			$rv['content'] = $p->hook_format_article($rv['content'], $line, $zoom_mode);
-		}
-
-		return $rv;
-
-	}
-
 	static function get_article_tags($id, $owner_uid = 0, $tag_cache = false) {
 
 		$a_id = $id;
@@ -827,7 +568,7 @@ class Article extends Handler_Protected {
 		$pdo = Db::pdo();
 
 		$sth = $pdo->prepare("SELECT DISTINCT tag_name,
-			owner_uid as owner FROM	ttrss_tags 
+			owner_uid as owner FROM	ttrss_tags
 			WHERE post_int_id = (SELECT int_id FROM ttrss_user_entries WHERE
 			ref_id = ? AND owner_uid = ? LIMIT 1) ORDER BY tag_name");
 
@@ -876,7 +617,7 @@ class Article extends Handler_Protected {
 			$tags_str = "";
 
 			for ($i = 0; $i < $maxtags; $i++) {
-				$tags_str .= "<a class=\"tag\" href=\"#\" onclick=\"viewfeed({feed:'".$tags[$i]."'})\">" . $tags[$i] . "</a>, ";
+				$tags_str .= "<a class=\"tag\" href=\"#\" onclick=\"Feeds.open({feed:'".$tags[$i]."'})\">" . $tags[$i] . "</a>, ";
 			}
 
 			$tags_str = mb_substr($tags_str, 0, mb_strlen($tags_str)-2);
@@ -895,8 +636,8 @@ class Article extends Handler_Protected {
 		$labels_str = "";
 
 		foreach ($labels as $l) {
-			$labels_str .= sprintf("<span class='hlLabelRef'
-				style='color : %s; background-color : %s'>%s</span>",
+			$labels_str .= sprintf("<div class='label'
+				style='color : %s; background-color : %s'>%s</div>",
 				$l[2], $l[3], $l[1]);
 		}
 
@@ -906,9 +647,18 @@ class Article extends Handler_Protected {
 
 	static function format_article_note($id, $note, $allow_edit = true) {
 
-		$str = "<div class='articleNote'	onclick=\"editArticleNote($id)\">
-			<div class='noteEdit' onclick=\"editArticleNote($id)\">".
-			($allow_edit ? __('(edit note)') : "")."</div>$note</div>";
+		if ($allow_edit) {
+			$onclick = "onclick='Plugins.Note.edit($id)'";
+			$note_class = 'editable';
+		} else {
+			$onclick = '';
+			$note_class = '';
+		}
+
+		return "<div class='article-note $note_class'>
+			<i class='material-icons'>note</i>
+			<div $onclick class='body'>$note</div>			
+			</div>";
 
 		return $str;
 	}
@@ -935,24 +685,24 @@ class Article extends Handler_Protected {
 		return $rv;
 	}
 
-	static function purge_orphans($do_output = false) {
+	static function purge_orphans() {
 
-		// purge orphaned posts in main content table
+        // purge orphaned posts in main content table
 
-		if (DB_TYPE == "mysql")
-			$limit_qpart = "LIMIT 5000";
-		else
-			$limit_qpart = "";
+        if (DB_TYPE == "mysql")
+            $limit_qpart = "LIMIT 5000";
+        else
+            $limit_qpart = "";
 
-		$pdo = Db::pdo();
-		$res = $pdo->query("DELETE FROM ttrss_entries WHERE
+        $pdo = Db::pdo();
+        $res = $pdo->query("DELETE FROM ttrss_entries WHERE
 			NOT EXISTS (SELECT ref_id FROM ttrss_user_entries WHERE ref_id = id) $limit_qpart");
 
-		if ($do_output) {
-			$rows = $res->rowCount();
-			_debug("Purged $rows orphaned posts.");
-		}
-	}
+        if (Debug::enabled()) {
+            $rows = $res->rowCount();
+            Debug::log("Purged $rows orphaned posts.");
+        }
+    }
 
 	static function catchupArticlesById($ids, $cmode, $owner_uid = false) {
 
@@ -962,17 +712,17 @@ class Article extends Handler_Protected {
 
 		$ids_qmarks = arr_qmarks($ids);
 
-		if ($cmode == 0) {
+		if ($cmode == 1) {
 			$sth = $pdo->prepare("UPDATE ttrss_user_entries SET
-			unread = false,last_read = NOW()
-				WHERE ref_id IN ($ids_qmarks) AND owner_uid = ?");
-		} else if ($cmode == 1) {
-			$sth = $pdo->prepare("UPDATE ttrss_user_entries SET
-			unread = true
-				WHERE ref_id IN ($ids_qmarks) AND owner_uid = ?");
-		} else {
+				unread = true
+					WHERE ref_id IN ($ids_qmarks) AND owner_uid = ?");
+		} else if ($cmode == 2) {
 			$sth = $pdo->prepare("UPDATE ttrss_user_entries SET
 				unread = NOT unread,last_read = NOW()
+					WHERE ref_id IN ($ids_qmarks) AND owner_uid = ?");
+		} else {
+			$sth = $pdo->prepare("UPDATE ttrss_user_entries SET
+				unread = false,last_read = NOW()
 					WHERE ref_id IN ($ids_qmarks) AND owner_uid = ?");
 		}
 
@@ -1048,6 +798,27 @@ class Article extends Handler_Protected {
 			Labels::update_cache($owner_uid, $id, array("no-labels" => 1));
 
 		return $rv;
+	}
+
+	static function sanitize_tag($tag) {
+		$tag = trim($tag);
+
+		$tag = mb_strtolower($tag, 'utf-8');
+
+		$tag = preg_replace('/[,\'\"\+\>\<]/', "", $tag);
+
+		if (DB_TYPE == "mysql") {
+			$tag = preg_replace('/[\x{10000}-\x{10FFFF}]/u', "\xEF\xBF\xBD", $tag);
+		}
+
+		return $tag;
+	}
+
+	static function tag_is_valid($tag) {
+		if (!$tag || is_numeric($tag) || mb_strlen($tag) > 250)
+			return false;
+
+		return true;
 	}
 
 }
