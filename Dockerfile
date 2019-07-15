@@ -1,8 +1,8 @@
 FROM php:7.1-apache
 MAINTAINER Yoann Ono Dit Biot <yoann.onoditbiot@tedomum.net>
 
-RUN DEBIAN_FRONTEND=noninteractive apt-get update && apt-get install -y supervisor
-RUN docker-php-ext-install pcntl mysqli pdo_mysql opcache
+RUN DEBIAN_FRONTEND=noninteractive apt-get update && apt-get install -y supervisor libicu-dev
+RUN docker-php-ext-install pcntl mysqli pdo_mysql opcache intl
 
 WORKDIR /var/www/html
 COPY ./ /var/www/html
